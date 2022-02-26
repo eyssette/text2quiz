@@ -99,7 +99,7 @@ function modalShareActivate() {
 }
 
 input {
-	width: 40vw
+	width: 50%;
 }
 </style>
 
@@ -138,7 +138,7 @@ input {
 			<button class="delete" aria-label="close" on:click={()=>(modalShareActive=!modalShareActive)}></button>
 		</header>
 		<section class="modal-card-body">
-			<div>
+			<div class="is-size-5">
 				<span>{urlQuizText}</span>
 				<input class="input is-small mx-5" type="text" value="{urlQuiz}" readonly />
 				<span class="material-icons is-clickable"  on:click={()=>navigator.clipboard.writeText(urlQuiz)}>content_copy</span>
