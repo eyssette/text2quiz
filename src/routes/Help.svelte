@@ -10,7 +10,7 @@
 	helpText[5] = ["Flashcard", "Flashcard || recto || verso", "On écrit une question au recto et une réponse au verso"];
 	helpText[6] = ["Grille", "Grille || catégorie 1|catégorie 2 || {énoncé|énoncé}{énoncé|énoncé|énoncé}", "On peut utiliser autant de catégories que l'on veut, mais la grille sera difficilement lisible au-delà de 3. Pour chaque catégorie, on met entre accolades les énoncés qui correspondent à cette catégorie, séparés par une barre verticale (|)"];
 	helpText[7] = ["Ordre", "Ordre || énoncé 1|énoncé 2|énoncé 3", "On met dans le bon ordre les différents énoncés, séparés par une barre verticale (|). Les énoncés seront placés automatiquement dans le désordre dans le quiz"];
-	helpText[8] = ["Etiquettes", "Etiquettes || catégorie 1|catégorie 2 || {étiquette|étiquette}{étiquette|étiquette|étiquette}", "On peut utiliser autant de catégories que l'on veut. Pour chaque catégorie, on met entre accolades les étiquettes qui correspondent à cette catégorie, séparées par une barre verticale (|)"];
+	helpText[8] = ["Etiquettes", "Etiquettes || catégorie 1|catégorie 2 || {étiquette 1|étiquette 2}{étiquette 3|étiquette 4|étiquette 5}", "On peut utiliser autant de catégories que l'on veut. Pour chaque catégorie, on met entre accolades les étiquettes qui correspondent à cette catégorie, séparées par une barre verticale (|)"];
 	helpText[9] = ["Association", "Association || item 1|item 2 || étiquette 1|étiquette 2", "On peut utiliser autant d'items que l'on veut. Pour chaque item, on indique l'étiquette qui correspond à cet élément et on sépare les étiquettes avec une barre verticale (|)"];
 </script>
 <style>
