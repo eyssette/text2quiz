@@ -23,6 +23,8 @@
 		numberItems[8] = [3];
 		types[9] = /^Association\s\|\|\s.+\|.+\s\|\|\s.+\|.+/; // Association
 		numberItems[9] = [3, 4];
+		types[10] = /^Texte\s\|\|\s.*\|\|\s/; // Texte
+		numberItems[10]= [3];
 		let i = 0;
 		types.forEach(type => {
 			const regex = new RegExp(type);
