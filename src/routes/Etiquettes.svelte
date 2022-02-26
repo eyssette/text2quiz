@@ -1,6 +1,7 @@
 <script>
 	import {
-		countCorrectAnswers
+		countCorrectAnswers,
+		changeQuestions
 	} from './stores.js';
 	import {
 		shuffleArray
@@ -59,6 +60,15 @@
 		tmp;
 	while (tmp = reg.exec(answersByCategoryString)) res.push(tmp);
 	res.forEach(choices);
+
+	$: if ($changeQuestions) {
+		res = [],
+		tmp;
+		answersByCategory=[];
+		answersShuffled=[];
+		while (tmp = reg.exec(answersByCategoryString)) res.push(tmp);
+		res.forEach(choices);
+	}
 
 	function choices(element) {
 		let choicesArray = element[1].split('|');

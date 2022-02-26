@@ -1,6 +1,7 @@
 <script>
 	import {
-		countCorrectAnswers
+		countCorrectAnswers,
+		changeQuestions
 	} from './stores.js';
 	import {
 		shuffleArray
@@ -57,15 +58,26 @@
 	});
 
 
-	let answersByCategoryArray = answersByCategoryString.split('|');
+	let answersByCategoryArray = [];
+	answersByCategoryArray= answersByCategoryString.split('|');
 	answersByCategoryArray.forEach(choices);
+
+	$: if ($changeQuestions) {
+		answersByCategoryArray= answersByCategoryString.split('|');
+		answersByCategory=[];
+		answersShuffled=[];
+		answersByCategoryArray.forEach(choices);
+	}
+
+	answersShuffled = shuffleArray(answersShuffled);
 
 	function choices(element) {
 		answersByCategory.push([element]);
 		answersShuffled = answersShuffled.concat(element)
 	}
-	answersShuffled = shuffleArray(answersShuffled);
+	
 
+	
 
 	function childrenTexts(item) {
 		let arr = [];
