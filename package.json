@@ -1,0 +1,21 @@
+{
+  "name": "my-app",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
+    "package": "svelte-kit package",
+    "preview": "svelte-kit preview"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-auto": "next",
+    "@sveltejs/kit": "next",
+    "svelte": "^3.44.0"
+  },
+  "type": "module",
+  "dependencies": {
+    "katex": "^0.15.2",
+    "markdown-it": "^12.3.2",
+    "sortablejs": "^1.14.0"
+  }
+}
