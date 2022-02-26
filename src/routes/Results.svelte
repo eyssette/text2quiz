@@ -37,7 +37,7 @@
 {#if !$validation}
 	<section class="section" id="validation">
 		<div class="has-text-centered">
-			<button class="button is-dark has-background-grey-dark  is-rounded is-size-4 is-size-7-mobile" type="button" on:click={resultsShow}><span class="material-icons">check </span>{titleButton}</button>
+			<button class="button is-dark has-background-grey-dark  is-rounded is-size-4 is-size-7-mobile" type="button" on:click={resultsShow}><span class="material-icons mr-2">check </span>{titleButton}</button>
 		</div>
 	</section>
 {/if}
@@ -52,7 +52,7 @@
 			</div>
 		</article>
 		<div class="has-text-centered mt-6">
-			<button class="button is-rounded is-size-4 is-size-7-mobile " type="button" id="refreshQuiz" on:click={resultsHide}><span class="material-icons">refresh </span>{titleRefresh}</button>   
+			<button class="button is-rounded is-size-4 is-size-7-mobile " type="button" id="refreshQuiz" on:click={resultsHide}><span class="material-icons mr-2">refresh </span>{titleRefresh}</button>   
 			<!--<button class="button is-rounded is-size-4 is-size-7-mobile" type="button" id="modifyAnswers" on:click={modifyAnswers}><span
 					class="material-icons">refresh </span>  Modifier ses réponses</button>-->
 		</div>
