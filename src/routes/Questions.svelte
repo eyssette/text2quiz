@@ -28,7 +28,6 @@
 	let questionCodeArray = [];
 	let validate = '';
 	let latex = true;
-	//let textInitial=['Texte',"Le principe","[Text2quiz](https://text2quiz.vercel.app/) est une application de quiz qui permet de transformer du texte en un quiz \n ### Comment ça marche ? \n On clique sur l'icône ✏️ pour éditer son quiz, et sur l'icône 🔗 pour créer un lien vers le quiz afin de partager"];
 	let question1 = ['VF', 'Intitulé de la question', 'V'];
 	let question2 = ['QCM', 'Intitulé de la question', 'A : Réponse 1|B : Réponse 2|C : Réponse 3|D : Réponse 4', '1|2'];
 	let question3 = ['QR', 'Intitulé de la question', 'Réponse 1|Réponse 2|Réponse 3', '3'];
@@ -40,7 +39,6 @@
 	let question9 = ['Etiquettes', 'Catégorie 1|Catégorie 2', '{etiquette 1|étiquette 2|étiquette 3}{étiquette 4|étiquette 5|étiquette 6}']
 	let question10 = ['Association', 'Catégorie 1|Catégorie 2', 'étiquette 1|étiquette 2', 'Question']
 	let questionsDefault = [question1,question2,question3,question4,question5,question6,question7,question8,question9,question10];
-	//questionsDefault.forEach(question =>{question.forEach(function(element, index) {this[index] = katexifyString(element);}, question);});
 	questions = questionsDefault;
 	$: if ($questionsCode && $changeQuestions) {
 		validation.update(n => false);
@@ -51,12 +49,7 @@
 		questionsCodeArray.forEach(question => {
 			questionCodeArray = question.split(/\s\|\|\s/);
 			questionsCodeArrayChanged.push(questionCodeArray);
-		})
-		//	if (latex) {
-		//		questionsCodeArrayChanged.forEach(question =>{question.forEach(function(element, index) {
-		//  this[index] = katexifyString(md.render(element));}, question);})
-		//	} else {
-		//	}		
+		})	
 		questions = questionsCodeArrayChanged;
 	} else {}
 	$: countExpectedAnswers.update(n => questions.length);
@@ -70,7 +63,7 @@
 
 {#each questions as question, i}
 	{#if question[0]=='Texte'}
-		<Texte title={question[1]} content={latex ? katexifyString(md.render(question[2])) : md.render(question[2])} />
+		<Texte title={question[1]} content={latex ? katexifyString(md.render(question[2])) : md.render(question[2])}/>
 	{/if}
 	{#if question[0]=='VF'}
 		<VF question={latex ? katexifyString(md.render(question[1])) : md.render(question[1])} quizId={i} correctAnswer={question[2]} validate={$validation}/>
