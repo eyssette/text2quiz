@@ -1,15 +1,4 @@
 <script>
-	const tooltipEdit = 'Changer le contenu de ce quiz';
-	const tooltipShare = 'Partager ce quiz';
-	const tooltipHomeOff = "Afficher les explications initiales";
-	const tooltipHomeOn = "Masquer les explications initiales";
-	const textQuizContent = 'Contenu du quiz';
-	const textSave = 'Sauvegarder';
-	const textCancel = 'Annuler';
-	const urlQuizText = 'Lien vers ce quiz :';
-	const messageInvalidQuestionsText = '⚠️  Syntaxe incorrecte';
-	const helpActiveText = "Afficher l'aide";
-	const helpNotActiveText = "Masquer l'aide";
 	import {
 		questionsCode,
 		changeQuestions,
@@ -21,8 +10,18 @@
 		regexValid
 	} from './regexValid.svelte';
 	import url from './url.js'
-	//import slocation from "slocation";
 	import Help from './Help.svelte';
+	const tooltipEdit = 'Changer le contenu de ce quiz';
+	const tooltipShare = 'Partager ce quiz';
+	const tooltipHomeOff = "Afficher les explications initiales";
+	const tooltipHomeOn = "Masquer les explications initiales";
+	const textQuizContent = 'Contenu du quiz';
+	const textSave = 'Sauvegarder';
+	const textCancel = 'Annuler';
+	const urlQuizText = 'Lien vers ce quiz :';
+	const messageInvalidQuestionsText = '⚠️  Syntaxe incorrecte';
+	const helpActiveText = "Afficher l'aide";
+	const helpNotActiveText = "Masquer l'aide";
 
 	let modalActive = '';
 	let helpActive = false;

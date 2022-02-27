@@ -1,4 +1,6 @@
 <script>
+	//import {MarkdownIt} from 'https://cdnjs.cloudflare.com/ajax/libs/markdown-it/12.0.4/markdown-it.min.js';
+	import MarkdownIt from 'markdown-it';
 	import {
 		katexifyString
 	} from './katexify';
@@ -19,8 +21,6 @@
 		countExpectedAnswers,
 		countCorrectAnswers
 	} from './stores.js';
-	//import {MarkdownIt} from 'https://cdnjs.cloudflare.com/ajax/libs/markdown-it/12.0.4/markdown-it.min.js';
-	import MarkdownIt from 'markdown-it';
 	const md = new MarkdownIt();
 	let questions = [];
 	let questionsCodeArray = [];
