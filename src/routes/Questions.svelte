@@ -40,7 +40,7 @@
 	let question9 = ['Etiquettes', 'Catégorie 1|Catégorie 2', '{etiquette 1|étiquette 2|étiquette 3}{étiquette 4|étiquette 5|étiquette 6}']
 	let question10 = ['Association', 'Catégorie 1|Catégorie 2', 'étiquette 1|étiquette 2', 'Question']
 	let questionsDefault = [question1,question2,question3,question4,question5,question6,question7,question8,question9,question10];
-	questionsDefault.forEach(question =>{question.forEach(function(element, index) {this[index] = katexifyString(element);}, question);});
+	//questionsDefault.forEach(question =>{question.forEach(function(element, index) {this[index] = katexifyString(element);}, question);});
 	questions = questionsDefault;
 	$: if ($questionsCode && $changeQuestions) {
 		validation.update(n => false);
