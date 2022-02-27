@@ -163,7 +163,7 @@
 				</article>
 			</div>
 		</div>
-		<div class="is-size-5 is-size-6-mobile mt-3 pl-6 is-italic has-text-centered"> {#if answersChecked.filter(element=>element==false).length>0 && checkAnswers.filter(element=>(element[2]==true)).length>0}{showNotComplete}{/if}</div>
+		<div class="is-size-5 is-size-6-mobile mt-3 pl-6 is-italic has-text-centered">&nbsp;{#if answersChecked.filter(element=>element==false).length>0 && checkAnswers.filter(element=>(element[2]==true)).length>0}{showNotComplete}{/if}</div>
 	</div>
 </div>
 

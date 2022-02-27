@@ -49,14 +49,12 @@
 		<article class="panel is-danger is-size-4 is-size-6-mobile has-text-centered">
 			<p class="panel-heading">{titleResults}</p>
 			<div class="panel-block columns py-6">
-				<div class="column "><span id="countCorrectAnswers">{$countCorrectAnswers}</span> <span id="textcountCorrectAnswers">{textAnswer}{plural} {textCorrect}{plural} {textFractionBar} <span id="countExpectedAnswers">{$countExpectedAnswers}</span></span>   (<span id="percentCorrectAnswers">{percentCorrectAnswers}</span>%)</div>
+				<div class="column "><span id="countCorrectAnswers">{$countCorrectAnswers}</span> <span id="textcountCorrectAnswers">{textAnswer}{plural} {textCorrect}{plural} {textFractionBar} <span id="countExpectedAnswers">{$countExpectedAnswers}</span></span>&nbsp;&nbsp;&nbsp;(<span id="percentCorrectAnswers">{percentCorrectAnswers}</span>%)</div>
 				<div class="column"><progress class="progress is-warning" value="{percentCorrectAnswers}" max="100" id="barPercentCorrectAnswers"></progress></div>
 			</div>
 		</article>
 		<div class="has-text-centered mt-6">
-			<button class="button is-rounded is-size-4 is-size-7-mobile " type="button" id="refreshQuiz" on:click={resultsHide}><span class="material-icons mr-2">refresh </span>{titleRefresh}</button>   
-			<!--<button class="button is-rounded is-size-4 is-size-7-mobile" type="button" id="modifyAnswers" on:click={modifyAnswers}><span
-					class="material-icons">refresh </span>  Modifier ses réponses</button>-->
+			<button class="button is-rounded is-size-4 is-size-7-mobile " type="button" id="refreshQuiz" on:click={resultsHide}><span class="material-icons mr-2">refresh </span>{titleRefresh}</button>
 		</div>
 	</section>
 {/if}

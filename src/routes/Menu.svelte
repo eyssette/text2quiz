@@ -19,7 +19,7 @@
 	const textSave = 'Sauvegarder';
 	const textCancel = 'Annuler';
 	const urlQuizText = 'Lien vers ce quiz :';
-	const messageInvalidQuestionsText = '⚠️  Syntaxe incorrecte';
+	const messageInvalidQuestionsText = '⚠&nbsp;&nbsp;Syntaxe incorrecte';
 	const helpActiveText = "Afficher l'aide";
 	const helpNotActiveText = "Masquer l'aide";
 
@@ -120,7 +120,7 @@
 			<button class="button is-success" disabled={!$questionsCode || !checkQuestions()} on:click={modalOffSave}>{textSave}</button>
 			<button class="button" on:click={modalOffCancel}>{textCancel}</button>
 			<button class="button is-info" on:click={()=> helpActive = !helpActive}>{#if helpActive}{helpNotActiveText}{:else}{helpActiveText}{/if}</button>
-			<p class='invalidQuestions has-text-danger is-size-6'> {messageInvalidQuestions}</p>
+			<p class='invalidQuestions has-text-danger is-size-6'>&nbsp;{@html messageInvalidQuestions}</p>
 		</footer>	
 	</div>
 </div>
