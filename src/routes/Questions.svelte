@@ -1,6 +1,7 @@
 <script>
 	//import {MarkdownIt} from 'https://cdnjs.cloudflare.com/ajax/libs/markdown-it/12.0.4/markdown-it.min.js';
-	import MarkdownIt from 'markdown-it';
+	//import MarkdownIt from 'markdown-it';
+	import snarkdown from 'snarkdown'
 	import {
 		katexifyString
 	} from './katexify';
@@ -21,7 +22,7 @@
 		countExpectedAnswers,
 		countCorrectAnswers
 	} from './stores.js';
-	const md = new MarkdownIt();
+	//const md = new MarkdownIt();
 	let questions = [];
 	let questionsCodeArray = [];
 	let questionCodeArray = [];
@@ -63,33 +64,33 @@
 
 {#each questions as question, i}
 	{#if question[0]=='VF'}
-		<VF question={latex ? katexifyString(md.render(question[1])) : md.render(question[1])} quizId={i} correctAnswer={question[2]} validate={$validation}/>
+		<VF question={latex ? katexifyString(snarkdown(question[1])) : snarkdown(question[1])} quizId={i} correctAnswer={question[2]} validate={$validation}/>
 	{/if}
 	{#if question[0]=='QCM'}
-		<QCM question={latex ? katexifyString(md.render(question[1])) : md.render(question[1])} quizId={i} textAnswers={latex ? katexifyString(md.render(question[2])).replace('<p>','').replace('</p>','') : md.render(question[2]).replace('<p>','').replace('</p>','')} validate={$validation} correctAnswersString={question[3]} />
+		<QCM question={latex ? katexifyString(snarkdown(question[1])) : snarkdown(question[1])} quizId={i} textAnswers={latex ? katexifyString(snarkdown(question[2])).replace('<p>','').replace('</p>','') : snarkdown(question[2]).replace('<p>','').replace('</p>','')} validate={$validation} correctAnswersString={question[3]} />
 	{/if}
 	{#if question[0]=='QR'}
-		<QR question={latex ? katexifyString(md.render(question[1])) : md.render(question[1])} quizId={i} textAnswers={latex ? katexifyString(md.render(question[2])).replace('<p>','').replace('</p>','') : md.render(question[2]).replace('<p>','').replace('</p>','')} correctAnswerString={question[3]} validate={$validation} />
+		<QR question={latex ? katexifyString(snarkdown(question[1])) : snarkdown(question[1])} quizId={i} textAnswers={latex ? katexifyString(snarkdown(question[2])).replace('<p>','').replace('</p>','') : snarkdown(question[2]).replace('<p>','').replace('</p>','')} correctAnswerString={question[3]} validate={$validation} />
 	{/if}
 	{#if question[0]=='Flashcard'}
-		<Flashcard quizId={i} recto={latex ? katexifyString(md.render(question[1])) : md.render(question[1])} verso={latex ? katexifyString(md.render(question[2])) : md.render(question[2])} validate={$validation}/>
+		<Flashcard quizId={i} recto={latex ? katexifyString(snarkdown(question[1])) : snarkdown(question[1])} verso={latex ? katexifyString(snarkdown(question[2])) : snarkdown(question[2])} validate={$validation}/>
 	{/if}
 	{#if question[0]=='QRC'}
-		<QRC question={latex ? katexifyString(md.render(question[1])) : md.render(question[1])} quizId={i} textAnswers={question[2]} validate={$validation} />
+		<QRC question={latex ? katexifyString(snarkdown(question[1])) : snarkdown(question[1])} quizId={i} textAnswers={question[2]} validate={$validation} />
 	{/if}
 	{#if question[0]=='Trous'}
-		<Trous text={latex ? katexifyString(md.render(question[1])).replace('<p>','').replace('</p>','') : md.render(question[1]).replace('<p>','').replace('</p>','')} quizId={i} validate={$validation} />
+		<Trous text={latex ? katexifyString(snarkdown(question[1])).replace('<p>','').replace('</p>','') : snarkdown(question[1]).replace('<p>','').replace('</p>','')} quizId={i} validate={$validation} />
 	{/if}
 	{#if question[0]=='Grille'}
-		<Grille categories={latex ? katexifyString(md.render(question[1])).replace('<p>','').replace('</p>','') : md.render(question[1]).replace('<p>','').replace('</p>','')} answersByCategoryString={latex ? katexifyString(md.render(question[2])).replace('<p>','').replace('</p>','') : md.render(question[2]).replace('<p>','').replace('</p>','')} quizId={i} validate={$validation} />
+		<Grille categories={latex ? katexifyString(snarkdown(question[1])).replace('<p>','').replace('</p>','') : snarkdown(question[1]).replace('<p>','').replace('</p>','')} answersByCategoryString={latex ? katexifyString(snarkdown(question[2])).replace('<p>','').replace('</p>','') : snarkdown(question[2]).replace('<p>','').replace('</p>','')} quizId={i} validate={$validation} />
 	{/if}
 	{#if question[0]=='Ordre'}
-		<Ordre quizId={i} textAnswers={latex ? katexifyString(md.render(question[1])).replace('<p>','').replace('</p>','') : md.render(question[1]).replace('<p>','').replace('</p>','')} validate={$validation} />
+		<Ordre quizId={i} textAnswers={latex ? katexifyString(snarkdown(question[1])).replace('<p>','').replace('</p>','') : snarkdown(question[1]).replace('<p>','').replace('</p>','')} validate={$validation} />
 	{/if}
 	{#if question[0]=='Etiquettes'}
-		<Etiquettes quizId={i} categories={latex ? katexifyString(md.render(question[1])).replace('<p>','').replace('</p>','') : md.render(question[1]).replace('<p>','').replace('</p>','')} answersByCategoryString={latex ? katexifyString(md.render(question[2])).replace('<p>','').replace('</p>','') : md.render(question[2]).replace('<p>','').replace('</p>','')} validate={$validation} />
+		<Etiquettes quizId={i} categories={latex ? katexifyString(snarkdown(question[1])).replace('<p>','').replace('</p>','') : snarkdown(question[1]).replace('<p>','').replace('</p>','')} answersByCategoryString={latex ? katexifyString(snarkdown(question[2])).replace('<p>','').replace('</p>','') : snarkdown(question[2]).replace('<p>','').replace('</p>','')} validate={$validation} />
 	{/if}
 	{#if question[0]=='Association'}
-		<Association quizId={i} categories={latex ? katexifyString(md.render(question[1])).replace('<p>','').replace('</p>','') : md.render(question[1]).replace('<p>','').replace('</p>','')} answersByCategoryString={latex ? katexifyString(md.render(question[2])).replace('<p>','').replace('</p>','') : md.render(question[2]).replace('<p>','').replace('</p>','')} validate={$validation} question={question[3]} />
+		<Association quizId={i} categories={latex ? katexifyString(snarkdown(question[1])).replace('<p>','').replace('</p>','') : snarkdown(question[1]).replace('<p>','').replace('</p>','')} answersByCategoryString={latex ? katexifyString(snarkdown(question[2])).replace('<p>','').replace('</p>','') : snarkdown(question[2]).replace('<p>','').replace('</p>','')} validate={$validation} question={question[3]} />
 	{/if}
 {/each}
