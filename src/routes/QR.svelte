@@ -7,8 +7,10 @@
 	export let question;
 	export let textAnswers;
 	let textAnswersArray = textAnswers.split('|');
+	$: textAnswersArray = textAnswers.split('|');
 	export let correctAnswerString;
 	let correctAnswer = Number(correctAnswerString);
+	$: correctAnswer = Number(correctAnswerString);
 	const title = 'Question / Réponse';
 	const textAnswerDefault = 'Je ne sais pas';
 	let answer;

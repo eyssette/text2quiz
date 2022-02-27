@@ -1,10 +1,9 @@
 <script>
-	//import {MarkdownIt} from 'https://cdnjs.cloudflare.com/ajax/libs/markdown-it/12.0.4/markdown-it.min.js';
-	//import MarkdownIt from 'markdown-it';
 	import snarkdown from 'snarkdown'
 	import {
 		katexifyString
 	} from './katexify';
+	import Results from './Results.svelte';
 	import VF from './VF.svelte';
 	import QCM from './QCM.svelte';
 	import QR from './QR.svelte';
@@ -22,7 +21,8 @@
 		countExpectedAnswers,
 		countCorrectAnswers
 	} from './stores.js';
-	//const md = new MarkdownIt();
+	const title = 'Quiz';
+	const subtitle = 'Répondez à toutes les questions et calculez votre score';
 	let questions = [];
 	let questionsCodeArray = [];
 	let questionCodeArray = [];
@@ -39,8 +39,9 @@
 	// let question9 = ['Etiquettes', 'Catégorie 1|Catégorie 2', '{etiquette 1|étiquette 2|étiquette 3}{étiquette 4|étiquette 5|étiquette 6}']
 	// let question10 = ['Association', 'Catégorie 1|Catégorie 2', 'étiquette 1|étiquette 2', 'Question']
 	 // let questionsDefault = [question1,question2, question3,question4,question5,question6,question7,question8,question9,question10];
-	 let questionsDefault = [question1, question2];
-	 questions = questionsDefault;
+
+	 //let questionsDefault = [question1, question2];
+	 //questions = questionsDefault;
 	$: if ($questionsCode && $changeQuestions) {
 		validation.update(n => false);
 		questionsCodeArray = $questionsCode.split(/\r?\n/);
@@ -62,6 +63,11 @@
 	}
 </script>
 
+{#if $questionsCode && $changeQuestions && questionsCodeArray.length > 0}
+<h1 class="title has-text-centered pt-2 is-size-1 has-text-link-dark">{title}</h1>
+<h2 class="subtitle has-text-centered has-text-link-dark mt-4">{subtitle}</h2>
+
+<section class="pt-6">
 {#each questions as question, i}
 	{#if question[0]=='VF'}
 		<VF question={latex ? katexifyString(snarkdown(question[1])) : snarkdown(question[1])} quizId={i} correctAnswer={question[2]} validate={$validation}/>
@@ -94,3 +100,8 @@
 		<Association quizId={i} categories={latex ? katexifyString(snarkdown(question[1])).replace('<p>','').replace('</p>','') : snarkdown(question[1]).replace('<p>','').replace('</p>','')} answersByCategoryString={latex ? katexifyString(snarkdown(question[2])).replace('<p>','').replace('</p>','') : snarkdown(question[2]).replace('<p>','').replace('</p>','')} validate={$validation} question={question[3]} />
 	{/if}
 {/each}
+
+</section>
+
+<Results />
+{/if}

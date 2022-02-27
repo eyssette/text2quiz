@@ -2,7 +2,6 @@
 	import Head from './Head.svelte';
 	import HomeBody from './HomeBody.svelte';
 	import Menu from './Menu.svelte';
-	import Results from './Results.svelte';
 	import Footer from './Footer.svelte';
 	import {
 		questionsCode,
@@ -15,8 +14,6 @@
 	import {
 		regexValid
 	} from './regexValid.svelte';
-	const title = 'Quiz';
-	const subtitle = 'Répondez à toutes les questions et calculez votre score';
 	let validate = '';
 	$: if ($validation) {
 		validate = 'validate';
@@ -25,7 +22,6 @@
 	}
 	let quizEncodageHash;
 	let quiz;
-
 
 	
 //	$: if ($changeQuestions) {home.update(n=>false)}
@@ -69,17 +65,7 @@
 
 	<Menu />
 
-
-
-	<h1 class="title has-text-centered pt-2 is-size-1 has-text-link-dark">{title}</h1>
-	<h2 class="subtitle has-text-centered has-text-link-dark mt-4">{subtitle}</h2>
-
-	<section class="pt-6">
 		<Questions />
-	</section>
-
-	<Results />
-
 
 	{#if $home}
 		<section class="pt-6">
