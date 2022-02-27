@@ -25,6 +25,29 @@
 		flashcard.classList.toggle('flip');
 	}
 </script>
+
+
+<div class="block quiz-Flashcard py-2" id="quiz-q{quizId}">
+	<h2 class="title has-text-centered">{title}</h2>
+	<div class="box block" class:quiz-success={validate && correctAnswer==answer} class:quiz-error={validate && answer>0
+		&& correctAnswer!=answer}>
+		<div class="card flip has-background-lighter px-5 my-4 has-text-justified" on:click={toggleFlashcard} bind:this={flashcard}>
+			<div class="front" class:is-size-1={recto.includes('h1')} class:is-size-2={recto.includes('h2')} class:is-size-3={recto.includes('h3')} class:is-size-4={recto.includes('h4')}>{@html recto}</div>
+			<div class="back">{@html verso}</div>
+		</div>
+		<div class="has-text-centered block mt-5">
+			<button class="button" type="button" on:click={toggleFlashcard}><span class="material-icons">swap_vert</span>Voir le verso</button>
+		</div>
+		<div class="control is-size-5 is-size-6-mobile">
+			{#each textAnswers as textAnswer, i}
+				<label class="radio" class:r-success={validate && correctAnswer==i+1 && answer==i+1} class:r-error={validate && correctAnswer!=i+1 && answer==i+1} for="quiz-q{quizId}-r{i+1}"><input type="radio" name="quiz-q{quizId}" id="quiz-q{quizId}-r{i+1}" {disabled} bind:group={answer}  value={i+1}>{textAnswer} </label>
+			{/each}
+			<label class="radio" for="quiz-q{quizId}-r-default"><input type="radio" name="quiz-q{quizId}"  id="quiz-q{quizId}-r-default" {disabled} bind:this={answerDefault} bind:group={answer} value="default" checked>{textAnswerDefault}</label>
+		</div>
+	</div>
+</div>
+
+
 <style>
 	label {
 		padding-left: 1.25em
@@ -71,23 +94,3 @@
 		transform: rotateY(0deg);
 	}
 </style>
-
-<div class="block quiz-Flashcard py-2" id="quiz-q{quizId}">
-	<h2 class="title has-text-centered">{title}</h2>
-	<div class="box block" class:quiz-success={validate && correctAnswer==answer} class:quiz-error={validate && answer>0
-		&& correctAnswer!=answer}>
-		<div class="card flip has-background-lighter px-5 my-4 has-text-justified" on:click={toggleFlashcard} bind:this={flashcard}>
-			<div class="front" class:is-size-1={recto.includes('h1')} class:is-size-2={recto.includes('h2')} class:is-size-3={recto.includes('h3')} class:is-size-4={recto.includes('h4')}>{@html recto}</div>
-			<div class="back">{@html verso}</div>
-		</div>
-		<div class="has-text-centered block mt-5">
-			<button class="button" type="button" on:click={toggleFlashcard}><span class="material-icons">swap_vert</span>Voir le verso</button>
-		</div>
-		<div class="control is-size-5 is-size-6-mobile">
-			{#each textAnswers as textAnswer, i}
-				<label class="radio" class:r-success={validate && correctAnswer==i+1 && answer==i+1} class:r-error={validate && correctAnswer!=i+1 && answer==i+1} for="quiz-q{quizId}-r{i+1}"><input type="radio" name="quiz-q{quizId}" id="quiz-q{quizId}-r{i+1}" {disabled} bind:group={answer}  value={i+1}>{textAnswer} </label>
-			{/each}
-			<label class="radio" for="quiz-q{quizId}-r-default"><input type="radio" name="quiz-q{quizId}"  id="quiz-q{quizId}-r-default" {disabled} bind:this={answerDefault} bind:group={answer} value="default" checked>{textAnswerDefault}</label>
-		</div>
-	</div>
-</div>

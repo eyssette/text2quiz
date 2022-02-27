@@ -25,12 +25,7 @@
 		}
 	}
 </script>
-<style>
-	label {
-		display: block;
-		margin-left: 0.7em !important
-	}
-</style>
+
 
 <div class="block quiz-QCM py-2" id="quiz-q{quizId}">
 	<h2 class="title has-text-centered">{title}</h2>
@@ -44,3 +39,10 @@
 		<div class="is-size-5 is-size-6-mobile mt-3 pl-6 is-italic" class:is-invisible={answers.length==0 || arrayEquals(answers,correctAnswers) || correctAnswers.filter(value => answers.includes(value)).length ==0}> {#if validate}{showNotComplete}{/if}</div>
 	</div>
 </div>
+
+<style>
+	label {
+		display: block;
+		margin-left: 0.7em !important
+	}
+</style>

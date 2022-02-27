@@ -44,11 +44,6 @@
 		}
 	}
 </script>
-<style>
-	label {
-		padding-left: 1.25em
-	}
-</style>
 
 <div class="block quiz-QR py-2" id="quiz-q{quizId}">
 	<h2 class="title has-text-centered">{title}</h2>
@@ -63,3 +58,10 @@
 		</div>
 	</div>
 </div>
+
+
+<style>
+	label {
+		padding-left: 1.25em
+	}
+</style>

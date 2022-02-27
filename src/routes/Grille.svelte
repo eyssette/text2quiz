@@ -71,6 +71,41 @@
 		}
 	}
 </script>
+
+
+<div class="block quiz-Grille py-2" id="quiz-q{quizId}">
+	<h2 class="title has-text-centered">{title}</h2>
+	<div class="box block" class:quiz-success={validate && answers.length>0 &&
+		answersChecked.filter(element=>element==true).length==answersShuffledUnique.length &&
+		answersChecked.every(element=>element==true)} class:quiz-error={(validate && answers.length>0 &&
+		answersChecked.includes(false)) || (validate && answersChecked.includes(true) &&
+		answersChecked.filter(element=>element==true).length!=answersShuffledUnique.length )}>
+		<div class="content">
+			<table class="table is-size-5 is-size-7-mobile">
+				<thead>
+					<tr>
+						<th></th>
+						{#each categoriesArray as category}
+							<th>{@html category}</th>
+						{/each}
+					</tr>
+				</thead>
+				<tbody>
+					{#each answersShuffledUnique as answer,i}
+						<tr>
+							<td>{@html answer}</td>
+							{#each categoriesArray as category,j}
+								<td><input class:r-success={validate && correctAnswers[i][1][j]==true} class:r-error={validate && correctAnswers[i][1][j]==false} class="is-checkradio is-circle is-info" type="checkbox" id="quiz-q{quizId}-r{i}-{j}" name="quiz-q{quizId}-r{i}-{j}" {disabled} value='{[answer,j]}' bind:group={answers}><label for="quiz-q{quizId}-r{i}-{j}"></label></td>
+							{/each}
+						</tr>
+					{/each}
+				</tbody>
+			</table>
+		</div>
+		<div class="is-size-5 is-size-6-mobile mt-3 pl-6 is-italic"> {#if validate && answersChecked.length>0 && answersChecked.filter(element=>element==true).length!=answersShuffledUnique.length}{showNotComplete}{/if}</div>
+	</div>
+</div>
+
 <style>
 	table td,
 	table th {
@@ -115,36 +150,3 @@
 		display: none;
 	}
 </style>
-
-<div class="block quiz-Grille py-2" id="quiz-q{quizId}">
-	<h2 class="title has-text-centered">{title}</h2>
-	<div class="box block" class:quiz-success={validate && answers.length>0 &&
-		answersChecked.filter(element=>element==true).length==answersShuffledUnique.length &&
-		answersChecked.every(element=>element==true)} class:quiz-error={(validate && answers.length>0 &&
-		answersChecked.includes(false)) || (validate && answersChecked.includes(true) &&
-		answersChecked.filter(element=>element==true).length!=answersShuffledUnique.length )}>
-		<div class="content">
-			<table class="table is-size-5 is-size-7-mobile">
-				<thead>
-					<tr>
-						<th></th>
-						{#each categoriesArray as category}
-							<th>{@html category}</th>
-						{/each}
-					</tr>
-				</thead>
-				<tbody>
-					{#each answersShuffledUnique as answer,i}
-						<tr>
-							<td>{@html answer}</td>
-							{#each categoriesArray as category,j}
-								<td><input class:r-success={validate && correctAnswers[i][1][j]==true} class:r-error={validate && correctAnswers[i][1][j]==false} class="is-checkradio is-circle is-info" type="checkbox" id="quiz-q{quizId}-r{i}-{j}" name="quiz-q{quizId}-r{i}-{j}" {disabled} value='{[answer,j]}' bind:group={answers}><label for="quiz-q{quizId}-r{i}-{j}"></label></td>
-							{/each}
-						</tr>
-					{/each}
-				</tbody>
-			</table>
-		</div>
-		<div class="is-size-5 is-size-6-mobile mt-3 pl-6 is-italic"> {#if validate && answersChecked.length>0 && answersChecked.filter(element=>element==true).length!=answersShuffledUnique.length}{showNotComplete}{/if}</div>
-	</div>
-</div>

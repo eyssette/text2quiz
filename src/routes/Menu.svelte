@@ -1,122 +1,103 @@
 <script>
-const tooltipEdit = 'Changer le contenu de ce quiz';
-const tooltipShare = 'Partager ce quiz';
-const tooltipHomeOff= "Afficher les explications initiales";
-const tooltipHomeOn= "Masquer les explications initiales";
-const textQuizContent = 'Contenu du quiz';
-const textSave = 'Sauvegarder';
-const textCancel = 'Annuler';
-const urlQuizText = 'Lien vers ce quiz :';
-const messageInvalidQuestionsText = '⚠️  Syntaxe incorrecte';
-const helpActiveText = "Afficher l'aide";
-const helpNotActiveText = "Masquer l'aide";
-import {
-	questionsCode,
-	changeQuestions,
-	validation,
-	countCorrectAnswers,
-	home
-} from './stores.js';
-import {
-	regexValid
-} from './regexValid.svelte';
-import url from './url.js'
-//import slocation from "slocation";
-import Help from './Help.svelte';
+	const tooltipEdit = 'Changer le contenu de ce quiz';
+	const tooltipShare = 'Partager ce quiz';
+	const tooltipHomeOff = "Afficher les explications initiales";
+	const tooltipHomeOn = "Masquer les explications initiales";
+	const textQuizContent = 'Contenu du quiz';
+	const textSave = 'Sauvegarder';
+	const textCancel = 'Annuler';
+	const urlQuizText = 'Lien vers ce quiz :';
+	const messageInvalidQuestionsText = '⚠️  Syntaxe incorrecte';
+	const helpActiveText = "Afficher l'aide";
+	const helpNotActiveText = "Masquer l'aide";
+	import {
+		questionsCode,
+		changeQuestions,
+		validation,
+		countCorrectAnswers,
+		home
+	} from './stores.js';
+	import {
+		regexValid
+	} from './regexValid.svelte';
+	import url from './url.js'
+	//import slocation from "slocation";
+	import Help from './Help.svelte';
 
-let modalActive = '';
-let helpActive = false;
-let previousQuestionsCode = '';
-let modalShareActive = false;
-let tooltipHome=tooltipHomeOn;
+	let modalActive = '';
+	let helpActive = false;
+	let previousQuestionsCode = '';
+	let modalShareActive = false;
+	let tooltipHome = tooltipHomeOn;
 
 
-let messageInvalidQuestions = '';
+	let messageInvalidQuestions = '';
 
-$: if ($questionsCode && checkQuestions()) {
-	messageInvalidQuestions = '';
-} else {
-	if ($questionsCode != '') {
-		messageInvalidQuestions = messageInvalidQuestionsText;
-		changeQuestions.update(n => false);
+	$: if ($questionsCode && checkQuestions()) {
+		messageInvalidQuestions = '';
 	} else {
-		messageInvalidQuestions = '';
-	}
-}
-
-function modalOn() {
-	modalActive = 'is-active';
-}
-
-let newURL
-
-
-function modalOffSave() {
-	if (checkQuestions()) {
-		previousQuestionsCode = $questionsCode;
-		modalActive = '';
-		messageInvalidQuestions = '';
-		newURL = '/#' + encodeURI($questionsCode);
-		//slocation.pushState({}, "", newURL);
-		$changeQuestions = true;
-	}
-}
-
-function modalOffCancel() {
-	modalActive = '';
-	$questionsCode = previousQuestionsCode;
-	$changeQuestions = true;
-}
-
-function checkQuestions() {
-	let check = false;
-	let chekQuestionsArray = [];
-	if ($questionsCode) {
-		let questionsCodeArray = $questionsCode.split(/\r?\n/);
-		if (Array.isArray(questionsCodeArray)) {
-			questionsCodeArray.forEach(question => {
-				chekQuestionsArray.push(regexValid(question));
-			})
-			if (chekQuestionsArray.every(element => element == true)) {
-				check = true
-			}
+		if ($questionsCode != '') {
+			messageInvalidQuestions = messageInvalidQuestionsText;
+			changeQuestions.update(n => false);
+		} else {
+			messageInvalidQuestions = '';
 		}
 	}
-	return check;
-}
 
-function goHome() {
-	$home ? $home= false : $home=true;
-	$home ? tooltipHome=tooltipHomeOn: tooltipHome=tooltipHomeOff;
-}
+	function modalOn() {
+		modalActive = 'is-active';
+	}
 
-let urlQuiz;
+	let newURL
 
-function modalShareActivate() {
-	$questionsCode && checkQuestions ? urlQuiz = $url.protocol + '//' + $url.host + '#' + encodeURI($questionsCode) : urlQuiz = $url.protocol + '//' + $url.host;
-	modalShareActive = !modalShareActive;
-}
-	
+
+	function modalOffSave() {
+		if (checkQuestions()) {
+			previousQuestionsCode = $questionsCode;
+			modalActive = '';
+			messageInvalidQuestions = '';
+			newURL = '/#' + encodeURI($questionsCode);
+			//slocation.pushState({}, "", newURL);
+			$changeQuestions = true;
+		}
+	}
+
+	function modalOffCancel() {
+		modalActive = '';
+		$questionsCode = previousQuestionsCode;
+		$changeQuestions = true;
+	}
+
+	function checkQuestions() {
+		let check = false;
+		let chekQuestionsArray = [];
+		if ($questionsCode) {
+			let questionsCodeArray = $questionsCode.split(/\r?\n/);
+			if (Array.isArray(questionsCodeArray)) {
+				questionsCodeArray.forEach(question => {
+					chekQuestionsArray.push(regexValid(question));
+				})
+				if (chekQuestionsArray.every(element => element == true)) {
+					check = true
+				}
+			}
+		}
+		return check;
+	}
+
+	function goHome() {
+		$home ? $home = false : $home = true;
+		$home ? tooltipHome = tooltipHomeOn : tooltipHome = tooltipHomeOff;
+	}
+
+	let urlQuiz;
+
+	function modalShareActivate() {
+		$questionsCode && checkQuestions ? urlQuiz = $url.protocol + '//' + $url.host + '#' + encodeURI($questionsCode) : urlQuiz = $url.protocol + '//' + $url.host;
+		modalShareActive = !modalShareActive;
+	}
 </script>
 
-<style>
-.level-right span {
-	border: none;
-}
-
-.invalidQuestions {
-	padding-left: 1em;
-}
-
-.modal-card {
-	width: 90vw;
-	max-width: 900px;
-}
-
-input {
-	width: 50%;
-}
-</style>
 
 <nav class="level pt-2">
 	<div class="level-right">
@@ -162,3 +143,23 @@ input {
 		</section>
 	</div>
 </div>
+
+
+<style>
+	.level-right span {
+		border: none;
+	}
+
+	.invalidQuestions {
+		padding-left: 1em;
+	}
+
+	.modal-card {
+		width: 90vw;
+		max-width: 900px;
+	}
+
+	input {
+		width: 50%;
+	}
+</style>

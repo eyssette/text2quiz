@@ -6,7 +6,6 @@
 	import {
 		shuffleArray
 	} from './functions.svelte';
-	//import {Sortable} from 'https://unpkg.com/sortablejs?module'
 	import {
 		Sortable
 	} from 'sortablejs';
@@ -132,6 +131,43 @@
 		}
 	}
 </script>
+
+
+<div class="block quiz-Grille py-2" id="quiz-q{quizId}">
+	<h2 class="title has-text-centered">{title}</h2>
+	<div class="box block" class:quiz-success={validate && answersChecked.filter(element=>
+		element==true).length==categoriesArray.length} class:quiz-error={validate && checkAnswers.length>0 &&
+		answersChecked.filter(element=>element==false).length>0}>
+		<p class="has-text-centered block has-text-weight-medium">{subtitle}</p>
+		<div class="columns mt-5">
+			{#each categoriesArray as category,i}
+				<div class="column">
+					<article class="message has-background-white">
+						<div class="message-header has-background-grey-lighter  has-text-dark">{@html category}</div>
+						<div class="message-body mt-2 quiz-zone has-background-white" id="quiz-q{quizId}-z{i}" bind:this={zone[i]}></div>
+					</article>
+				</div>
+			{/each}
+		</div>
+		<div class="columns is-mobile">
+  			<div class="column is-10 is-offset-1 ">
+				<article class="message  mt-5 zoneInitial">
+					<div class="message-header has-background-white has-text-dark">{labelsListText}</div>
+					<div class="message-body">
+						<div id="quiz-q{quizId}-z0" bind:this={zoneInitial}>
+							{#each answersShuffled as answer,i}
+								<p class="has-text-justified py-1" class:r-success={validate && checkAnswers.filter(element=>(element[0]==answer && element[2]==true)).length>0} class:r-error={validate && checkAnswers.filter(element=>(element[0]==answer && element[2]==false)).length>0}  id="quiz-q{quizId}-r{i}" class:draggable={!validate}>{@html answer}</p>
+							{/each}
+						</div>
+					</div>
+				</article>
+			</div>
+		</div>
+		<div class="is-size-5 is-size-6-mobile mt-3 pl-6 is-italic has-text-centered"> {#if answersChecked.filter(element=>element==false).length>0 && checkAnswers.filter(element=>(element[2]==true)).length>0}{showNotComplete}{/if}</div>
+	</div>
+</div>
+
+
 <style>
 	article {
 		border: 1px hsl(0, 0%, 66%) solid;
@@ -188,37 +224,3 @@
 		border-color: hsl(348, 86%, 43%)
 	}
 </style>
-
-<div class="block quiz-Grille py-2" id="quiz-q{quizId}">
-	<h2 class="title has-text-centered">{title}</h2>
-	<div class="box block" class:quiz-success={validate && answersChecked.filter(element=>
-		element==true).length==categoriesArray.length} class:quiz-error={validate && checkAnswers.length>0 &&
-		answersChecked.filter(element=>element==false).length>0}>
-		<p class="has-text-centered block has-text-weight-medium">{subtitle}</p>
-		<div class="columns mt-5">
-			{#each categoriesArray as category,i}
-				<div class="column">
-					<article class="message has-background-white">
-						<div class="message-header has-background-grey-lighter  has-text-dark">{@html category}</div>
-						<div class="message-body mt-2 quiz-zone has-background-white" id="quiz-q{quizId}-z{i}" bind:this={zone[i]}></div>
-					</article>
-				</div>
-			{/each}
-		</div>
-		<div class="columns is-mobile">
-  			<div class="column is-10 is-offset-1 ">
-				<article class="message  mt-5 zoneInitial">
-					<div class="message-header has-background-white has-text-dark">{labelsListText}</div>
-					<div class="message-body">
-						<div id="quiz-q{quizId}-z0" bind:this={zoneInitial}>
-							{#each answersShuffled as answer,i}
-								<p class="has-text-justified py-1" class:r-success={validate && checkAnswers.filter(element=>(element[0]==answer && element[2]==true)).length>0} class:r-error={validate && checkAnswers.filter(element=>(element[0]==answer && element[2]==false)).length>0}  id="quiz-q{quizId}-r{i}" class:draggable={!validate}>{@html answer}</p>
-							{/each}
-						</div>
-					</div>
-				</article>
-			</div>
-		</div>
-		<div class="is-size-5 is-size-6-mobile mt-3 pl-6 is-italic has-text-centered"> {#if answersChecked.filter(element=>element==false).length>0 && checkAnswers.filter(element=>(element[2]==true)).length>0}{showNotComplete}{/if}</div>
-	</div>
-</div>

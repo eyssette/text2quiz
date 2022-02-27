@@ -5,7 +5,6 @@
 	import {
 		shuffleArray
 	} from './functions.svelte';
-	//import {Sortable} from 'https://unpkg.com/sortablejs?module'
 	import {
 		Sortable
 	} from 'sortablejs';

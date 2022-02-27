@@ -61,32 +61,6 @@
 	}
 </script>
 
-<style>
-:global(.quiz-error) {
-	border-left: 4px solid hsl(348, 86%, 43%);
-}
-
-:global(.quiz-success) {
-	border-left: 4px solid hsl(141, 53%, 31%);
-}
-
-:global(.r-error) {
-	text-decoration: line-through hsl(348, 86%, 43%);
-	font-weight: 600 !important;
-}
-
-
-:global(.r-success) {
-	color: #257942 !important;
-	font-weight: 600 !important;
-}
-
-
-:global(input) {
-	margin-right: 0.5em !important;
-}
-
-</style>
 
 <Head/>
 
@@ -94,24 +68,52 @@
 
 	<Menu />
 
-		
-		
-		<h1 class="title has-text-centered pt-2 is-size-1 has-text-link-dark">{title}</h1>
-		<h2 class="subtitle has-text-centered has-text-link-dark mt-4">{subtitle}</h2>
 
-			<section class="pt-6">
-				<Questions />
-			</section>
 
-			<Results />
-		
-			
-		{#if $home}
+	<h1 class="title has-text-centered pt-2 is-size-1 has-text-link-dark">{title}</h1>
+	<h2 class="subtitle has-text-centered has-text-link-dark mt-4">{subtitle}</h2>
+
+	<section class="pt-6">
+		<Questions />
+	</section>
+
+	<Results />
+
+
+	{#if $home}
 		<section class="pt-6">
 			<HomeBody />
 		</section>
-		{/if}
+	{/if}
 
 	<Footer />
 
 </div>
+
+
+<style>
+	:global(.quiz-error) {
+		border-left: 4px solid hsl(348, 86%, 43%);
+	}
+	
+	:global(.quiz-success) {
+		border-left: 4px solid hsl(141, 53%, 31%);
+	}
+	
+	:global(.r-error) {
+		text-decoration: line-through hsl(348, 86%, 43%);
+		font-weight: 600 !important;
+	}
+	
+	
+	:global(.r-success) {
+		color: #257942 !important;
+		font-weight: 600 !important;
+	}
+	
+	
+	:global(input) {
+		margin-right: 0.5em !important;
+	}
+	
+	</style>

@@ -34,6 +34,8 @@
 		plural = '';
 	}
 </script>
+
+
 {#if !$validation}
 	<section class="section" id="validation">
 		<div class="has-text-centered">

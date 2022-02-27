@@ -1,3 +1,6 @@
+// https://github.com/bluwy/svelte-url
+// https://bjornlu.com/blog/simple-svelte-routing-with-reactive-urls
+
 import {
   derived,
   writable
