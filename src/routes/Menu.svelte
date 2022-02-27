@@ -1,6 +1,7 @@
 <script>
-const tooltip = 'Changer le contenu de ce quiz';
+const tooltipEdit = 'Changer le contenu de ce quiz';
 const tooltipShare = 'Partager ce quiz';
+const tooltipHome= "Revenir à la page d'accueil";
 const textQuizContent = 'Contenu du quiz';
 const textSave = 'Sauvegarder';
 const textCancel = 'Annuler';
@@ -47,7 +48,7 @@ function modalOffSave() {
 		previousQuestionsCode = $questionsCode;
 		modalActive = '';
 		messageInvalidQuestions = '';
-		//if ($questionsCode!=previousQuestionsCode) {$changeQuestions=true; }
+		location.replace($url.protocol+'//'+$url.host+'#' + encodeURI($questionsCode));
 		$changeQuestions = true;
 	}
 }
@@ -73,6 +74,10 @@ function checkQuestions() {
 		}
 	}
 	return check;
+}
+
+function goHome() {
+	location.replace($url.protocol+'//'+$url.host);
 }
 
 let urlQuiz;
@@ -105,7 +110,8 @@ input {
 
 <nav class="level">
 	<div class="level-right">
-		<span class="material-icons is-size-3 is-size-5-mobile pt-2 has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" data-target="modal" aria-haspopup="true" data-tooltip="{tooltip}" on:click={modalOn}> edit </span>
+		<span class="material-icons is-size-3 is-size-5-mobile pt-2 has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipHome}" on:click={goHome}>home</span>
+		<span class="material-icons is-size-3 is-size-5-mobile pt-2 has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipEdit}" on:click={modalOn}> edit </span>
 		<span class="material-icons is-size-3 is-size-5-mobile pt-2 has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" data-target="modal2" aria-haspopup="true" data-tooltip="{tooltipShare}" on:click={modalShareActivate}>share</span>
 	</div>
 </nav>
@@ -114,7 +120,7 @@ input {
 	<div class="modal-background"></div>
 	<div class="modal-card">
 		<header class="modal-card-head">
-			<p class="modal-card-title">{tooltip}</p>
+			<p class="modal-card-title">{tooltipEdit}</p>
 			<button class="delete" aria-label="close" on:click={modalOffCancel}></button>
 		</header>
 		<section class="modal-card-body">
