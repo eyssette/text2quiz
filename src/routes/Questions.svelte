@@ -27,7 +27,7 @@
 	let questionCodeArray = [];
 	let validate = '';
 	let latex = true;
-	let question2 = ['VF', 'Text2quiz est un logiciel très utile', 'V'];
+	let question2 = ['VF', 'Text2quiz est un logiciel très pratique', 'V'];
 	let question1 = ['QCM', 'Avec Text2quiz, …', "A : On peut créer des quiz rapidement|B : On peut réparer sa trotinette|C : On n'a pas besoin de créer un compte |D : l'interface est minimaliste pour pouvoir être efficace", '1|3|4'];
 	// let question3 = ['QR', 'Intitulé de la question', 'Réponse 1|Réponse 2|Réponse 3', '3'];
 	//let question2 = ['Flashcard', "# Qu'est-ce que Text2quiz ?", "Text2quiz est une application de quiz qui permet de transformer du texte en un quiz."];
