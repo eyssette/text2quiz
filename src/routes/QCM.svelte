@@ -33,7 +33,7 @@
 		<div class="content">{@html question}</div>
 		<div class="control is-size-5 is-size-6-mobile">
 			{#each textAnswersArray as textAnswer, i}
-				<label class="checkbox" class:r-success={validate && correctAnswers.includes(i+1) && answers.includes(i+1)} class:r-error={validate && !correctAnswers.includes(i+1) && answers.includes(i+1)} for="quiz-q{quizId}-r{i+1}"><input type="checkbox" name="quiz-q{quizId}-r{i+1}" id="quiz-q{quizId}-r{i+1}" value={i+1} {disabled}  bind:group={answers}>{@html textAnswer}</label>
+				<label class="checkbox" class:r-success={validate && correctAnswers.includes(i+1) && answers.includes(i+1)} class:r-error={validate && !correctAnswers.includes(i+1) && answers.includes(i+1)} for="quiz-q{quizId}-r{i+1}"><input type="checkbox" name="quiz-q{quizId}-r{i+1}" id="quiz-q{quizId}-r{i+1}" value={i+1} {disabled}  bind:group={answers}>&nbsp;{@html textAnswer}</label>
 			{/each}
 		</div>
 		<div class="is-size-5 is-size-6-mobile mt-3 pl-6 is-italic" class:is-invisible={answers.length==0 || arrayEquals(answers,correctAnswers) || correctAnswers.filter(value => answers.includes(value)).length ==0}>&nbsp;{#if validate}{showNotComplete}{/if}</div>

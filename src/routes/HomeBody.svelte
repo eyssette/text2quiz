@@ -1,3 +1,18 @@
+<script>
+import {
+		questionsCode,
+		changeQuestions,
+	} from './stores.js';
+	import url from './url.js';
+let newURL;
+function goToHash(hashCode) {
+	newURL = $url.protocol + '//' + $url.host + '#' +hashCode
+	window.location.assign(newURL);
+	//$questionsCode=hashcode;
+	//$changeQuestions=true;
+	window.scrollTo(0,0);
+	}
+</script>
 
 	<h1 class="title has-text-centered is-1">Text2quiz</h1>
 	<div class="box block px-6 py-5 mt-6">
@@ -21,16 +36,16 @@
 			  <article class="message is-info mt-6">
 				<div class="message-body">
 					<h4 class="is-4 has-text-left">Types de questions possibles</h4>
-					<ol><li>Vrai ou faux ?</li>
-						<li>QCM</li>
-						<li>Question / réponse</li>
-						<li>Question à réponse courte</li>
-						<li>Texte à trous</li>
-						<li>Flashcard</li>
-						<li>Grille</li>
-						<li>Ordre</li>
-						<li>Étiquettes</li>
-						<li>Association</li>
+					<ol><li><a on:click={()=>goToHash('VF%20%7C%7C%20$$(a+b)(a-b)=a%5E2-b%5E2$$%20%7C%7C%20V%0AVF%20%7C%7C%20$$(a-b)%5E2=a%5E2-2ab+b%5E2$$%20%7C%7C%20V')}>Vrai ou faux ?<span class="material-icons is-size-6 ml-2">link</span></a></li>
+						<li><a on:click={()=>goToHash("QCM%20%7C%7C%20Qu'est-ce%20qui%20est%20important%20pour%20%C3%89picure%20?%20%7C%7C%20Le%20plaisir%20simple%20d'exister%7CLes%20plaisirs%20raffin%C3%A9s%20de%20la%20culture%7CL'absence%20de%20souffrances%20dans%20le%20corps%20et%20de%20trouble%20dans%20l'%C3%A2me%7CLe%20plaisir%20accumul%C3%A9%20au%20maximum%20%7C%7C%201%7C3")}>QCM<span class="material-icons is-size-6 ml-2">link</span></a></li>
+						<li><a href="">Question / réponse<span class="material-icons is-size-6 ml-2">link</span></a></li>
+						<li><a href="">Question à réponse courte<span class="material-icons is-size-6 ml-2">link</span></a></li>
+						<li><a href="">Texte à trous<span class="material-icons is-size-6 ml-2">link</span></a></li>
+						<li><a href="">Flashcard<span class="material-icons is-size-6 ml-2">link</span></a></li>
+						<li><a href="">Grille<span class="material-icons is-size-6 ml-2">link</span></a></li>
+						<li><a href="">Ordre<span class="material-icons is-size-6 ml-2">link</span></a></li>
+						<li><a href="">Étiquettes<span class="material-icons is-size-6 ml-2">link</span></a></li>
+						<li><a href="">Association<span class="material-icons is-size-6 ml-2">link</span></a></li>
 					</ol>
 		
 				</div>
