@@ -15,7 +15,8 @@
 	} else {
 		validate = '';
 	}
-	import url from './url.js'
+
+	import slocation from "slocation"
 	import {
 		questionsCode,
 		changeQuestions
@@ -24,8 +25,8 @@
 		regexValid
 	} from './regexValid.svelte';
 
-	$: if ($url) {
-		let quizEncodageHash = $url.hash.slice(1);
+	$: if ($slocation) {
+		let quizEncodageHash = $slocation.hash.slice(1);
 		let quiz = decodeURI(quizEncodageHash);
 		navigator.clipboard.writeText('#' + quizEncodageHash);
 		if (checkQuestions(quiz)) {

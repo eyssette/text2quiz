@@ -16,6 +16,7 @@
   "dependencies": {
     "katex": "^0.15.2",
     "markdown-it": "^12.3.2",
+    "slocation": "^1.5.0",
     "sortablejs": "^1.14.0"
   }
 }
