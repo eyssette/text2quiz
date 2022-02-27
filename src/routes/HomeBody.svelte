@@ -3,7 +3,7 @@
 	<div class="box block px-6 py-5 mt-6">
 		<div class="content has-text-justified">
 			
-			<div>Text2quizz est une application de quiz qui permet de transformer du texte en un quiz. Le principe est simple :</div>
+			<div>Text2quiz est une application de quiz qui permet de transformer du texte en un quiz. Le principe est simple :</div>
 			<ol><li>On clique sur l'icône <span class="material-icons"> edit </span> pour éditer son quiz.</li>
 			<li>On clique sur l'icône <span class="material-icons">share</span> pour créer un lien vers le quiz afin de le partager.</li></ol>
 			<article class="message is-dark">
@@ -13,7 +13,12 @@
 						<li>interface minimaliste pour pouvoir créer rapidement un quiz</li></ul>
 				</div>
 			  </article>
-			  <article class="message is-info">
+
+			  <h4 class="is-4 has-text-left mt-6">Comment ça marche ?</h4>
+						<ul><li>Pour écrire son quiz, on doit coder chaque question</li>
+							<li>On peut afficher l'aide dans la fenêtre d'édition du quiz, et commencer d'abord par les types de question les plus simples</li></ul>
+
+			  <article class="message is-info mt-6">
 				<div class="message-body">
 					<h4 class="is-4 has-text-left">Types de questions possibles</h4>
 					<ol><li>Vrai ou faux ?</li>

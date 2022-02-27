@@ -93,7 +93,7 @@
 
 	<Menu />
 
-		{#if !home}
+		
 		
 		<h1 class="title has-text-centered pt-2 is-size-1 has-text-link-dark">{title}</h1>
 		<h2 class="subtitle has-text-centered has-text-link-dark mt-4">{subtitle}</h2>
@@ -103,8 +103,9 @@
 			</section>
 
 			<Results />
+		
 			
-		{:else}
+		{#if home}
 		<section class="pt-6">
 			<HomeBody />
 		</section>

@@ -27,18 +27,19 @@
 	let questionCodeArray = [];
 	let validate = '';
 	let latex = true;
-	// let question1 = ['VF', 'Intitulé de la question', 'V'];
-	// let question2 = ['QCM', 'Intitulé de la question', 'A : Réponse 1|B : Réponse 2|C : Réponse 3|D : Réponse 4', '1|2'];
+	let question2 = ['VF', 'Text2quiz est un logiciel très utile', 'V'];
+	let question1 = ['QCM', 'Avec Text2quiz, …', "A : On peut créer des quiz rapidement|B : On peut réparer sa trotinette|C : On n'a pas besoin de créer un compte |D : l'interface est minimaliste pour pouvoir être efficace", '1|3|4'];
 	// let question3 = ['QR', 'Intitulé de la question', 'Réponse 1|Réponse 2|Réponse 3', '3'];
-	// let question4 = ['Flashcard', "# Lorem ipsum dolor sit amet ?", "Lorem ipsum dolor sit amet. In officiis qui internos perferendis aut similique nobis est alias possimus. Aut tempora Quis aut dolor galisum est molestiae repudiandae hic quia rerum sed corrupti alias. Id molestiae rerum nam magnam quos non consequatur blanditiis et ipsam commodi &"];
+	//let question2 = ['Flashcard', "# Qu'est-ce que Text2quiz ?", "Text2quiz est une application de quiz qui permet de transformer du texte en un quiz."];
 	// let question5 = ['QRC', 'Intitulé de la question', 'réponse'];
 	// let question6 = ['Trous', 'Lorem ipsum {V:dolor|dolores|doloreo} sit amet. In officiis qui internos perferendis aut similique {nobis|V:nobus|nobum} est alias {possimus|V:possime}. Aut tempora {Quid|Quia|V:Quis} aut dolor gal'];
 	// let question7 = ['Grille', 'Catégorie 1|Catégorie 2', '{Proposition 1|Proposition 2|Proposition 3}{Proposition 4|Proposition 5|Proposition 6|Proposition 7}']
 	// let question8 = ['Ordre', 'Réponse 1|Réponse 2|Réponse 3']
 	// let question9 = ['Etiquettes', 'Catégorie 1|Catégorie 2', '{etiquette 1|étiquette 2|étiquette 3}{étiquette 4|étiquette 5|étiquette 6}']
 	// let question10 = ['Association', 'Catégorie 1|Catégorie 2', 'étiquette 1|étiquette 2', 'Question']
-	// let questionsDefault = [question1,question2, question3,question4,question5,question6,question7,question8,question9,question10];
-	// questions = questionsDefault;
+	 // let questionsDefault = [question1,question2, question3,question4,question5,question6,question7,question8,question9,question10];
+	 let questionsDefault = [question1, question2];
+	 questions = questionsDefault;
 	$: if ($questionsCode && $changeQuestions) {
 		validation.update(n => false);
 		questionsCodeArray = $questionsCode.split(/\r?\n/);
