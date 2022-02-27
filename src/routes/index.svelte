@@ -3,6 +3,7 @@
 	import HomeBody from './HomeBody.svelte';
 	import Menu from './Menu.svelte';
 	import Footer from './Footer.svelte';
+	import { onMount } from 'svelte';
 	import {
 		questionsCode,
 		changeQuestions,
@@ -26,18 +27,21 @@
 	
 //	$: if ($changeQuestions) {home.update(n=>false)}
 
-	$: if ($url) {
+
+onMount(async () => {
+	 if ($url) {
 		quizEncodageHash = $url.hash.slice(1);
 		quiz = decodeURI(quizEncodageHash);
 		if (checkQuestions(quiz)) {
 			questionsCode.update(n => quiz);
 			changeQuestions.update(n => true);
-			// home.update(n=>false);
+			home.update(n=>false);
+			//history.replaceState(null, null, ' ');
 		} else {
 			home.update(n=>true);
 		}
 	}
-
+});
 
 
 	function checkQuestions(toCheck) {

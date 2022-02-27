@@ -1,5 +1,13 @@
-
+<script>
+	import { assign } from 'svelte/internal';
+import url from './url.js';
+	let baseURL='';
+	if ($url) {
+		baseURL=$url.protocol+'//'+$url.host;
+	}
+	</script>
 	<h1 class="title has-text-centered is-1">Text2quiz</h1>
+
 	<div class="box block px-6 py-5 mt-6">
 		<div class="content has-text-justified">
 			
