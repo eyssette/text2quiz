@@ -69,7 +69,7 @@
 		answersByCategoryArray.forEach(choices);
 	}
 
-	answersShuffled = shuffleArray(answersShuffled);
+	$: answersShuffled = shuffleArray(answersShuffled);
 
 	function choices(element) {
 		answersByCategory.push([element]);
