@@ -29,17 +29,26 @@
 
 
 onMount(async () => {
-	 if ($url) {
+	if ($url) {
 		quizEncodageHash = $url.hash.slice(1);
-		quiz = decodeURI(quizEncodageHash);
-		if (checkQuestions(quiz)) {
-			questionsCode.update(n => quiz);
-			changeQuestions.update(n => true);
-			home.update(n=>false);
-			//history.replaceState(null, null, ' ');
+
+		if (quizEncodageHash.startsWith('http')) {
+			const response = await fetch(quizEncodageHash);
+			const data = await response.text();
+			console.log (data);
+			quiz = decodeURI(data);
 		} else {
-			home.update(n=>true);
-		}
+			quiz = decodeURI(quizEncodageHash);}
+
+			if (checkQuestions(quiz)) {
+				questionsCode.update(n => quiz);
+				changeQuestions.update(n => true);
+				home.update(n => false);
+				//history.replaceState(null, null, ' ');
+			} else {
+				home.update(n => true);
+			}
+		
 	}
 });
 
