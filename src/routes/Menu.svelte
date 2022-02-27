@@ -96,7 +96,7 @@
 	let urlQuiz;
 
 	function modalShareActivate() {
-		$questionsCode && checkQuestions ? urlQuiz = $url.protocol + '//' + $url.host + '#' + encodeURI($questionsCode) : urlQuiz = $url.protocol + '//' + $url.host;
+		if ($url) {$questionsCode && checkQuestions ? urlQuiz = $url.protocol + '//' + $url.host + '#' + encodeURI($questionsCode) : urlQuiz = $url.protocol + '//' + $url.host;}
 		modalShareActive = !modalShareActive;
 	}
 </script>
