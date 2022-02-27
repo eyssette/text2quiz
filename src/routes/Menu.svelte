@@ -56,7 +56,6 @@
 			modalActive = '';
 			messageInvalidQuestions = '';
 			newURL = '/#' + encodeURI($questionsCode);
-			//slocation.pushState({}, "", newURL);
 			$changeQuestions = true;
 		}
 	}
