@@ -26,19 +26,20 @@
 
 	let home=true;
 	
+	$: if ($changeQuestions) {home=false}
+
 	$: if ($url) {
 		let quizEncodageHash = $url.hash.slice(1);
 		let quiz = decodeURI(quizEncodageHash);
 		navigator.clipboard.writeText('#' + quizEncodageHash);
 		if (checkQuestions(quiz)) {
-			home = false;
 			questionsCode.update(n => quiz) & changeQuestions.update(n => true)
+			home=false;
 		} else {
 			home=true;
 		}
 	}
 
-	$: if ($changeQuestions) {home=false}
 
 
 	function checkQuestions(toCheck) {
@@ -92,18 +93,21 @@
 
 	<Menu />
 
-		{#if home==true || !$questionsCode}
-			<section class="pt-6">
-				<HomeBody />
-			</section>
-		{:else}
-			<h1 class="title has-text-centered pt-2 is-size-1 has-text-link-dark">{title}</h1>
-			<h2 class="subtitle has-text-centered has-text-link-dark mt-4">{subtitle}</h2>
+		{#if !home}
+		
+		<h1 class="title has-text-centered pt-2 is-size-1 has-text-link-dark">{title}</h1>
+		<h2 class="subtitle has-text-centered has-text-link-dark mt-4">{subtitle}</h2>
+
 			<section class="pt-6">
 				<Questions />
 			</section>
 
 			<Results />
+			
+		{:else}
+		<section class="pt-6">
+			<HomeBody />
+		</section>
 		{/if}
 
 	<Footer />
