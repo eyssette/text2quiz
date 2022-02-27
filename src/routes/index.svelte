@@ -27,7 +27,7 @@
 
 
 	
-	$: if ($changeQuestions) {$home=false}
+	$: if ($changeQuestions) {home.update(n=>false)}
 
 	$: if ($url) {
 		let quizEncodageHash = $url.hash.slice(1);
@@ -35,9 +35,9 @@
 		navigator.clipboard.writeText('#' + quizEncodageHash);
 		if (checkQuestions(quiz)) {
 			questionsCode.update(n => quiz) & changeQuestions.update(n => true)
-			$home=false;
+			home.update(n=>false);
 		} else {
-			$home=true;
+			home.update(n=>true);
 		}
 	}
 

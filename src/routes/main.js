@@ -1,6 +1,6 @@
-import App from './index.svelte';
+import Index from './index.svelte';
 
-var app = new App({
+var app = new Index({
 	target: document.body
 });
 

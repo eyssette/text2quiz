@@ -9,7 +9,7 @@
 	import {
 		regexValid
 	} from './regexValid.svelte';
-	import url from './url.js'
+	import url from './url.js';
 	import Help from './Help.svelte';
 	const tooltipEdit = 'Changer le contenu de ce quiz';
 	const tooltipShare = 'Partager ce quiz';
@@ -84,8 +84,13 @@
 	}
 
 	function goHome() {
-		$home ? $home = false : $home = true;
-		$home ? tooltipHome = tooltipHomeOn : tooltipHome = tooltipHomeOff;
+		if($home) {
+			home.update(n=>false);
+			tooltipHome = tooltipHomeOff;
+		} else {
+			home.update(n=>true);
+			tooltipHome = tooltipHomeOn;
+		}
 	}
 
 	let urlQuiz;
