@@ -1,6 +1,7 @@
 <script>
 	import {
-		countCorrectAnswers
+		countCorrectAnswers,
+		changeQuestions
 	} from './stores.js';
 	import {
 		shuffleArray
@@ -11,6 +12,7 @@
 	const title = 'Grille';
 	const textNotComplete = "La grille est incomplète";
 	let categoriesArray = categories.split('|');
+	$: categoriesArray = categories.split('|');
 	export let answersByCategoryString;
 	let answersByCategory = [];
 	let answersShuffled = [];
@@ -19,6 +21,7 @@
 	let answersChecked = [];
 	let correctAnswers = [];
 	const reg = /\{(.*?)\}/g;
+
 	let res = [],
 		tmp;
 	while (tmp = reg.exec(answersByCategoryString)) res.push(tmp);
@@ -31,7 +34,21 @@
 		answersShuffledUnique = [...new Set(answersShuffled)]
 	}
 
-	for (let i = 0; i < answersShuffledUnique.length; i++) {
+	$: if ($changeQuestions) {
+		res = [],
+		tmp;
+		answersByCategory=[];
+		answersShuffled=[]
+		answersShuffledUnique = [];
+		correctAnswers = [];
+	while (tmp = reg.exec(answersByCategoryString)) res.push(tmp);
+	res.forEach(choices);
+	}
+
+
+
+
+	$: for (let i = 0; i < answersShuffledUnique.length; i++) {
 		let partialCheck = [];
 		for (let j = 0; j < categoriesArray.length; j++) {
 			if (answersByCategory[j].includes(answersShuffledUnique[i])) {
