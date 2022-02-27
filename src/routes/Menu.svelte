@@ -43,15 +43,16 @@ function modalOn() {
 	modalActive = 'is-active';
 }
 
-let newUrl;
+let newURL
+
 
 function modalOffSave() {
 	if (checkQuestions()) {
 		previousQuestionsCode = $questionsCode;
 		modalActive = '';
 		messageInvalidQuestions = '';
-		newUrl = $url.protocol+'//'+$url.host+'#' + encodeURI($questionsCode);
-		history.pushState(newUrl, '', newUrl)
+		newURL = '/#' + encodeURI($questionsCode);
+		window.location = newURL;
 		$changeQuestions = true;
 	}
 }
@@ -80,8 +81,8 @@ function checkQuestions() {
 }
 
 function goHome() {
-	newUrl =  $url.protocol+'//'+$url.host;
-	history.pushState(newUrl, '', newUrl);
+	newURL= '/';
+	window.location = newURL;
 }
 
 let urlQuiz;
