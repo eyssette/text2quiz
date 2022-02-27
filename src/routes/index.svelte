@@ -1,5 +1,6 @@
 <script>
 	import Head from './Head.svelte';
+	import HomeBody from './HomeBody.svelte';
 	import Menu from './Menu.svelte';
 	import Results from './Results.svelte';
 	import Footer from './Footer.svelte';
@@ -15,7 +16,6 @@
 	} else {
 		validate = '';
 	}
-
 	import slocation from "slocation"
 	import {
 		questionsCode,
@@ -25,12 +25,18 @@
 		regexValid
 	} from './regexValid.svelte';
 
+	let home=false;
+
 	$: if ($slocation) {
+		console.log ($slocation);
 		let quizEncodageHash = $slocation.hash.slice(1);
 		let quiz = decodeURI(quizEncodageHash);
 		navigator.clipboard.writeText('#' + quizEncodageHash);
 		if (checkQuestions(quiz)) {
+			home = false;
 			questionsCode.update(n => quiz) & changeQuestions.update(n => true)
+		} else {
+			home=true;
 		}
 	}
 
@@ -86,14 +92,19 @@
 
 	<Menu />
 
-	<h1 class="title has-text-centered pt-2 is-size-1 has-text-link-dark">{title}</h1>
-	<h2 class="subtitle has-text-centered has-text-link-dark mt-4">{subtitle}</h2>
+		{#if $slocation.href==$slocation.origin || home==true}
+			<section class="pt-6">
+				<HomeBody />
+			</section>
+		{:else}
+			<h1 class="title has-text-centered pt-2 is-size-1 has-text-link-dark">{title}</h1>
+			<h2 class="subtitle has-text-centered has-text-link-dark mt-4">{subtitle}</h2>
+			<section class="pt-6">
+				<Questions />
+			</section>
 
-	<section class="pt-6">
-		<Questions />
-	</section>
-
-	<Results />
+			<Results />
+		{/if}
 
 	<Footer />
 

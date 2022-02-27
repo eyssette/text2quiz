@@ -2,7 +2,6 @@
 	import {
 		katexifyString
 	} from './katexify';
-	import Texte from './Texte.svelte';
 	import VF from './VF.svelte';
 	import QCM from './QCM.svelte';
 	import QR from './QR.svelte';
@@ -62,9 +61,6 @@
 </script>
 
 {#each questions as question, i}
-	{#if question[0]=='Texte'}
-		<Texte title={question[1]} content={latex ? katexifyString(md.render(question[2])) : md.render(question[2])}/>
-	{/if}
 	{#if question[0]=='VF'}
 		<VF question={latex ? katexifyString(md.render(question[1])) : md.render(question[1])} quizId={i} correctAnswer={question[2]} validate={$validation}/>
 	{/if}

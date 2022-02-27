@@ -212,7 +212,7 @@
 					<div class="message-body">
 						<div id="quiz-q{quizId}-z0" bind:this={zoneInitial}>
 							{#each answersShuffled as answer,i}
-								<p class="has-text-justify py-1" class:r-success={validate && checkAnswers.filter(element=>(element[0]==answer && element[2]==true)).length>0} class:r-error={validate && checkAnswers.filter(element=>(element[0]==answer && element[2]==false)).length>0}  id="quiz-q{quizId}-r{i}" class:draggable={!validate}>{@html answer}</p>
+								<p class="has-text-justified py-1" class:r-success={validate && checkAnswers.filter(element=>(element[0]==answer && element[2]==true)).length>0} class:r-error={validate && checkAnswers.filter(element=>(element[0]==answer && element[2]==false)).length>0}  id="quiz-q{quizId}-r{i}" class:draggable={!validate}>{@html answer}</p>
 							{/each}
 						</div>
 					</div>

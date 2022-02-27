@@ -54,7 +54,7 @@ function modalOffSave() {
 		modalActive = '';
 		messageInvalidQuestions = '';
 		newURL = '/#' + encodeURI($questionsCode);
-		//slocation.pushState({}, "", newURL);
+		slocation.pushState({}, "", newURL);
 		$changeQuestions = true;
 	}
 }
@@ -82,6 +82,10 @@ function checkQuestions() {
 	return check;
 }
 
+function goHome() {
+	newURL= '/';
+	slocation.pushState({}, "", newURL);
+}
 
 let urlQuiz;
 
@@ -109,13 +113,11 @@ function modalShareActivate() {
 input {
 	width: 50%;
 }
-
-nav a {color:inherit;}
 </style>
 
 <nav class="level pt-2">
 	<div class="level-right">
-		<a class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipHome}" href="/"><span class="material-icons is-size-3 is-size-5-mobile" >home</span></a>
+		<span class="material-icons is-size-3 is-size-5-mobile has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipHome}" on:click={goHome}>home</span>
 		<span class="material-icons is-size-3 is-size-5-mobile has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipEdit}" on:click={modalOn}> edit </span>
 		<span class="material-icons is-size-3 is-size-5-mobile has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" data-target="modal2" aria-haspopup="true" data-tooltip="{tooltipShare}" on:click={modalShareActivate}>share</span>
 	</div>
