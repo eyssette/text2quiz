@@ -36,7 +36,7 @@
 		if (checkQuestions(quiz)) {
 			questionsCode.update(n => quiz);
 			changeQuestions.update(n => true);
-			//home.update(n=>false);
+			// home.update(n=>false);
 		} else {
 			home.update(n=>true);
 		}

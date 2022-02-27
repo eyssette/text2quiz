@@ -13,8 +13,9 @@
 	import Help from './Help.svelte';
 	const tooltipEdit = 'Changer le contenu de ce quiz';
 	const tooltipShare = 'Partager ce quiz';
-	const tooltipHomeOff = "Afficher les explications initiales";
-	const tooltipHomeOn = "Masquer les explications initiales";
+	const tooltipHome = "Revenir à la page d'accueil";
+	//const tooltipHomeOff = "Afficher les explications initiales";
+	//const tooltipHomeOn = "Masquer les explications initiales";
 	const textQuizContent = 'Contenu du quiz';
 	const textSave = 'Sauvegarder';
 	const textCancel = 'Annuler';
@@ -27,7 +28,7 @@
 	let helpActive = false;
 	let previousQuestionsCode = '';
 	let modalShareActive = false;
-	let tooltipHome = tooltipHomeOn;
+	//let tooltipHome = tooltipHomeOn;
 
 
 	let messageInvalidQuestions = '';
@@ -47,7 +48,6 @@
 		modalActive = 'is-active';
 	}
 
-	let newURL
 
 
 	function modalOffSave() {
@@ -55,7 +55,6 @@
 			previousQuestionsCode = $questionsCode;
 			modalActive = '';
 			messageInvalidQuestions = '';
-			newURL = '/#' + encodeURI($questionsCode);
 			$changeQuestions = true;
 		}
 	}
