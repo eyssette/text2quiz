@@ -13,9 +13,9 @@
 	import Help from './Help.svelte';
 	const tooltipEdit = 'Changer le contenu de ce quiz';
 	const tooltipShare = 'Partager ce quiz';
-	const tooltipHome = "Revenir à la page d'accueil";
-	//const tooltipHomeOff = "Afficher les explications initiales";
-	//const tooltipHomeOn = "Masquer les explications initiales";
+	const tooltipHomeOff = "Afficher les explications initiales";
+	const tooltipHomeOn = "Masquer les explications initiales";
+	let tooltipHome = tooltipHomeOn;
 	const textQuizContent = 'Contenu du quiz';
 	const textSave = 'Sauvegarder';
 	const textCancel = 'Annuler';
@@ -28,7 +28,7 @@
 	let helpActive = false;
 	let previousQuestionsCode = '';
 	let modalShareActive = false;
-	//let tooltipHome = tooltipHomeOn;
+	
 
 
 	let messageInvalidQuestions = '';
