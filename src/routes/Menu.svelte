@@ -48,7 +48,7 @@ function modalOffSave() {
 		previousQuestionsCode = $questionsCode;
 		modalActive = '';
 		messageInvalidQuestions = '';
-		location.replace($url.protocol+'//'+$url.host+'#' + encodeURI($questionsCode));
+		window.location = $url.protocol+'//'+$url.host+'#' + encodeURI($questionsCode);
 		$changeQuestions = true;
 	}
 }
@@ -77,7 +77,7 @@ function checkQuestions() {
 }
 
 function goHome() {
-	location.replace($url.protocol+'//'+$url.host);
+	window.location =  $url.protocol+'//'+$url.host;
 }
 
 let urlQuiz;
