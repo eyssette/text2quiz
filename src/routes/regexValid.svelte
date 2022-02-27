@@ -13,7 +13,7 @@
 		numberItems[3] = [3];
 		types[4] = /^QRC\s\|\|\s.+\s\|\|\s.+$/; // QRC
 		numberItems[4] = [3];
-		types[5] = /^Trous\s\|\|\s.*(({V:.+})|({F:.+})).*/; // Trous
+		types[5] = /^Trous\s\|\|\s.*{.+}.*/; // Trous
 		numberItems[5] = [2];
 		types[6] = /^Grille\s\|\|\s.+\s\|\|\s{.+}$/; // Grille
 		numberItems[6] = [3];
