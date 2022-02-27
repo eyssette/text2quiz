@@ -18,7 +18,7 @@
 		types[6] = /^Grille\s\|\|\s.+\s\|\|\s{.+}$/; // Grille
 		numberItems[6] = [3];
 		types[7] = /^Ordre\s\|\|\s.+\|.+/; // Ordre
-		numberItems[7] = [2];
+		numberItems[7] = [2,3];
 		types[8] = /^Etiquettes\s\|\|\s.+\s\|\|\s{.+}$/; // Etiquettes
 		numberItems[8] = [3];
 		types[9] = /^Association\s\|\|\s.+\|.+\s\|\|\s.+\|.+/; // Association

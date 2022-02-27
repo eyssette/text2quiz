@@ -11,13 +11,15 @@
 	import {
 		onMount
 	} from "svelte";
+	const title = 'Ordre';
 	export let validate;
 	export let quizId;
 	export let textAnswers;
+	export let subtitle='Classez les éléments de cette liste dans le bon ordre :';
 	let textAnswersArray = textAnswers.split('|');
+	$: textAnswersArray = textAnswers.split('|');
 	let textAnswersArrayShuffled = shuffleArray(textAnswersArray);
-	const title = 'Ordre';
-	const subtitle = 'Classez les éléments de cette liste dans le bon ordre :';
+	$: textAnswersArrayShuffled = shuffleArray(textAnswersArray);
 	let disabled = '';
 	let sortableElement;
 	let correctAnswer;

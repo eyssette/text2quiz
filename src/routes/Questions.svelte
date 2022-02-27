@@ -91,7 +91,7 @@
 		<Grille categories={latex ? katexifyString(snarkdown(question[1])).replace('<p>','').replace('</p>','') : snarkdown(question[1]).replace('<p>','').replace('</p>','')} answersByCategoryString={latex ? katexifyString(snarkdown(question[2])).replace('<p>','').replace('</p>','') : snarkdown(question[2]).replace('<p>','').replace('</p>','')} quizId={i} validate={$validation} />
 	{/if}
 	{#if question[0]=='Ordre'}
-		<Ordre quizId={i} textAnswers={latex ? katexifyString(snarkdown(question[1])).replace('<p>','').replace('</p>','') : snarkdown(question[1]).replace('<p>','').replace('</p>','')} validate={$validation} />
+		<Ordre quizId={i} textAnswers={latex ? katexifyString(snarkdown(question[1])).replace('<p>','').replace('</p>','') : snarkdown(question[1]).replace('<p>','').replace('</p>','')} subtitle={question[2]} validate={$validation} />
 	{/if}
 	{#if question[0]=='Etiquettes'}
 		<Etiquettes quizId={i} categories={latex ? katexifyString(snarkdown(question[1])).replace('<p>','').replace('</p>','') : snarkdown(question[1]).replace('<p>','').replace('</p>','')} answersByCategoryString={latex ? katexifyString(snarkdown(question[2])).replace('<p>','').replace('</p>','') : snarkdown(question[2]).replace('<p>','').replace('</p>','')} validate={$validation} />
