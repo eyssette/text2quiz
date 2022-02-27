@@ -27,7 +27,6 @@
 		types.forEach(type => {
 			const regex = new RegExp(type);
 			let checkType = regex.test(questionCode);
-			//console.log('checkType : '+checkType);
 			if (checkType) {
 				let separators = questionCode.match(/\s\|\|\s/g);
 				let checkNumberItems;
@@ -36,7 +35,6 @@
 				} else {
 					checkNumberItems = 1;
 				}
-				//console.log('checkNumberItems : '+checkNumberItems+'  numberItems['+i+'] : '+numberItems[i]);
 				if (!numberItems[i].includes(checkNumberItems)) {
 					checkType = false
 				}

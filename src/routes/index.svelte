@@ -5,9 +5,15 @@
 	import Results from './Results.svelte';
 	import Footer from './Footer.svelte';
 	import {
+		questionsCode,
+		changeQuestions,
 		validation
 	} from './stores.js';
 	import Questions from './Questions.svelte';
+	import url from './url.js';
+	import {
+		regexValid
+	} from './regexValid.svelte';
 	const title = 'Quiz';
 	const subtitle = 'Répondez à toutes les questions et calculez votre score';
 	let validate = '';
@@ -16,20 +22,12 @@
 	} else {
 		validate = '';
 	}
-	import slocation from "slocation"
-	import {
-		questionsCode,
-		changeQuestions
-	} from './stores.js';
-	import {
-		regexValid
-	} from './regexValid.svelte';
+	
 
-	let home=false;
-
-	$: if ($slocation) {
-		console.log ($slocation);
-		let quizEncodageHash = $slocation.hash.slice(1);
+	let home=true;
+	
+	$: if ($url) {
+		let quizEncodageHash = $url.hash.slice(1);
 		let quiz = decodeURI(quizEncodageHash);
 		navigator.clipboard.writeText('#' + quizEncodageHash);
 		if (checkQuestions(quiz)) {
@@ -39,6 +37,8 @@
 			home=true;
 		}
 	}
+
+	$: if ($changeQuestions) {home=false}
 
 
 	function checkQuestions(toCheck) {
@@ -92,7 +92,7 @@
 
 	<Menu />
 
-		{#if $slocation.href==$slocation.origin || home==true}
+		{#if home==true || !$questionsCode}
 			<section class="pt-6">
 				<HomeBody />
 			</section>

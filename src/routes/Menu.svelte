@@ -18,8 +18,8 @@ import {
 import {
 	regexValid
 } from './regexValid.svelte';
-// import url from './url.js'
-import slocation from "slocation";
+import url from './url.js'
+//import slocation from "slocation";
 import Help from './Help.svelte';
 
 let modalActive = '';
@@ -54,7 +54,7 @@ function modalOffSave() {
 		modalActive = '';
 		messageInvalidQuestions = '';
 		newURL = '/#' + encodeURI($questionsCode);
-		slocation.pushState({}, "", newURL);
+		//slocation.pushState({}, "", newURL);
 		$changeQuestions = true;
 	}
 }
@@ -84,13 +84,13 @@ function checkQuestions() {
 
 function goHome() {
 	newURL= '/';
-	slocation.pushState({}, "", newURL);
+	//slocation.pushState({}, "", newURL);
 }
 
 let urlQuiz;
 
 function modalShareActivate() {
-	$questionsCode && checkQuestions ? urlQuiz = $slocation.protocol + '//' + $slocation.host + '#' + encodeURI($questionsCode) : urlQuiz = $slocation.protocol + '//' + $slocation.host;
+	$questionsCode && checkQuestions ? urlQuiz = $url.protocol + '//' + $url.host + '#' + encodeURI($questionsCode) : urlQuiz = $url.protocol + '//' + $url.host;
 	modalShareActive = !modalShareActive;
 }
 	
