@@ -1,14 +1,36 @@
+# build folder
+dist/
+build/
+
+# logs
+logs/
+.cache
 .DS_Store
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# process data
+.pid
+pids
+.pid-lock
+
+# Coverage & Test
+coverage
+.nyc_output
+
+# Dependency folder
 node_modules
-dist
-test-results/
-package-lock.json
-yarn.lock
-/packages/create-svelte/template/CHANGELOG.md
-/documentation/types.js
-.env
-.vercel_build_output
+bower_components
+jspm_packages
+
+# Environment files
+.dot
+# Editor and other files
+.idea
+typing
+internal
+.vscode
+*.tgz
+.eslintcache
 .svelte-kit
-.cloudflare
-.pnpm-debug.log
-.netlify
