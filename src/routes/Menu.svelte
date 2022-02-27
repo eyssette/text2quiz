@@ -56,6 +56,7 @@
 			modalActive = '';
 			messageInvalidQuestions = '';
 			$changeQuestions = true;
+			$countCorrectAnswers=0;
 		}
 	}
 

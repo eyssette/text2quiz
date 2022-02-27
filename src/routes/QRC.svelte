@@ -7,6 +7,7 @@
 	export let question;
 	export let textAnswers;
 	let textAnswersArray = textAnswers.split('|');
+	$: textAnswersArray = textAnswers.split('|');
 	const title = 'Réponse courte';
 	let answer;
 	let disabled = '';
