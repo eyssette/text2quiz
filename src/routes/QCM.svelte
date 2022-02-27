@@ -10,8 +10,10 @@
 	export let question;
 	export let textAnswers;
 	let textAnswersArray = textAnswers.split('|');
+	$ : textAnswersArray = textAnswers.split('|');
 	export let correctAnswersString;
 	let correctAnswers = correctAnswersString.split('|').map(Number);
+	$ : correctAnswers = correctAnswersString.split('|').map(Number);
 	const title = 'QCM';
 	const textNotComplete = 'Réponse partiellement juste !';
 	let answers = [];
