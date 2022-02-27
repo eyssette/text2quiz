@@ -7,3 +7,4 @@ export const validation = writable(false);
 export const questionsCode = writable('');
 export const changeQuestions = writable(false);
 export const language = writable('FR');
+export const home = writable(true);

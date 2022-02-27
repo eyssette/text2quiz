@@ -7,7 +7,8 @@
 	import {
 		questionsCode,
 		changeQuestions,
-		validation
+		validation,
+		home
 	} from './stores.js';
 	import Questions from './Questions.svelte';
 	import url from './url.js';
@@ -24,9 +25,9 @@
 	}
 	
 
-	let home=true;
+
 	
-	$: if ($changeQuestions) {home=false}
+	$: if ($changeQuestions) {$home=false}
 
 	$: if ($url) {
 		let quizEncodageHash = $url.hash.slice(1);
@@ -34,9 +35,9 @@
 		navigator.clipboard.writeText('#' + quizEncodageHash);
 		if (checkQuestions(quiz)) {
 			questionsCode.update(n => quiz) & changeQuestions.update(n => true)
-			home=false;
+			$home=false;
 		} else {
-			home=true;
+			$home=true;
 		}
 	}
 
@@ -105,7 +106,7 @@
 			<Results />
 		
 			
-		{#if home}
+		{#if $home}
 		<section class="pt-6">
 			<HomeBody />
 		</section>

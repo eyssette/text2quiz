@@ -1,7 +1,8 @@
 <script>
 const tooltipEdit = 'Changer le contenu de ce quiz';
 const tooltipShare = 'Partager ce quiz';
-const tooltipHome= "Revenir à la page d'accueil";
+const tooltipHomeOff= "Afficher les explications initiales";
+const tooltipHomeOn= "Masquer les explications initiales";
 const textQuizContent = 'Contenu du quiz';
 const textSave = 'Sauvegarder';
 const textCancel = 'Annuler';
@@ -13,7 +14,8 @@ import {
 	questionsCode,
 	changeQuestions,
 	validation,
-	countCorrectAnswers
+	countCorrectAnswers,
+	home
 } from './stores.js';
 import {
 	regexValid
@@ -26,6 +28,7 @@ let modalActive = '';
 let helpActive = false;
 let previousQuestionsCode = '';
 let modalShareActive = false;
+let tooltipHome=tooltipHomeOn;
 
 
 let messageInvalidQuestions = '';
@@ -83,8 +86,8 @@ function checkQuestions() {
 }
 
 function goHome() {
-	newURL= '/';
-	//slocation.pushState({}, "", newURL);
+	$home ? $home= false : $home=true;
+	$home ? tooltipHome=tooltipHomeOn: tooltipHome=tooltipHomeOff;
 }
 
 let urlQuiz;
@@ -124,7 +127,7 @@ input {
 </nav>
 
 <div class="modal {modalActive}">
-	<div class="modal-background"></div>
+	<div class="modal-background"  on:click={modalOffCancel}></div>
 	<div class="modal-card">
 		<header class="modal-card-head">
 			<p class="modal-card-title">{tooltipEdit}</p>
@@ -144,7 +147,7 @@ input {
 </div>
 
 <div class="modal" class:is-active={modalShareActive}>
-	<div class="modal-background"></div>
+	<div class="modal-background" on:click={()=>(modalShareActive=!modalShareActive)}></div>
 	<div class="modal-card">
 		<header class="modal-card-head">
 			<p class="modal-card-title">{tooltipShare}</p>
