@@ -12,10 +12,11 @@
 		onMount
 	} from "svelte";
 	const title = 'Ordre';
+	const subtitleDefault = 'Classez les éléments de cette liste dans le bon ordre :';
 	export let validate;
 	export let quizId;
 	export let textAnswers;
-	export let subtitle='Classez les éléments de cette liste dans le bon ordre :';
+	export let subtitle=subtitleDefault;
 	let textAnswersArray = textAnswers.split('|');
 	$: textAnswersArray = textAnswers.split('|');
 	let textAnswersArrayShuffled = shuffleArray(textAnswersArray);
