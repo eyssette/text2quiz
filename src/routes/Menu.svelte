@@ -107,8 +107,19 @@
 		modalShareActive = !modalShareActive;
 		$modal = !$modal;
 	}
+
+	function handleKeydown(event) {
+		if (event.key === 'Escape') {
+			if (modalEditActive == 'is-active') {modalEditOffCancel()}
+			if (modalShareActive) {
+				modalShareActive = !modalShareActive;
+				$modal = !$modal;
+			}
+		}
+	}
 </script>
 
+<svelte:window on:keydown={handleKeydown}/>
 
 <nav class="level pt-2">
 	<div class="level-right">
