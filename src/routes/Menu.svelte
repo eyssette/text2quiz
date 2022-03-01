@@ -4,7 +4,8 @@
 		changeQuestions,
 		validation,
 		countCorrectAnswers,
-		home
+		home,
+		modal
 	} from './stores.js';
 	import {
 		regexValid
@@ -24,11 +25,11 @@
 	const helpActiveText = "Afficher l'aide";
 	const helpNotActiveText = "Masquer l'aide";
 
-	let modalActive = '';
+	let modalEditActive = '';
 	let helpActive = false;
 	let previousQuestionsCode = '';
 	let modalShareActive = false;
-	
+	let targetMenu=0;
 
 
 	let messageInvalidQuestions = '';
@@ -44,26 +45,32 @@
 		}
 	}
 
-	function modalOn() {
-		modalActive = 'is-active';
+	function modalEditOn() {
+		modalEditActive = 'is-active';
+		targetMenu=-1;
+		$modal=true;
 	}
 
 
 
-	function modalOffSave() {
+	function modalEditOffSave() {
 		if (checkQuestions()) {
 			previousQuestionsCode = $questionsCode;
-			modalActive = '';
+			modalEditActive = '';
 			messageInvalidQuestions = '';
 			$changeQuestions = true;
 			$countCorrectAnswers=0;
+			targetMenu=0;
+			$modal=false;
 		}
 	}
 
-	function modalOffCancel() {
-		modalActive = '';
+	function modalEditOffCancel() {
+		modalEditActive = '';
 		$questionsCode = previousQuestionsCode;
 		$changeQuestions = true;
+		targetMenu=0;
+		$modal=false;
 	}
 
 	function checkQuestions() {
@@ -98,32 +105,33 @@
 	function modalShareActivate() {
 		if ($url) {$questionsCode && checkQuestions ? urlQuiz = $url.protocol + '//' + $url.host + '#' + encodeURI($questionsCode) : urlQuiz = $url.protocol + '//' + $url.host;}
 		modalShareActive = !modalShareActive;
+		$modal = !$modal;
 	}
 </script>
 
 
 <nav class="level pt-2">
 	<div class="level-right">
-		<span class="material-icons is-size-3 is-size-5-mobile has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipHome}" on:click={goHome}>home</span>
-		<span class="material-icons is-size-3 is-size-5-mobile has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipEdit}" on:click={modalOn}> edit </span>
-		<span class="material-icons is-size-3 is-size-5-mobile has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" data-target="modal2" aria-haspopup="true" data-tooltip="{tooltipShare}" on:click={modalShareActivate}>share</span>
+		<a href="" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={goHome} tabindex="{targetMenu}" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipHome}"><span class="material-icons is-size-3 is-size-5-mobile">home</span></a>
+		<a href="" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalEditOn} tabindex="{targetMenu}" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipEdit}"><span class="material-icons is-size-3 is-size-5-mobile">edit </span></a>
+		<a href="" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalShareActivate} tabindex="{targetMenu}" data-target="modal2" aria-haspopup="true" data-tooltip="{tooltipShare}"><span class="material-icons is-size-3 is-size-5-mobile">share</span></a>
 	</div>
 </nav>
 
-<div class="modal {modalActive}">
-	<div class="modal-background"  on:click={modalOffCancel}></div>
+<div class="modal {modalEditActive}">
+	<div class="modal-background"  on:click={modalEditOffCancel}></div>
 	<div class="modal-card">
 		<header class="modal-card-head">
 			<p class="modal-card-title">{tooltipEdit}</p>
-			<button class="delete" aria-label="close" on:click={modalOffCancel}></button>
+			
 		</header>
 		<section class="modal-card-body">
-			<textarea class="textarea" placeholder="{textQuizContent}" rows="20" cols="50" id="quizContent" name="quizContent" bind:value={$questionsCode}></textarea>
+			<textarea class="textarea" placeholder="{textQuizContent}" rows="20" cols="50" id="quizContent" name="quizContent" bind:value={$questionsCode}  tabindex="{targetMenu+1}"></textarea>
 			<Help {helpActive} />
 		</section>
 		<footer class="modal-card-foot">
-			<button class="button is-success" disabled={!$questionsCode || !checkQuestions()} on:click={modalOffSave}>{textSave}</button>
-			<button class="button" on:click={modalOffCancel}>{textCancel}</button>
+			<button class="button is-success" disabled={!$questionsCode || !checkQuestions()} on:click={modalEditOffSave}>{textSave}</button>
+			<button class="button" on:click={modalEditOffCancel}>{textCancel}</button>
 			<button class="button is-info" on:click={()=> helpActive = !helpActive}>{#if helpActive}{helpNotActiveText}{:else}{helpActiveText}{/if}</button>
 			<p class='invalidQuestions has-text-danger is-size-6'>&nbsp;{@html messageInvalidQuestions}</p>
 		</footer>	
