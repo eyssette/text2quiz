@@ -50,6 +50,7 @@
 		targetMenu=-1;
 		$modal=true;
 		$home=false;
+		previousQuestionsCode = $questionsCode;
 	}
 
 
