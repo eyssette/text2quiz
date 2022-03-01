@@ -19,7 +19,8 @@
 		questionsCode,
 		changeQuestions,
 		countExpectedAnswers,
-		countCorrectAnswers
+		countCorrectAnswers,
+		modal
 	} from './stores.js';
 	const title = 'Quiz';
 	const subtitle = 'Répondez à toutes les questions et calculez votre score';
@@ -42,7 +43,7 @@
 
 	 //let questionsDefault = [question1, question2];
 	 //questions = questionsDefault;
-	$: if ($questionsCode && $changeQuestions) {
+	$: if ($questionsCode && $changeQuestions && !$modal) {
 		validation.update(n => false);
 		questionsCodeArray = $questionsCode.split(/\r?\n/);
 	}
