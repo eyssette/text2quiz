@@ -37,9 +37,9 @@
 	$: if ($questionsCode && checkQuestions()) {
 		messageInvalidQuestions = '';
 	} else {
+		changeQuestions.update(n => false);
 		if ($questionsCode != '') {
 			messageInvalidQuestions = messageInvalidQuestionsText;
-			changeQuestions.update(n => false);
 		} else {
 			messageInvalidQuestions = '';
 		}
@@ -49,6 +49,7 @@
 		modalEditActive = 'is-active';
 		targetMenu=-1;
 		$modal=true;
+		$home=false;
 	}
 
 
@@ -91,14 +92,10 @@
 	}
 
 	function goHome() {
-		if($home) {
-			home.update(n=>false);
-			tooltipHome = tooltipHomeOff;
-		} else {
-			home.update(n=>true);
-			tooltipHome = tooltipHomeOn;
-		}
+		$home ? home.update(n=>false) : home.update(n=>true)
 	}
+
+	$: $home ? tooltipHome = tooltipHomeOn : tooltipHome = tooltipHomeOff;
 
 	let urlQuiz;
 

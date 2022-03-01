@@ -46,7 +46,7 @@ onMount(async () => {
 				home.update(n => false);
 				//history.replaceState(null, null, ' ');
 			} else {
-				home.update(n => true);
+				//home.update(n => true);
 			}
 		
 	}
@@ -84,9 +84,9 @@ onMount(async () => {
 		<section class="pt-6">
 			<HomeBody />
 		</section>
-	{/if}
 
-	<Footer />
+		<Footer />
+	{/if}
 
 </div>
 
