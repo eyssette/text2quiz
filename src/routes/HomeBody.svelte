@@ -48,9 +48,11 @@ import url from './url.js';
 			<div class="is-size-5 mt-6">
 			  <h4 class="is-4 has-text-left">Usages plus avancés</h4>
 			  	<h5 class="is-5 mt-5">Markdown</h5>
-					<div>On peut utiliser la syntaxe Markdown dans les questions pour insérer du texte en gras (**gras**), en italiques (*italiques*), ou pour insérer une image : ![](URL de l'image)</div>
+					<div>On peut utiliser la syntaxe Markdown dans les questions pour insérer du texte en gras (**gras**), en italiques (*italiques*), ou pour insérer une image : ![](URL de l'image).</div>
 					<h5 class="is-5 mt-5">Latex</h5>
 					<div>On peut aussi utiliser des formules mathématiques en Latex, en les mettant entre deux signes $$ : $$formule Latex$$</div>
+					<h5 class="is-5 mt-5">HTML</h5>
+					<div>On peut également utiliser des balises HTML, notamment pour intégrer des vidéos</div>
 			</div>
 		</div>
 	</div>
