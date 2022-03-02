@@ -6,7 +6,7 @@
 	import {
 		shuffleArray
 	} from './functions.svelte';
-	import sanitizeMarkdown from 'sanitize-markdown';
+	import sanitizeHTML from './sanitizeHTML.js';
 	export let validate;
 	export let quizId;
 	export let categories;
@@ -104,14 +104,14 @@
 					<tr>
 						<th></th>
 						{#each categoriesArray as category}
-							<th>{@html sanitizeMarkdown(category)}</th>
+							<th>{@html sanitizeHTML(category)}</th>
 						{/each}
 					</tr>
 				</thead>
 				<tbody>
 					{#each answersShuffledUnique as answer,i}
 						<tr>
-							<td>{@html sanitizeMarkdown(answer)}</td>
+							<td>{@html sanitizeHTML(answer)}</td>
 							{#each categoriesArray as category,j}
 								<td><input class:r-success={validate && correctAnswers[i][1][j]==true} class:r-error={validate && correctAnswers[i][1][j]==false} class="is-checkradio is-circle is-info" type="checkbox" id="quiz-q{quizId}-r{i}-{j}" name="quiz-q{quizId}-r{i}-{j}" {disabled} value='{[answer,j]}' bind:group={answers}><label for="quiz-q{quizId}-r{i}-{j}"></label></td>
 							{/each}

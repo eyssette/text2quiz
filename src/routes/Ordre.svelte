@@ -11,7 +11,7 @@
 	import {
 		onMount
 	} from "svelte";
-	import sanitizeMarkdown from 'sanitize-markdown';
+	import sanitizeHTML from './sanitizeHTML.js';
 	const title = 'Ordre';
 	const subtitleDefault = 'Classez les éléments de cette liste dans le bon ordre :';
 	export let validate;
@@ -53,10 +53,10 @@
 <div class="block quiz-QR py-2" id="quiz-q{quizId}">
 	<h2 class="title has-text-centered">{title}</h2>
 	<div class="box block has-text-centered quiz-sortable" class:quiz-success={validate && answer==correctAnswer} class:quiz-error={validate && answer!=correctAnswer}>
-		<p class="has-text-centered block has-text-weight-medium">{@html sanitizeMarkdown(subtitle)}</p>
+		<p class="has-text-centered block has-text-weight-medium">{@html sanitizeHTML(subtitle)}</p>
 		<ul bind:this={sortableElement}>
 			{#each textAnswersArrayShuffled as answer}
-				<li class="my-3 has-background-light" class:draggable={!validate} id="quiz-q{quizId}-r1">{@html sanitizeMarkdown(answer)}</li>
+				<li class="my-3 has-background-light" class:draggable={!validate} id="quiz-q{quizId}-r1">{@html sanitizeHTML(answer)}</li>
 			{/each}
 		</ul>
 	</div>

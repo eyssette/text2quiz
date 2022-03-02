@@ -5,7 +5,7 @@
 	import {
 		language
 	} from './stores.js';
-	import sanitizeMarkdown from 'sanitize-markdown';
+	import sanitizeHTML from './sanitizeHTML.js';
 	export let validate;
 	export let quizId;
 	export let question;
@@ -49,7 +49,7 @@
 	<h2 class="title has-text-centered">{title}</h2>
 	<div class="box block" class:quiz-success={validate && correctAnswer==answer} class:quiz-error={validate && answer>0
 		&& correctAnswer!=answer}>
-		<div class="content">{@html sanitizeMarkdown(question)}</div>
+		<div class="content">{@html sanitizeHTML(question)}</div>
 		<div class="control is-size-5 is-size-6-mobile">
 			{#each textAnswers as textAnswer, i}
 				<label class="radio" class:r-success={validate && correctAnswer==i+1 && answer==i+1} class:r-error={validate && correctAnswer!=i+1 && answer==i+1} for="quiz-q{quizId}-r{i+1}"><input type="radio" name="quiz-q{quizId}" id="quiz-q{quizId}-r{i+1}" {disabled} bind:group={answer}  value={i+1}>{textAnswer} </label>

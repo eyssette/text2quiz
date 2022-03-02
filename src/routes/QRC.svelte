@@ -2,7 +2,7 @@
 	import {
 		countCorrectAnswers
 	} from './stores.js';
-	import sanitizeMarkdown from 'sanitize-markdown';
+	import sanitizeHTML from './sanitizeHTML.js';
 	export let validate;
 	export let quizId;
 	export let question;
@@ -24,7 +24,7 @@
 <div class="block quiz-QRC py-2" id="quiz-q{quizId}">
 	<h2 class="title has-text-centered">{title}</h2>
 	<div class="box block" class:quiz-success={validate && answer && textAnswersArray.includes(answer)} class:quiz-error={validate && answer && !textAnswersArray.includes(answer)}>
-		<div class="content">{@html sanitizeMarkdown(question)}</div>
+		<div class="content">{@html sanitizeHTML(question)}</div>
 		<div class="control is-size-5 is-size-6-mobile">
 			{#if !validate || !answer}
 				<input class="input" type="text" placeholder="Réponse" id="quiz-q{quizId}-r1" name="quiz-q{quizId}" bind:value={answer} {disabled} >{:else}<span class:r-success={validate && answer && textAnswersArray.includes(answer)} class:r-error={validate && answer && !textAnswersArray.includes(answer)}>{answer}</span>

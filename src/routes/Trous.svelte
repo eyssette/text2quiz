@@ -2,7 +2,7 @@
 	import {
 		countCorrectAnswers
 	} from './stores.js';
-	import sanitizeMarkdown from 'sanitize-markdown';
+	import sanitizeHTML from './sanitizeHTML.js';
 	import {
 		arrayEquals
 	} from './functions.svelte';
@@ -74,22 +74,22 @@
 		<div class="content">
 			{#each textFragments as textFragment,i}
 				{#if i==0}
-					{@html sanitizeMarkdown(textFragments[0])}
+					{@html sanitizeHTML(textFragments[0])}
 					{#if validate && selected[0]!='default'}
-						<span class:r-success={validate && correctAnswers[0]==selected[0]} class:r-error={validate && correctAnswers[0]!=selected[0]}>{@html sanitizeMarkdown(selected[0])}</span>
+						<span class:r-success={validate && correctAnswers[0]==selected[0]} class:r-error={validate && correctAnswers[0]!=selected[0]}>{@html sanitizeHTML(selected[0])}</span>
 					{:else}
 						<span class="select is-size-6 is-size-7-mobile" id="quiz-q{quizId}-r0">
 							<select name="quiz-q{quizId}-r0" bind:value={selected[0]} {disabled}>
 								<option value="default">…</option>
 								{#each choicesAnswers[0] as choice,j}
-									<option value="{choice}">{@html sanitizeMarkdown(choice)}</option>
-									{@html sanitizeMarkdown(choice)}
+									<option value="{choice}">{@html sanitizeHTML(choice)}</option>
+									{@html sanitizeHTML(choice)}
 								{/each}
 							</select>
 						</span>
 					{/if}
 				{:else if i<textFragments.length-1}
-					{@html sanitizeMarkdown(textFragment)}
+					{@html sanitizeHTML(textFragment)}
 					{#if validate && selected[i]!='default'}
 						<span class:r-success={validate && correctAnswers[i]==selected[i]} class:r-error={validate && correctAnswers[i]!=selected[i]}>{selected[i]}</span>
 					{:else}
@@ -97,8 +97,8 @@
 							<select name="quiz-q{quizId}-r{i+1}" bind:value={selected[i]} {disabled}>
 								<option value="default">…</option>
 								{#each choicesAnswers[i] as choice,j}
-									<option value="{choice}">{@html sanitizeMarkdown(choice)}</option>
-									{@html sanitizeMarkdown(choice)}
+									<option value="{choice}">{@html sanitizeHTML(choice)}</option>
+									{@html sanitizeHTML(choice)}
 								{/each}
 							</select>
 						</span>
