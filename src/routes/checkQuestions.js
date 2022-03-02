@@ -21,11 +21,13 @@ types[8] = /^Etiquettes\s\|\|\s.+\s\|\|\s{.+}$/; // Etiquettes
 numberItems[8] = [3];
 types[9] = /^Association\s\|\|\s.+\|.+\s\|\|\s.+\|.+/; // Association
 numberItems[9] = [3, 4];
+let regex;
 
 export function regexValid(questionCode) {
 	let i = 0;
+	valid=[];
 	types.forEach(type => {
-		const regex = new RegExp(type);
+		regex = new RegExp(type);
 		let checkType = regex.test(questionCode);
 		if (checkType) {
 			let separators = questionCode.match(/\s\|\|\s/g);
