@@ -6,15 +6,15 @@
 	import { onMount } from 'svelte';
 	import {
 		questionsCode,
+		previousQuestionsCode,
 		changeQuestions,
 		validation,
 		home
 	} from './stores.js';
 	import Questions from './Questions.svelte';
 	import url from './url.js';
-	import {
-		regexValid
-	} from './regexValid.svelte';
+	import {checkQuestions}
+	from './checkQuestions.svelte';
 	let validate = '';
 	$: if ($validation) {
 		validate = 'validate';
@@ -35,13 +35,14 @@ onMount(async () => {
 		if (quizEncodageHash.startsWith('http')) {
 			const response = await fetch(quizEncodageHash);
 			const data = await response.text();
-			console.log (data);
-			quiz = decodeURI(data);
+			quiz = encodeURI(data);
+			history.replaceState(null, null, '#'+quiz);
 		} else {
 			quiz = decodeURI(quizEncodageHash);}
 
 			if (checkQuestions(quiz)) {
 				questionsCode.update(n => quiz);
+				previousQuestionsCode.update(n => quiz);
 				changeQuestions.update(n => true);
 				home.update(n => false);
 				//history.replaceState(null, null, ' ');
@@ -53,22 +54,23 @@ onMount(async () => {
 });
 
 
-	function checkQuestions(toCheck) {
-		let check = false;
-		let chekQuestionsArray = [];
-		if (toCheck) {
-			let questionsCodeArray = toCheck.split(/\r?\n/);
-			if (Array.isArray(questionsCodeArray)) {
-				questionsCodeArray.forEach(question => {
-					chekQuestionsArray.push(regexValid(question));
-				})
-				if (chekQuestionsArray.every(element => element == true)) {
-					check = true
-				}
+$: if ($url) {
+		quizEncodageHash = $url.hash.slice(1);
+			quiz = decodeURI(quizEncodageHash);
+			if (checkQuestions(quiz)) {
+				questionsCode.update(n => quiz);
+				previousQuestionsCode.update(n => quiz);
+				changeQuestions.update(n => true);
+				home.update(n => false);
+				//history.replaceState(null, null, ' ');
+			} else {
+				questionsCode.update(n => '');
+				previousQuestionsCode.update(n => '');
+				home.update(n=>true);
 			}
-		}
-		return check;
+		
 	}
+
 </script>
 
 

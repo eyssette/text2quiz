@@ -48,4 +48,21 @@
 			return false
 		}
 	}
+
+	export function checkQuestions(toCheck) {
+		let check = false;
+		let chekQuestionsArray = [];
+		if (toCheck) {
+			let questionsCodeArray = toCheck.split(/\r?\n/);
+			if (Array.isArray(questionsCodeArray)) {
+				questionsCodeArray.forEach(question => {
+					chekQuestionsArray.push(regexValid(question));
+				})
+				if (chekQuestionsArray.every(element => element == true)) {
+					check = true
+				}
+			}
+		}
+		return check;
+	}
 </script>

@@ -1,6 +1,7 @@
 <script>
 	import {
 		questionsCode,
+		previousQuestionsCode,
 		changeQuestions,
 		validation,
 		countCorrectAnswers,
@@ -8,15 +9,13 @@
 		modal
 	} from './stores.js';
 	import {
-		regexValid
-	} from './regexValid.svelte';
+		checkQuestions
+	} from './checkQuestions.svelte';
 	import url from './url.js';
 	import Help from './Help.svelte';
 	const tooltipEdit = 'Changer le contenu de ce quiz';
 	const tooltipShare = 'Partager ce quiz';
-	const tooltipHomeOff = "Afficher les explications initiales";
-	const tooltipHomeOn = "Masquer les explications initiales";
-	let tooltipHome = tooltipHomeOn;
+	const tooltipHome = 'Accueil';
 	const textQuizContent = 'Contenu du quiz';
 	const textSave = 'Sauvegarder';
 	const textCancel = 'Annuler';
@@ -27,18 +26,18 @@
 
 	let modalEditActive = '';
 	let helpActive = false;
-	let previousQuestionsCode = '';
 	let modalShareActive = false;
 	let targetMenu=0;
+	let textAreaquestionsCode='';
 
 
 	let messageInvalidQuestions = '';
 
-	$: if ($questionsCode && checkQuestions()) {
+	$: if (textAreaquestionsCode && checkQuestions(textAreaquestionsCode)) {
 		messageInvalidQuestions = '';
 	} else {
 		changeQuestions.update(n => false);
-		if ($questionsCode != '') {
+		if (textAreaquestionsCode != '') {
 			messageInvalidQuestions = messageInvalidQuestionsText;
 		} else {
 			messageInvalidQuestions = '';
@@ -50,14 +49,16 @@
 		targetMenu=-1;
 		$modal=true;
 		$home=false;
-		previousQuestionsCode = $questionsCode;
+		textAreaquestionsCode = $previousQuestionsCode
+		$previousQuestionsCode = $questionsCode;
 	}
 
 
 
 	function modalEditOffSave() {
-		if (checkQuestions()) {
-			previousQuestionsCode = $questionsCode;
+		if (checkQuestions(textAreaquestionsCode)) {
+			$previousQuestionsCode = $questionsCode;
+			window.location.assign('#'+encodeURI(textAreaquestionsCode))
 			modalEditActive = '';
 			messageInvalidQuestions = '';
 			$changeQuestions = true;
@@ -69,34 +70,19 @@
 
 	function modalEditOffCancel() {
 		modalEditActive = '';
-		$questionsCode = previousQuestionsCode;
+		$questionsCode = $previousQuestionsCode;
 		$changeQuestions = true;
 		targetMenu=0;
 		$modal=false;
 	}
 
-	function checkQuestions() {
-		let check = false;
-		let chekQuestionsArray = [];
-		if ($questionsCode) {
-			let questionsCodeArray = $questionsCode.split(/\r?\n/);
-			if (Array.isArray(questionsCodeArray)) {
-				questionsCodeArray.forEach(question => {
-					chekQuestionsArray.push(regexValid(question));
-				})
-				if (chekQuestionsArray.every(element => element == true)) {
-					check = true
-				}
-			}
-		}
-		return check;
-	}
 
 	function goHome() {
-		$home ? home.update(n=>false) : home.update(n=>true)
+		questionsCode.update(n => '');
+		previousQuestionsCode.update(n => '');
+		window.location.assign('');
 	}
 
-	$: $home ? tooltipHome = tooltipHomeOn : tooltipHome = tooltipHomeOff;
 
 	let urlQuiz;
 
@@ -121,9 +107,9 @@
 
 <nav class="level pt-2">
 	<div class="level-right">
-		<a href="" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={goHome} tabindex="{targetMenu}" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipHome}"><span class="material-icons is-size-3 is-size-5-mobile">home</span></a>
-		<a href="" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalEditOn} tabindex="{targetMenu}" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipEdit}"><span class="material-icons is-size-3 is-size-5-mobile">edit </span></a>
-		<a href="" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalShareActivate} tabindex="{targetMenu}" data-target="modal2" aria-haspopup="true" data-tooltip="{tooltipShare}"><span class="material-icons is-size-3 is-size-5-mobile">share</span></a>
+		<a href="#home" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={goHome} tabindex="{targetMenu}" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipHome}"><span class="material-icons is-size-3 is-size-5-mobile">home</span></a>
+		<a href="#edit" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalEditOn} tabindex="{targetMenu}" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipEdit}"><span class="material-icons is-size-3 is-size-5-mobile">edit </span></a>
+		<a href="#share" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalShareActivate} tabindex="{targetMenu}" data-target="modal2" aria-haspopup="true" data-tooltip="{tooltipShare}"><span class="material-icons is-size-3 is-size-5-mobile">share</span></a>
 	</div>
 </nav>
 
@@ -135,11 +121,11 @@
 			
 		</header>
 		<section class="modal-card-body">
-			<textarea class="textarea" placeholder="{textQuizContent}" rows="20" cols="50" id="quizContent" name="quizContent" bind:value={$questionsCode}  tabindex="{targetMenu+1}"></textarea>
+			<textarea class="textarea" placeholder="{textQuizContent}" rows="20" cols="50" id="quizContent" name="quizContent" bind:value={textAreaquestionsCode}  tabindex="{targetMenu+1}"></textarea>
 			<Help {helpActive} />
 		</section>
 		<footer class="modal-card-foot">
-			<button class="button is-success" disabled={!$questionsCode || !checkQuestions()} on:click={modalEditOffSave}>{textSave}</button>
+			<button class="button is-success" disabled={textAreaquestionsCode=='' || !checkQuestions(textAreaquestionsCode)} on:click={modalEditOffSave}>{textSave}</button>
 			<button class="button" on:click={modalEditOffCancel}>{textCancel}</button>
 			<button class="button is-info" on:click={()=> helpActive = !helpActive}>{#if helpActive}{helpNotActiveText}{:else}{helpActiveText}{/if}</button>
 			<p class='invalidQuestions has-text-danger is-size-6'>&nbsp;{@html messageInvalidQuestions}</p>
