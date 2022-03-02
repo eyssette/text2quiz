@@ -74,6 +74,7 @@
 		$changeQuestions = true;
 		targetMenu=0;
 		$modal=false;
+		if (textAreaquestionsCode=='') {home.update(n=>true)}
 	}
 
 
