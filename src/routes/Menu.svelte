@@ -10,7 +10,7 @@
 	} from './stores.js';
 	import {
 		checkQuestions
-	} from './checkQuestions.svelte';
+	} from './checkQuestions.js';
 	import url from './url.js';
 	import Help from './Help.svelte';
 	const tooltipEdit = 'Changer le contenu de ce quiz';
@@ -27,8 +27,8 @@
 	let modalEditActive = '';
 	let helpActive = false;
 	let modalShareActive = false;
-	let targetMenu=0;
-	let textAreaquestionsCode='';
+	let targetMenu = 0;
+	let textAreaquestionsCode = '';
 
 
 	let messageInvalidQuestions = '';
@@ -46,9 +46,9 @@
 
 	function modalEditOn() {
 		modalEditActive = 'is-active';
-		targetMenu=-1;
-		$modal=true;
-		$home=false;
+		targetMenu = -1;
+		$modal = true;
+		$home = false;
 		textAreaquestionsCode = $previousQuestionsCode
 		$previousQuestionsCode = $questionsCode;
 	}
@@ -58,13 +58,13 @@
 	function modalEditOffSave() {
 		if (checkQuestions(textAreaquestionsCode)) {
 			$previousQuestionsCode = $questionsCode;
-			window.location.assign('#'+encodeURI(textAreaquestionsCode))
+			window.location.assign('#' + encodeURI(textAreaquestionsCode))
 			modalEditActive = '';
 			messageInvalidQuestions = '';
 			$changeQuestions = true;
-			$countCorrectAnswers=0;
-			targetMenu=0;
-			$modal=false;
+			$countCorrectAnswers = 0;
+			targetMenu = 0;
+			$modal = false;
 		}
 	}
 
@@ -72,9 +72,11 @@
 		modalEditActive = '';
 		$questionsCode = $previousQuestionsCode;
 		$changeQuestions = true;
-		targetMenu=0;
-		$modal=false;
-		if (textAreaquestionsCode=='') {home.update(n=>true)}
+		targetMenu = 0;
+		$modal = false;
+		if (textAreaquestionsCode == '') {
+			home.update(n => true)
+		}
 	}
 
 
@@ -88,14 +90,18 @@
 	let urlQuiz;
 
 	function modalShareActivate() {
-		if ($url) {$questionsCode && checkQuestions ? urlQuiz = $url.protocol + '//' + $url.host + '#' + encodeURI($questionsCode) : urlQuiz = $url.protocol + '//' + $url.host;}
+		if ($url) {
+			$questionsCode && checkQuestions ? urlQuiz = $url.protocol + '//' + $url.host + '#' + encodeURI($questionsCode) : urlQuiz = $url.protocol + '//' + $url.host;
+		}
 		modalShareActive = !modalShareActive;
 		$modal = !$modal;
 	}
 
 	function handleKeydown(event) {
 		if (event.key === 'Escape') {
-			if (modalEditActive == 'is-active') {modalEditOffCancel()}
+			if (modalEditActive == 'is-active') {
+				modalEditOffCancel()
+			}
 			if (modalShareActive) {
 				modalShareActive = !modalShareActive;
 				$modal = !$modal;

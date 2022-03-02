@@ -5,7 +5,7 @@
 	} from './stores.js';
 	import {
 		shuffleArray
-	} from './functions.svelte';
+	} from './functions.js';
 	import {
 		Sortable
 	} from 'sortablejs';
@@ -59,13 +59,13 @@
 
 
 	let answersByCategoryArray = [];
-	answersByCategoryArray= answersByCategoryString.split('|');
+	answersByCategoryArray = answersByCategoryString.split('|');
 	answersByCategoryArray.forEach(choices);
 
 	$: if ($changeQuestions) {
-		answersByCategoryArray= answersByCategoryString.split('|');
-		answersByCategory=[];
-		answersShuffled=[];
+		answersByCategoryArray = answersByCategoryString.split('|');
+		answersByCategory = [];
+		answersShuffled = [];
 		answersByCategoryArray.forEach(choices);
 	}
 
@@ -75,9 +75,9 @@
 		answersByCategory.push([element]);
 		answersShuffled = answersShuffled.concat(element)
 	}
-	
 
-	
+
+
 
 	function childrenTexts(item) {
 		let arr = [];

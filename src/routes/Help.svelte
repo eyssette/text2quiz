@@ -1,7 +1,7 @@
 <script>
 	export let helpActive;
 	const copyText = 'Copier le code dans le presse-papier';
-	let helpText = [];
+	const helpText = [];
 	helpText[0] = ["Vrai ou faux", "VF || énoncé || V", "On indique si l'énoncé est vrai ou faux avec le dernier élément, qui doit être V ou F"];
 	helpText[1] = ["QCM", "QCM || Question || Réponse A|Réponse B|Réponse C || 1|3", "On peut mettre autant de réponses que l'on souhaite, en les séparant avec une barre verticale : |. On indique les réponses justes dans le dernier élément, avec à chaque fois le chiffre qui correspond au numéro de la réponse, en séparant les numéros avec une barre verticale : |"];
 	helpText[2] = ["Question / réponse", "QR || Question || Réponse A|Réponse B|Réponse C || 2", "À la différence du QCM, une seule réponse est possible : on indique la bonne réponse par son numéro"];

@@ -5,7 +5,7 @@
 	import sanitizeHTML from './sanitizeHTML.js';
 	import {
 		arrayEquals
-	} from './functions.svelte';
+	} from './functions.js';
 	export let validate;
 	export let quizId;
 	export let text;

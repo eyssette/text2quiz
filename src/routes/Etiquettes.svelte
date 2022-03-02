@@ -5,7 +5,7 @@
 	} from './stores.js';
 	import {
 		shuffleArray
-	} from './functions.svelte';
+	} from './functions.js';
 	import {
 		Sortable
 	} from 'sortablejs';
@@ -63,9 +63,9 @@
 
 	$: if ($changeQuestions) {
 		res = [],
-		tmp;
-		answersByCategory=[];
-		answersShuffled=[];
+			tmp;
+		answersByCategory = [];
+		answersShuffled = [];
 		while (tmp = reg.exec(answersByCategoryString)) res.push(tmp);
 		res.forEach(choices);
 	}

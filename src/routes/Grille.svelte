@@ -5,7 +5,7 @@
 	} from './stores.js';
 	import {
 		shuffleArray
-	} from './functions.svelte';
+	} from './functions.js';
 	import sanitizeHTML from './sanitizeHTML.js';
 	export let validate;
 	export let quizId;
@@ -37,13 +37,13 @@
 
 	$: if ($changeQuestions) {
 		res = [],
-		tmp;
-		answersByCategory=[];
-		answersShuffled=[]
+			tmp;
+		answersByCategory = [];
+		answersShuffled = []
 		answersShuffledUnique = [];
 		correctAnswers = [];
-	while (tmp = reg.exec(answersByCategoryString)) res.push(tmp);
-	res.forEach(choices);
+		while (tmp = reg.exec(answersByCategoryString)) res.push(tmp);
+		res.forEach(choices);
 	}
 
 

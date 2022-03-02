@@ -4,7 +4,7 @@
 	} from './stores.js';
 	import {
 		shuffleArray
-	} from './functions.svelte';
+	} from './functions.js';
 	import {
 		Sortable
 	} from 'sortablejs';

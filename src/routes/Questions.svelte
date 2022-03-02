@@ -38,7 +38,7 @@
 		questionsCodeArray.forEach(question => {
 			questionCodeArray = question.split(/\s\|\|\s/);
 			questionsCodeArrayChanged.push(questionCodeArray);
-		})	
+		})
 		questions = questionsCodeArrayChanged;
 	} else {}
 	$: countExpectedAnswers.update(n => questions.length);

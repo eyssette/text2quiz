@@ -1,4 +1,3 @@
-<script context='module'>
 export function arrayEquals(a, b) {
     return Array.isArray(a) &&
         Array.isArray(b) &&
@@ -13,4 +12,3 @@ export function shuffleArray(array) {
     }
     return array;
 }
-</script>

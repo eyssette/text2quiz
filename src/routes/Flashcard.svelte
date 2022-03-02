@@ -1,30 +1,31 @@
 <script>
 	import {
 		countCorrectAnswers
-	} from './stores.js';
-	import sanitizeHTML from './sanitizeHTML.js';
-	export let validate;
-	export let quizId;
-	export let recto;
-	export let verso;
-	const textAnswers = ['Réponse juste', 'Réponse partiellement juste', 'Réponse fausse']
-	const correctAnswer = 1;
-	const title = 'Flashcard';
-	const textAnswerDefault = 'Je ne sais pas';
-	let answer;
-	let disabled = '';
-	let answerDefault;
-	let flashcard;
-	$: disabled = (validate) ? 'disabled' : '';
-	$: if (validate) {
-		if (answer > 0 && correctAnswer == answer) {
-			countCorrectAnswers.update(n => n + 1)
 		}
-	}
+		from './stores.js';
+		import sanitizeHTML from './sanitizeHTML.js';
+		export let validate;
+		export let quizId;
+		export let recto;
+		export let verso;
+		const textAnswers = ['Réponse juste', 'Réponse partiellement juste', 'Réponse fausse']
+		const correctAnswer = 1;
+		const title = 'Flashcard';
+		const textAnswerDefault = 'Je ne sais pas';
+		let answer;
+		let disabled = '';
+		let answerDefault;
+		let flashcard;
+		$: disabled = (validate) ? 'disabled' : '';
+		$: if (validate) {
+			if (answer > 0 && correctAnswer == answer) {
+				countCorrectAnswers.update(n => n + 1)
+			}
+		}
 
-	function toggleFlashcard() {
-		flashcard.classList.toggle('flip');
-	}
+		function toggleFlashcard() {
+			flashcard.classList.toggle('flip');
+		}
 </script>
 
 

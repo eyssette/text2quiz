@@ -4,7 +4,7 @@
 	} from './stores.js';
 	import {
 		arrayEquals
-	} from './functions.svelte';
+	} from './functions.js';
 	import sanitizeHTML from './sanitizeHTML.js';
 	export let validate;
 	export let quizId;
