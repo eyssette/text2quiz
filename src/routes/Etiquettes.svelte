@@ -12,6 +12,7 @@
 	import {
 		onMount
 	} from "svelte";
+	import sanitizeMarkdown from 'sanitize-markdown';
 	export let validate;
 	export let quizId;
 	export let categories;
@@ -143,7 +144,7 @@
 			{#each categoriesArray as category,i}
 				<div class="column">
 					<article class="message has-background-white">
-						<div class="message-header has-background-grey-lighter  has-text-dark">{@html category}</div>
+						<div class="message-header has-background-grey-lighter  has-text-dark">{@html sanitizeMarkdown(category)}</div>
 						<div class="message-body mt-2 quiz-zone has-background-white" id="quiz-q{quizId}-z{i}" bind:this={zone[i]}></div>
 					</article>
 				</div>
@@ -156,7 +157,7 @@
 					<div class="message-body">
 						<div id="quiz-q{quizId}-z0" bind:this={zoneInitial}>
 							{#each answersShuffled as answer,i}
-								<p class="has-text-justified py-1" class:r-success={validate && checkAnswers.filter(element=>(element[0]==answer && element[2]==true)).length>0} class:r-error={validate && checkAnswers.filter(element=>(element[0]==answer && element[2]==false)).length>0}  id="quiz-q{quizId}-r{i}" class:draggable={!validate}>{@html answer}</p>
+								<p class="has-text-justified py-1" class:r-success={validate && checkAnswers.filter(element=>(element[0]==answer && element[2]==true)).length>0} class:r-error={validate && checkAnswers.filter(element=>(element[0]==answer && element[2]==false)).length>0}  id="quiz-q{quizId}-r{i}" class:draggable={!validate}>{@html sanitizeMarkdown(answer)}</p>
 							{/each}
 						</div>
 					</div>

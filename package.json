@@ -15,6 +15,7 @@
   "type": "module",
   "dependencies": {
     "katex": "^0.15.2",
+    "sanitize-markdown": "^2.6.7",
     "snarkdown": "^2.0.0",
     "sortablejs": "^1.14.0"
   }

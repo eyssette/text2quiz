@@ -2,6 +2,7 @@
 	import {
 		countCorrectAnswers
 	} from './stores.js';
+	import sanitizeMarkdown from 'sanitize-markdown';
 	export let validate;
 	export let quizId;
 	export let recto;
@@ -32,8 +33,8 @@
 	<div class="box block" class:quiz-success={validate && correctAnswer==answer} class:quiz-error={validate && answer>0
 		&& correctAnswer!=answer}>
 		<div class="card flip has-background-lighter px-5 my-4 has-text-justified" on:click={toggleFlashcard} bind:this={flashcard}>
-			<div class="front" class:is-size-1={recto.includes('h1')} class:is-size-2={recto.includes('h2')} class:is-size-3={recto.includes('h3')} class:is-size-4={recto.includes('h4')}>{@html recto}</div>
-			<div class="back">{@html verso}</div>
+			<div class="front" class:is-size-1={recto.includes('h1')} class:is-size-2={recto.includes('h2')} class:is-size-3={recto.includes('h3')} class:is-size-4={recto.includes('h4')}>{@html sanitizeMarkdown(recto)}</div>
+			<div class="back">{@html sanitizeMarkdown(verso)}</div>
 		</div>
 		<div class="has-text-centered block mt-5">
 			<button class="button" type="button" on:click={toggleFlashcard}><span class="material-icons">swap_vert</span>Voir le verso</button>

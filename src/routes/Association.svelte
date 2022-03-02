@@ -12,6 +12,7 @@
 	import {
 		onMount
 	} from "svelte";
+	import sanitizeMarkdown from 'sanitize-markdown';
 	export let validate;
 	export let quizId;
 	export let categories;
@@ -141,12 +142,12 @@
 		element==true).length==categoriesArray.length} class:quiz-error={validate && checkAnswers.length>0 &&
 		answersChecked.filter(element=>element==false).length>0}>
 		<p class="has-text-centered block has-text-weight-medium">{subtitle}</p>
-		<div class="content">{@html question}</div>
+		<div class="content">{@html sanitizeMarkdown(question)}</div>
 		<div class="columns mt-5">
 			<div class="column is-two-fifths">
 				{#each categoriesArray as category,i}
 					<article class="message has-background-white">
-						<div class="message-header has-background-grey-lighter  has-text-dark">{@html category}</div>
+						<div class="message-header has-background-grey-lighter  has-text-dark">{@html sanitizeMarkdown(category)}</div>
 						<div class="message-body mt-2 quiz-zone has-background-white" id="quiz-q{quizId}-z{i}" bind:this={zone[i]}></div>
 					</article>
 				{/each}
