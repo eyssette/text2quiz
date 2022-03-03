@@ -117,5 +117,10 @@
 	:global(input) {
 		margin-right: 0.5em !important;
 	}
+
+	:global(img) {
+		max-height:100%;
+		max-width:100%; 
+	}
 	
 	</style>

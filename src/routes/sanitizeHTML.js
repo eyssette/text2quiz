@@ -12,7 +12,7 @@ const allowewTagsDefault = [
 	"details",
 	"div",
 	"em",
-	"h1", "h2", "h3", "h4", "h5", "h6", 
+	"h1", "h2", "h3", "h4", "h5", "h6",
 	"hr",
 	"i",
 	"img",
@@ -80,7 +80,9 @@ export default function sanitizeHTML(string) {
 	return sanitizeMarkdown(string, {
 		allowedTags: allowedTagsArray,
 		allowedAttributes: {
-			span: ['class', 'style']
+			span: ['class', 'style'],
+			div: ['class', 'style'],
+			p: ['class', 'style'],
 		}
 	})
 }

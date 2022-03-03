@@ -175,4 +175,8 @@
 	input {
 		width: 50%;
 	}
+
+	button:focus {
+		border:2px solid blue !important;
+	}
 </style>
