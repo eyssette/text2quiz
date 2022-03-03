@@ -1,5 +1,4 @@
 const types = [];
-let valid = [];
 const numberItems = [];
 types[0] = /^VF\s\|\|\s.+\s\|\|\s(V|F)$/; // VF
 numberItems[0] = [3];
@@ -21,13 +20,12 @@ types[8] = /^Etiquettes\s\|\|\s.+\s\|\|\s{.+}$/; // Etiquettes
 numberItems[8] = [3];
 types[9] = /^Association\s\|\|\s.+\|.+\s\|\|\s.+\|.+/; // Association
 numberItems[9] = [3, 4];
-let regex;
 
 export function regexValid(questionCode) {
 	let i = 0;
-	valid=[];
+	let valid=[];
 	types.forEach(type => {
-		regex = new RegExp(type);
+		let regex = new RegExp(type);
 		let checkType = regex.test(questionCode);
 		if (checkType) {
 			let separators = questionCode.match(/\s\|\|\s/g);
@@ -38,32 +36,28 @@ export function regexValid(questionCode) {
 				checkNumberItems = 1;
 			}
 			if (!numberItems[i].includes(checkNumberItems)) {
-				checkType = false
+				checkType = false;
 			}
 		}
 		valid.push(checkType);
 		i++;
-	})
+	});
 	if (valid.includes(true)) {
-		return true
+		return true;
 	} else {
-		return false
+		return false;
 	}
 }
 
 export function checkQuestions(toCheck) {
-	let check = false;
 	let chekQuestionsArray = [];
 	if (toCheck) {
 		let questionsCodeArray = toCheck.split(/\r?\n/);
 		if (Array.isArray(questionsCodeArray)) {
-			questionsCodeArray.forEach(question => {
-				chekQuestionsArray.push(regexValid(question));
-			})
-			if (chekQuestionsArray.every(element => element == true)) {
-				check = true
-			}
+			for (let i=0;i<questionsCodeArray.length;i++) {
+        		if (regexValid(questionsCodeArray[i])===false) { return false;}
+      		}
+      return true;
 		}
 	}
-	return check;
 }
