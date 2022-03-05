@@ -160,7 +160,7 @@
 
 
 <style>
-	.level-right span {
+	.level-left span {
 		border: none;
 	}
 
