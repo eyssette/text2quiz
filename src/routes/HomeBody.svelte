@@ -2,6 +2,9 @@
 	import {
 		assign
 	} from 'svelte/internal';
+	import {
+		baseURL
+	} from './stores.js';
 	import url from './url.js';
 </script>
 
@@ -16,6 +19,7 @@
 			<li>On clique sur l'icône <span class="material-icons"> edit </span> pour éditer son quiz.</li>
 			<li>On clique sur l'icône <span class="material-icons">share</span> pour créer un lien vers le quiz afin de le partager.</li>
 		</ol>
+
 		<article class="message is-dark">
 			<div class="message-body">
 				<h4>Avantages :</h4>
@@ -26,11 +30,13 @@
 			</div>
 		</article>
 
-		<h4 class="is-4 has-text-left mt-6">Comment ça marche ?</h4>
+		<h4 class="is-4 has-text-left mt-5 mb-6">Comment ça marche ?</h4>
 		<ul>
 			<li>Pour écrire son quiz, on doit coder chaque question</li>
 			<li>On peut afficher l'aide dans la fenêtre d'édition du quiz, et commencer d'abord par les types de question les plus simples</li>
 		</ul>
+
+		<div class="mt-5 mb-6 has-text-centered"><a href="{$baseURL}#VF%20%7C%7C%20Énoncé%20%7C%7C%20V%0AQCM%20%7C%7C%20Question%20%7C%7C%20Réponse%20A%7CRéponse%20B%7CRéponse%20C%20%7C%7C%201%7C3%0AQR%20%7C%7C%20Question%20%7C%7C%20Réponse%20A%7CRéponse%20B%7CRéponse%20C%20%7C%7C%202%0AQRC%20%7C%7C%20Question%20%7C%7C%20Réponse%20correcte%7CAutre%20réponse%20correcte%0ATrous%20%7C%7C%20Texte%20avec%20des%20%7BV:trous%7Ctrou%7D,%20pas%20de%20%7BV:Latex%7CLateq%7CLateqh%7D%20possible%20dans%20les%20réponses%0AFlashcard%20%7C%7C%20Recto%20%7C%7C%20Verso%0AGrille%20%7C%7C%20Catégorie%201%7CCatégorie%202%20%7C%7C%20%7BÉnoncé%201%7CÉnoncé%202%7D%7BÉnoncé%203%7CÉnoncé%204%7CÉnoncé%205%7D%0AOrdre%20%7C%7C%20Énoncé%201%7CÉnoncé%202%7CÉnoncé%203%0AEtiquettes%20%7C%7C%20Catégorie%201%7CCatégorie%202%20%7C%7C%20%7BÉtiquette%201%7CÉtiquette%202%7D%7BÉtiquette%203%7CÉtiquette%204%7CÉtiquette%205%7D%0AAssociation%20%7C%7C%20Item%201%7CItem%202%20%7C%7C%20Étiquette%201%7CÉtiquette%202">Un exemple de quiz avec tous les types de questions</a></div>
 
 		<article class="message is-info mt-6">
 			<div class="message-body">
