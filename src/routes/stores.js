@@ -10,3 +10,4 @@ export const changeQuestions = writable(false);
 export const language = writable('FR');
 export const home = writable(true);
 export const modal = writable(false);
+export const baseURL = writable('');

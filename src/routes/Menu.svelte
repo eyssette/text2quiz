@@ -6,7 +6,8 @@
 		validation,
 		countCorrectAnswers,
 		home,
-		modal
+		modal,
+		baseURL
 	} from './stores.js';
 	import {
 		checkQuestions
@@ -58,7 +59,7 @@
 	function modalEditOffSave() {
 		if (checkQuestions(textAreaquestionsCode)) {
 			$previousQuestionsCode = $questionsCode;
-			window.location.assign('#' + encodeURI(textAreaquestionsCode))
+			window.location.assign($baseURL+'#' + encodeURI(textAreaquestionsCode))
 			modalEditActive = '';
 			messageInvalidQuestions = '';
 			$changeQuestions = true;
@@ -83,7 +84,7 @@
 	function goHome() {
 		questionsCode.update(n => '');
 		previousQuestionsCode.update(n => '');
-		window.location.assign('');
+		window.location.assign($baseURL);
 	}
 
 

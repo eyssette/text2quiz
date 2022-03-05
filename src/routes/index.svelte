@@ -11,7 +11,8 @@
 		previousQuestionsCode,
 		changeQuestions,
 		validation,
-		home
+		home,
+		baseURL
 	} from './stores.js';
 	import Questions from './Questions.svelte';
 	import url from './url.js';
@@ -35,26 +36,23 @@
 	onMount(async () => {
 		if ($url) {
 			quizEncodageHash = $url.hash.slice(1);
-
+			$baseURL = $url.protocol + '//' + $url.host;
 			if (quizEncodageHash.startsWith('http')) {
 				const response = await fetch(quizEncodageHash);
 				const data = await response.text();
 				quiz = encodeURI(data);
-				history.replaceState(null, null, '#' + quiz);
+				history.replaceState(null, null, $baseURL+'#' + quiz);
 			} else {
 				quiz = decodeURI(quizEncodageHash);
 			}
 
 			if (checkQuestions(quiz)) {
+				home.update(n => false);
 				questionsCode.update(n => quiz);
 				previousQuestionsCode.update(n => quiz);
 				changeQuestions.update(n => true);
-				home.update(n => false);
 				//history.replaceState(null, null, ' ');
-			} else {
-				//home.update(n => true);
 			}
-
 		}
 	});
 
@@ -63,10 +61,10 @@
 		quizEncodageHash = $url.hash.slice(1);
 		quiz = decodeURI(quizEncodageHash);
 		if (checkQuestions(quiz)) {
+			home.update(n => false);
 			questionsCode.update(n => quiz);
 			previousQuestionsCode.update(n => quiz);
 			changeQuestions.update(n => true);
-			home.update(n => false);
 			//history.replaceState(null, null, ' ');
 		} else {
 			questionsCode.update(n => '');

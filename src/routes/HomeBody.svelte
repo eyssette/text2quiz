@@ -3,10 +3,6 @@
 		assign
 	} from 'svelte/internal';
 	import url from './url.js';
-	let baseURL = '';
-	if ($url) {
-		baseURL = $url.protocol + '//' + $url.host;
-	}
 </script>
 
 
