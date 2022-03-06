@@ -19,8 +19,8 @@
 				glisser-déposer)</li>
 			<li><a href="https://katex.org/" tabindex={tabIndexFooter}>Katex</a> (pour la gestion des formules en Latex).</li>
 		</ul>
-		<p>Le code est publié sur <a href="https://github.com/eyssette/text2quiz" tabindex={tabIndexFooter}>Github</a>, mais il est sous licence
-			<a href="https://commonsclause.com/" tabindex={tabIndexFooter}>Commons Clause</a>, afin d'interdire tout usage commercial.
+		<p>Le code est publié sur <a href="https://github.com/eyssette/text2quiz" tabindex={tabIndexFooter}>Github</a>, sous licence
+			<a href="https://github.com/eyssette/text2quiz/blob/main/LICENSE" tabindex={tabIndexFooter}>GNU General Public License v3.0</a>.
 		</p>
 	</div>
 </footer>

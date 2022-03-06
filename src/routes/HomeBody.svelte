@@ -30,7 +30,7 @@
 			</div>
 		</article>
 
-		<h4 class="is-4 has-text-left mt-5 mb-6">Comment ça marche ?</h4>
+		<h4 class="is-4 has-text-left mt-6 mb-5">Comment ça marche ?</h4>
 		<ul>
 			<li>Pour écrire son quiz, on doit coder chaque question</li>
 			<li>On peut afficher l'aide dans la fenêtre d'édition du quiz, et commencer d'abord par les types de question les plus simples</li>
