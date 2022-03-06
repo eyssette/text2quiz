@@ -115,9 +115,9 @@
 
 <nav class="level is-mobile pt-2">
 	<div class="level-left">
-		<a href="#home" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={goHome} tabindex="{targetMenu}" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipHome}"><span class="material-icons is-size-3 is-size-5-mobile">home</span></a>
-		<a href="#edit" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalEditOn} tabindex="{targetMenu}" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipEdit}"><span class="material-icons is-size-3 is-size-5-mobile">edit </span></a>
-		<a href="#share" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalShareActivate} tabindex="{targetMenu}" data-target="modal2" aria-haspopup="true" data-tooltip="{tooltipShare}"><span class="material-icons is-size-3 is-size-5-mobile">share</span></a>
+		<a href="#home" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={goHome} tabindex="{targetMenu}" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipHome}"><span class="material-icons is-size-3">home</span></a>
+		<a href="#edit" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalEditOn} tabindex="{targetMenu}" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipEdit}"><span class="material-icons is-size-3">edit </span></a>
+		<a href="#share" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalShareActivate} tabindex="{targetMenu}" data-target="modal2" aria-haspopup="true" data-tooltip="{tooltipShare}"><span class="material-icons is-size-3">share</span></a>
 	</div>
 </nav>
 

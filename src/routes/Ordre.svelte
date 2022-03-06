@@ -17,7 +17,8 @@
 	export let validate;
 	export let quizId;
 	export let textAnswers;
-	export let subtitle=subtitleDefault;
+	export let subtitle
+	$: if (!subtitle || subtitle=='') {subtitle=subtitleDefault}
 	let textAnswersArray = textAnswers.split('|');
 	$: textAnswersArray = textAnswers.split('|');
 	let textAnswersArrayShuffled = shuffleArray(textAnswersArray);
