@@ -20,7 +20,8 @@
 	const textNotComplete = "Réponse partiellement juste";
 	const subtitle = "Associez à chaque élément l'étiquette correspondante";
 	const labelsListText = 'Étiquettes à classer';
-	let categoriesArray = categories.split('|');
+	let categoriesArray = []
+	$: categoriesArray = categories.split('|');
 	export let answersByCategoryString;
 	export let question = '';
 	let answersByCategory = [];
