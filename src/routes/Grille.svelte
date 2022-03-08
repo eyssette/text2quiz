@@ -10,6 +10,7 @@
 	export let validate;
 	export let quizId;
 	export let categories;
+	export let question = '';
 	const title = 'Grille';
 	const textNotComplete = "La grille est incomplète";
 	let categoriesArray = categories.split('|');
@@ -99,6 +100,7 @@
 		answersChecked.includes(false)) || (validate && answersChecked.includes(true) &&
 		answersChecked.filter(element=>element==true).length!=answersShuffledUnique.length )}>
 		<div class="content">
+			<div class="mt-4 mb-5">{@html sanitizeHTML(question)}</div>
 			<table class="table is-size-5 is-size-7-mobile">
 				<thead>
 					<tr>
