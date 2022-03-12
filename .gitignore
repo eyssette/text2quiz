@@ -26,6 +26,7 @@ jspm_packages
 
 # Environment files
 .dot
+.env
 # Editor and other files
 .idea
 typing
