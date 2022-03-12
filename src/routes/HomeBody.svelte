@@ -1,8 +1,5 @@
 <script>
 	import {
-		assign
-	} from 'svelte/internal';
-	import {
 		baseURL
 	} from './stores.js';
 	import url from './url.js';
@@ -24,11 +21,13 @@
 			<div class="message-body">
 				<h4>Avantages :</h4>
 				<ul>
-					<li>pas de compte à créer</li>
-					<li>interface minimaliste pour pouvoir créer rapidement un quiz</li>
+					<li>Pas de compte à créer</li>
+					<li>Pas de cookies, pas de données personnelles enregistrées : totalement compatible avec le RGPD</li>
+					<li>Interface simple pour pouvoir créer rapidement un quiz</li>
 				</ul>
 			</div>
 		</article>
+
 
 		<h4 class="is-4 has-text-left mt-6 mb-5">Comment ça marche ?</h4>
 		<ul>
@@ -56,14 +55,16 @@
 			</div>
 		</article>	
 		
-		<div class="is-size-5 mt-6">
+		<div class="is-size-5 is-size-6-mobile mt-6">
 			<h4 class="is-4 has-text-left">Usages plus avancés</h4>
 			<h5 class="is-5 mt-5">Markdown</h5>
-			<div>On peut utiliser la syntaxe Markdown dans les questions pour insérer du texte en gras (**gras**), en italiques (*italiques*), ou pour insérer une image : ![](URL de l'image).</div>
+			<div>On peut utiliser la syntaxe Markdown dans les questions, par exemple pour insérer du texte en gras (**gras**), en italiques (*italiques*), ou pour insérer une image : ![](URL de l'image).</div>
 			<h5 class="is-5 mt-5">Latex</h5>
 			<div>On peut aussi utiliser des formules mathématiques en Latex, avec la syntaxe suivante : $$formule Latex$$</div>
 			<h5 class="is-5 mt-5">HTML</h5>
 			<div>On peut également utiliser des balises HTML, notamment pour intégrer des vidéos ou mettre en page de manière plus précise sa question</div>
+			<h5 class="is-5 mt-5">Fichiers externes</h5>
+			<div>On peut écrire son quiz dans un fichier texte qu'on héberge sur internet. Text2quiz peut lire ce fichier si on met l'URL dans le lien ainsi : https://text2quiz.vercel.app/#URL</div>
 		</div>
 	</div>
 </div>
