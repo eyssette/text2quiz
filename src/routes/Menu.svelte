@@ -312,6 +312,7 @@
 					<tr><td>{codes[i]}</td><td>{codeDecrypted}</td></tr>
 					{/each}
 				</table>
+				<div class="mt-3 is-size-6">Le résultat est toujours de la forme suivante :<br>Nombre d'exercices réussis / Nombre d'exercices au total / Nombre de points / Nombre de points possibles au total </div>
 				{#if hasDuplicates}
 				<div class="mt-3 is-size-6 has-text-danger">Attention, il y a des codes identiques dans cette liste, alors qu'il ne devrait y avoir que des codes uniques !</div>
 				{/if}

@@ -3,6 +3,8 @@ import {keyEvaluation,
 countExpectedAnswers,
 countCorrectAnswers,
 generateCodeResults,
+countPoints,
+countPointsMax,
 validation}
 from './stores.js';
 import {
@@ -14,8 +16,8 @@ let code;
 let results;
 const titleRefresh = 'Refaire le quiz';
 let codeResultsShow = false;
-$: results = Math.round(($countCorrectAnswers / $countExpectedAnswers) * 100);
-$: code = encrypt(results.toString(), $keyEvaluation);
+$ : messageResults=$countCorrectAnswers.toString() + ' ' + $countExpectedAnswers.toString() + ' ' + $countPoints.toString() + ' ' + $countPointsMax.toString();
+$: code = encrypt(messageResults, $keyEvaluation);
 
 function generateCode() {
 	$validation=true;
