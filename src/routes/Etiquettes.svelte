@@ -2,7 +2,9 @@
 	import {
 		countCorrectAnswers,
 		changeQuestions,
-		generateCodeResults
+		generateCodeResults,
+		countPoints,
+		countPointsMax
 	} from './stores.js';
 	import {
 		shuffleArray
@@ -27,7 +29,6 @@
 	let answersShuffled = [];
 	let answers = [];
 	let answersChecked = [];
-	let correctAnswers = [];
 	let partialCheck = [];
 	let checkAnswers = [];
 
@@ -92,11 +93,12 @@
 	$: disabled = (validate) ? 'disabled' : '';
 	$: showNotComplete = (validate) ? textNotComplete : '';
 	$: if (validate) {
+		countPointsMax.update(n=>n+answersShuffled.length);
+		
 		if (zoneInitial) {
 			answersZoneInitial = childrenTexts(zoneInitial);
 		}
 		answersZone = [];
-		correctAnswers = [];
 		answersChecked = [];
 		checkAnswers = [];
 		for (let i = 0; i < categoriesArray.length; i++) {
@@ -120,17 +122,28 @@
 			})
 			category++;
 		})
+		
 		for (let i = 0; i < categoriesArray.length; i++) {
 			let checkAnswersByCategory = checkAnswers.filter(element => (element[1] == i) && (element[2] == true));
 			if (checkAnswersByCategory.length == answersByCategory[i].length) {
-				answersChecked[i] = true
+				answersChecked[i] = true;
 			} else {
 				answersChecked[i] = false
 			}
 		}
+
+		let countTemp = 0;
+		for (let i=0;i<checkAnswers.length;i++) {
+			if (checkAnswers[i].includes(true)) {countTemp++} else {countTemp--}
+		}
+		if (countTemp >= 0) {countPoints.update(n => n + countTemp);}
+
+
+
 		if (answersChecked.filter(element => element == true).length == categoriesArray.length) {
 			countCorrectAnswers.update(n => n + 1)
 		}
+
 	}
 </script>
 

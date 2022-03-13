@@ -2,7 +2,9 @@
 	import {
 		countCorrectAnswers,
 		changeQuestions,
-		generateCodeResults
+		generateCodeResults,
+		countPoints,
+		countPointsMax
 	} from './stores.js';
 	import {
 		shuffleArray
@@ -96,6 +98,7 @@
 	$: disabled = (validate) ? 'disabled' : '';
 	$: showNotComplete = (validate) ? textNotComplete : '';
 	$: if (validate) {
+		countPointsMax.update(n=>n+answersShuffled.length);
 		if (zoneInitial) {
 			answersZoneInitial = childrenTexts(zoneInitial);
 		}
@@ -135,6 +138,13 @@
 		if (answersChecked.filter(element => element == true).length == categoriesArray.length) {
 			countCorrectAnswers.update(n => n + 1)
 		}
+
+		let countTemp = 0;
+		for (let i=0;i<checkAnswers.length;i++) {
+			if (checkAnswers[i].includes(true)) {countTemp++} else {countTemp--}
+		}
+		if (countTemp >= 0) {countPoints.update(n => n + countTemp);}
+
 	}
 </script>
 

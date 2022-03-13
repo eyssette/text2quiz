@@ -1,7 +1,9 @@
 <script>
 	import {
 		countCorrectAnswers,
-		generateCodeResults
+		generateCodeResults,
+		countPoints,
+		countPointsMax
 		}
 		from './stores.js';
 		import sanitizeHTML from './sanitizeHTML.js';
@@ -19,8 +21,10 @@
 		let flashcard;
 		$: disabled = (validate) ? 'disabled' : '';
 		$: if (validate) {
+			countPointsMax.update(n => n + 1);
 			if (answer > 0 && correctAnswer == answer) {
-				countCorrectAnswers.update(n => n + 1)
+				countCorrectAnswers.update(n => n + 1);
+				countPoints.update(n => n + 1);
 			}
 		}
 

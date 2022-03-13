@@ -2,7 +2,9 @@
 	import {
 		countCorrectAnswers,
 		changeQuestions,
-		generateCodeResults
+		generateCodeResults,
+		countPoints,
+		countPointsMax
 	} from './stores.js';
 	import {
 		shuffleArray
@@ -85,7 +87,18 @@
 	$: disabled = (validate) ? 'disabled' : '';
 	$: showNotComplete = (validate) ? textNotComplete : '';
 	$: if (validate) {
+		countPointsMax.update(n=>n+correctAnswers.length);
 		answersShuffledUnique.forEach(checkAnswers);
+		let countTemp=0;
+		for (let i=0;i<answers.length;i++) {
+			let titleAnswer = answers[i][0];
+			let columnChecked = answers[i][1];
+			let partialCheck = correctAnswers.filter(element=>element.includes(titleAnswer));
+			let columnValues =partialCheck[0][1];
+			if (columnValues[columnChecked]) {countTemp++} else {countTemp--}
+		}
+		if (countTemp >= 0) {countPoints.update(n => n + countTemp);}
+
 		if (answers.length > 0 && answersChecked.filter(element => element == true).length == answersShuffledUnique.length && answersChecked.every(element => element == true)) {
 			countCorrectAnswers.update(n => n + 1)
 		}

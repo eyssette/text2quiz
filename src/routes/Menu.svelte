@@ -5,6 +5,8 @@
 		changeQuestions,
 		validation,
 		countCorrectAnswers,
+		countPoints,
+		countPointsMax,
 		home,
 		modal,
 		baseURL
@@ -23,7 +25,7 @@
 
 	const tooltipEditHome = 'Créer un quiz';
 	const tooltipEdit = 'Modifier le quiz';
-	const tooltipEditModalTitle = 'Edition du quiz'; 
+	const tooltipEditModalTitle = 'Édition du quiz'; 
 	const tooltipShare = 'Lien de partage';
 	const tooltipHome = 'Accueil';
 	const tooltipDecrypt = 'Décrypter les résultats'
@@ -83,6 +85,8 @@
 			messageInvalidQuestions = '';
 			$changeQuestions = true;
 			$countCorrectAnswers = 0;
+			$countPoints = 0;
+			$countPointsMax = 0;
 			targetMenu = 0;
 			$modal = false;
 		}

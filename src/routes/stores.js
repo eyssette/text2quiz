@@ -13,3 +13,5 @@ export const modal = writable(false);
 export const baseURL = writable('');
 export const keyEvaluation = writable('');
 export const generateCodeResults = writable(false);
+export const countPointsMax = writable(0);
+export const countPoints = writable(0);

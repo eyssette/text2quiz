@@ -1,7 +1,9 @@
 <script>
 	import {
 		countCorrectAnswers,
-		generateCodeResults
+		generateCodeResults,
+		countPoints,
+		countPointsMax
 	} from './stores.js';
 	import {
 		shuffleArray
@@ -42,12 +44,14 @@
 	});
 	$: disabled = (validate) ? 'disabled' : '';
 	$: if (validate) {
+		countPointsMax.update(n => n + 1);
 		if (sortableElement) {
 			answer = sortableElement.textContent;
 		}
 		correctAnswer = textAnswers.replaceAll('|', '');
 		if (answer == correctAnswer) {
 			countCorrectAnswers.update(n => n + 1)
+			countPoints.update(n => n + 1);
 		}
 	}
 </script>

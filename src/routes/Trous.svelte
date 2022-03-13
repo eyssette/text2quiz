@@ -1,7 +1,9 @@
 <script>
 	import {
 		countCorrectAnswers,
-		generateCodeResults
+		generateCodeResults,
+		countPoints,
+		countPointsMax
 	} from './stores.js';
 	import sanitizeHTML from './sanitizeHTML.js';
 	import {
@@ -62,6 +64,14 @@
 	}
 	$: disabled = (validate) ? 'disabled' : '';
 	$: showNotComplete = (validate) ? textNotComplete : '';
+	$: if (validate) {
+		countPointsMax.update(n=>n+correctAnswers.length);
+		let countTemp=0;
+		for (let i=0; i<selected.length;i++) {
+			if (correctAnswers.includes(selected[i])) {countTemp++} else {if(selected[i] !='default') {countTemp--}}
+		}
+		if (countTemp >= 0) {countPoints.update(n => n + countTemp);}
+	}
 	$: if (validate && selected && correctAnswers && arrayEquals(selected, correctAnswers)) {
 		countCorrectAnswers.update(n => n + 1)
 	}

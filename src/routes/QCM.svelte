@@ -1,7 +1,9 @@
 <script>
 	import {
 		countCorrectAnswers,
-		generateCodeResults
+		generateCodeResults,
+		countPoints,
+		countPointsMax
 	} from './stores.js';
 	import {
 		arrayEquals
@@ -19,11 +21,16 @@
 	const title = 'QCM';
 	const textNotComplete = 'Réponse partiellement juste !';
 	let answers = [];
-	let partialAnswers = [];
 	let disabled = '';
 	$: disabled = (validate) ? 'disabled' : '';
 	$: showNotComplete = (validate) ? textNotComplete : '';
 	$: if (validate) {
+		countPointsMax.update(n => n + correctAnswers.length);
+		let countTemp = 0;
+		for (let i=0;i<answers.length;i++){
+			if (correctAnswers.includes(answers[i])) {countTemp++} else {countTemp--}
+		}
+		if (countTemp >= 0) {countPoints.update(n => n + countTemp);}
 		if (answers.length > 0 && arrayEquals(answers, correctAnswers)) {
 			countCorrectAnswers.update(n => n + 1)
 		}

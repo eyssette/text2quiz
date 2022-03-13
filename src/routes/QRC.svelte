@@ -1,7 +1,9 @@
 <script>
 	import {
 		countCorrectAnswers,
-		generateCodeResults
+		generateCodeResults,
+		countPoints,
+		countPointsMax
 	} from './stores.js';
 	import sanitizeHTML from './sanitizeHTML.js';
 	export let validate;
@@ -16,8 +18,10 @@
 	let answerDefault;
 	$: disabled = (validate) ? 'disabled' : '';
 	$: if (validate) {
+		countPointsMax.update(n => n + 1);
 		if (answer && textAnswersArray.includes(answer)) {
-			countCorrectAnswers.update(n => n + 1)
+			countCorrectAnswers.update(n => n + 1);
+			countPoints.update(n => n + 1);
 		}
 	}
 </script>
