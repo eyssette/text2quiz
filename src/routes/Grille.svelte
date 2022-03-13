@@ -1,7 +1,8 @@
 <script>
 	import {
 		countCorrectAnswers,
-		changeQuestions
+		changeQuestions,
+		generateCodeResults
 	} from './stores.js';
 	import {
 		shuffleArray
@@ -96,9 +97,9 @@
 	<h2 class="title has-text-centered">{title}</h2>
 	<div class="box block" class:quiz-success={validate && answers.length>0 &&
 		answersChecked.filter(element=>element==true).length==answersShuffledUnique.length &&
-		answersChecked.every(element=>element==true)} class:quiz-error={(validate && answers.length>0 &&
-		answersChecked.includes(false)) || (validate && answersChecked.includes(true) &&
-		answersChecked.filter(element=>element==true).length!=answersShuffledUnique.length )}>
+		answersChecked.every(element=>element==true) && !$generateCodeResults} class:quiz-error={(validate && answers.length>0 &&
+		answersChecked.includes(false) && !$generateCodeResults) || (validate && answersChecked.includes(true) &&
+		answersChecked.filter(element=>element==true).length!=answersShuffledUnique.length  && !$generateCodeResults)}>
 		<div class="content">
 			<div class="mt-4 mb-5">{@html sanitizeHTML(question)}</div>
 			<table class="table is-size-5 is-size-7-mobile">
@@ -115,14 +116,14 @@
 						<tr>
 							<td>{@html sanitizeHTML(answer)}</td>
 							{#each categoriesArray as category,j}
-								<td><input class:r-success={validate && correctAnswers[i][1][j]==true} class:r-error={validate && correctAnswers[i][1][j]==false} class="is-checkradio is-circle is-info" type="checkbox" id="quiz-q{quizId}-r{i}-{j}" name="quiz-q{quizId}-r{i}-{j}" {disabled} value='{[answer,j]}' bind:group={answers}><label for="quiz-q{quizId}-r{i}-{j}"></label></td>
+								<td><input class:r-success={validate && correctAnswers[i][1][j]==true&& !$generateCodeResults} class:r-error={validate && correctAnswers[i][1][j]==false && !$generateCodeResults} class="is-checkradio is-circle is-info" type="checkbox" id="quiz-q{quizId}-r{i}-{j}" name="quiz-q{quizId}-r{i}-{j}" {disabled} value='{[answer,j]}' bind:group={answers}><label for="quiz-q{quizId}-r{i}-{j}"></label></td>
 							{/each}
 						</tr>
 					{/each}
 				</tbody>
 			</table>
 		</div>
-		<div class="is-size-5 is-size-6-mobile mt-3 pl-6 is-italic">&nbsp;{#if validate && answersChecked.length>0 && answersChecked.filter(element=>element==true).length!=answersShuffledUnique.length}{showNotComplete}{/if}</div>
+		<div class="is-size-5 is-size-6-mobile mt-3 pl-6 is-italic">&nbsp;{#if validate && answersChecked.length>0 && answersChecked.filter(element=>element==true).length!=answersShuffledUnique.length && !$generateCodeResults}{showNotComplete}{/if}</div>
 	</div>
 </div>
 

@@ -1,6 +1,7 @@
 <script>
 	import {
-		countCorrectAnswers
+		countCorrectAnswers,
+		generateCodeResults
 	} from './stores.js';
 	import sanitizeHTML from './sanitizeHTML.js';
 	import {
@@ -69,14 +70,14 @@
 <div class="block quiz-Trous py-2" id="quiz-q{quizId}">
 	<h2 class="title has-text-centered">{title}</h2>
 	<div class="box block" class:quiz-success={validate && selected && correctAnswers &&
-		arrayEquals(selected,correctAnswers)} class:quiz-error={validate && selected && correctAnswers &&
-		!arrayEquals(selected,correctAnswers) && selected.filter(value=> value=='default').length !=selected.length}>
+		arrayEquals(selected,correctAnswers) && !$generateCodeResults} class:quiz-error={validate && selected && correctAnswers &&
+		!arrayEquals(selected,correctAnswers) && selected.filter(value=> value=='default').length !=selected.length && !$generateCodeResults}>
 		<div class="content">
 			{#each textFragments as textFragment,i}
 				{#if i==0}
 					{@html sanitizeHTML(textFragments[0])}
 					{#if validate && selected[0]!='default'}
-						<span class:r-success={validate && correctAnswers[0]==selected[0]} class:r-error={validate && correctAnswers[0]!=selected[0]}>{@html sanitizeHTML(selected[0])}</span>
+						<span class:r-success={validate && correctAnswers[0]==selected[0] && !$generateCodeResults} class:r-error={validate && correctAnswers[0]!=selected[0] && !$generateCodeResults}>{@html sanitizeHTML(selected[0])}</span>
 					{:else}
 						<span class="select is-size-6 is-size-7-mobile" id="quiz-q{quizId}-r0">
 							<select name="quiz-q{quizId}-r0" bind:value={selected[0]} {disabled}>
@@ -91,7 +92,7 @@
 				{:else if i<textFragments.length-1}
 					{@html sanitizeHTML(textFragment)}
 					{#if validate && selected[i]!='default'}
-						<span class:r-success={validate && correctAnswers[i]==selected[i]} class:r-error={validate && correctAnswers[i]!=selected[i]}>{selected[i]}</span>
+						<span class:r-success={validate && correctAnswers[i]==selected[i] && !$generateCodeResults} class:r-error={validate && correctAnswers[i]!=selected[i] && !$generateCodeResults}>{selected[i]}</span>
 					{:else}
 						<span class="select is-size-6 is-size-7-mobile" id="quiz-q{quizId}-r{i+1}">
 							<select name="quiz-q{quizId}-r{i+1}" bind:value={selected[i]} {disabled}>
@@ -107,7 +108,7 @@
 					{textFragments[res.length]}
 				{/if}
 			{/each}
-			<div class="is-size-5 is-size-6-mobile mt-3 pl-6 is-italic" class:is-invisible={!selected || arrayEquals(selected,correctAnswers) || selected.filter(value => value=='default').length ==selected.length || correctAnswers.filter(value => selected.includes(value)).length ==0}>&nbsp;{#if validate}{showNotComplete}{/if}</div>
+			<div class="is-size-5 is-size-6-mobile mt-3 pl-6 is-italic" class:is-invisible={!selected || arrayEquals(selected,correctAnswers) || selected.filter(value => value=='default').length ==selected.length || correctAnswers.filter(value => selected.includes(value)).length ==0}>&nbsp;{#if validate && !$generateCodeResults}{showNotComplete}{/if}</div>
 		</div>	
 	</div>
 </div>

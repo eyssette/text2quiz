@@ -14,6 +14,8 @@
   },
   "type": "module",
   "dependencies": {
+    "buffer": "^6.0.3",
+    "crypto-es": "^1.2.7",
     "katex": "^0.15.2",
     "sanitize-markdown": "^2.6.7",
     "snarkdown": "^2.0.0",

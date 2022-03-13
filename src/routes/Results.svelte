@@ -1,11 +1,7 @@
 <script>
 	import {
-		countExpectedAnswers
-	} from './stores.js';
-	import {
-		countCorrectAnswers
-	} from './stores.js';
-	import {
+		countExpectedAnswers,
+		countCorrectAnswers,
 		validation
 	} from './stores.js';
 	$: percentCorrectAnswers = Math.round(($countCorrectAnswers / $countExpectedAnswers) * 100);

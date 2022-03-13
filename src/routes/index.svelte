@@ -12,7 +12,8 @@
 		changeQuestions,
 		validation,
 		home,
-		baseURL
+		baseURL,
+		keyEvaluation
 	} from './stores.js';
 	import Questions from './Questions.svelte';
 	import url from './url.js';
@@ -20,6 +21,11 @@
 		checkQuestions
 	}
 	from './checkQuestions.js';
+	import {cryptedModeKey} from './configEnvironment.js'
+	import {
+		encrypt,
+		decrypt
+	} from './crypt.js';
 	let validate = '';
 	$: if ($validation) {
 		validate = 'validate';
@@ -28,14 +34,27 @@
 	}
 	let quizEncodageHash;
 	let quiz;
-
-
+	let mode='open';
+	let hashEvaluation=[];
 	//	$: if ($changeQuestions) {home.update(n=>false)}
 
 
 	onMount(async () => {
 		if ($url) {
 			quizEncodageHash = $url.hash.slice(1);
+			keyEvaluation.update(n=>'');
+			if($url.search=='?m=1') {
+				quizEncodageHash=decrypt(quizEncodageHash,cryptedModeKey);
+				mode='crypted';
+				keyEvaluation.update(n=>'');
+			}
+			if($url.search=='?m=2') {
+				quizEncodageHash=decrypt(quizEncodageHash,cryptedModeKey);
+				hashEvaluation=quizEncodageHash.split('|||');
+				keyEvaluation.update(n => hashEvaluation[0]);
+				quizEncodageHash=hashEvaluation[1];
+				mode='evaluation';
+			}
 			$baseURL = $url.protocol + '//' + $url.host;
 			if (quizEncodageHash.startsWith('http')) {
 				const response = await fetch(quizEncodageHash);
@@ -45,7 +64,6 @@
 			} else {
 				quiz = decodeURI(quizEncodageHash);
 			}
-
 			if (checkQuestions(quiz)) {
 				home.update(n => false);
 				questionsCode.update(n => quiz);
@@ -59,6 +77,19 @@
 
 	$: if ($url) {
 		quizEncodageHash = $url.hash.slice(1);
+		keyEvaluation.update(n=>'');
+			if($url.search=='?m=1') {
+				quizEncodageHash=decrypt(quizEncodageHash,cryptedModeKey);
+				mode='crypted';
+				keyEvaluation.update(n=>'');
+			}
+			if($url.search=='?m=2') {
+				quizEncodageHash=decrypt(quizEncodageHash,cryptedModeKey);
+				hashEvaluation=quizEncodageHash.split('|||');
+				keyEvaluation.update(n => hashEvaluation[0]);
+				quizEncodageHash=hashEvaluation[1];
+				mode='evaluation';
+			}
 		quiz = decodeURI(quizEncodageHash);
 		if (checkQuestions(quiz)) {
 			home.update(n => false);
@@ -80,7 +111,9 @@
 <Head/>
 
 <div class="container is-max-desktop has-background-white-ter px-4 pb-6 is-size-4 is-size-6-mobile {validate}">
+	{#if mode=='open'}
 	<Menu />
+	{/if}
 		<Questions />
 	{#if $home}
 		<section class="pt-6">

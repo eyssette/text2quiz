@@ -1,6 +1,7 @@
 <script>
 	import {
-		countCorrectAnswers
+		countCorrectAnswers,
+		generateCodeResults
 	} from './stores.js';
 	import {
 		shuffleArray
@@ -53,7 +54,7 @@
 
 <div class="block quiz-QR py-2" id="quiz-q{quizId}">
 	<h2 class="title has-text-centered">{title}</h2>
-	<div class="box block has-text-centered quiz-sortable" class:quiz-success={validate && answer==correctAnswer} class:quiz-error={validate && answer!=correctAnswer}>
+	<div class="box block has-text-centered quiz-sortable" class:quiz-success={validate && answer==correctAnswer  && !$generateCodeResults} class:quiz-error={validate && answer!=correctAnswer  && !$generateCodeResults}>
 		<p class="has-text-centered block has-text-weight-medium">{@html sanitizeHTML(subtitle)}</p>
 		<ul bind:this={sortableElement}>
 			{#each textAnswersArrayShuffled as answer}

@@ -4,6 +4,7 @@
 		katexifyString
 	} from './katexify';
 	import Results from './Results.svelte';
+	import CodeResults from './CodeResults.svelte';
 	import VF from './VF.svelte';
 	import QCM from './QCM.svelte';
 	import QR from './QR.svelte';
@@ -20,7 +21,8 @@
 		changeQuestions,
 		countExpectedAnswers,
 		countCorrectAnswers,
-		modal
+		modal,
+		keyEvaluation
 	} from './stores.js';
 	const title = 'Quiz';
 	const subtitle = 'Répondez à toutes les questions et calculez votre score';
@@ -100,5 +102,9 @@
 
 </section>
 
+{#if $keyEvaluation==''}
 <Results />
+{:else}
+<CodeResults />
+{/if}
 {/if}

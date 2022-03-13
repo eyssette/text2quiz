@@ -12,11 +12,21 @@
 	import {
 		checkQuestions
 	} from './checkQuestions.js';
+	import {cryptedModeKey} from './configEnvironment.js'
+	import {
+		encrypt,
+		decrypt
+	} from './crypt.js';
 	import url from './url.js';
 	import Help from './Help.svelte';
-	const tooltipEdit = 'Changer le contenu de ce quiz';
+	
+
+	const tooltipEditHome = 'Créer un quiz';
+	const tooltipEdit = 'Modifier le quiz';
+	const tooltipEditModalTitle = 'Edition du quiz'; 
 	const tooltipShare = 'Partager ce quiz';
 	const tooltipHome = 'Accueil';
+	const tooltipDecrypt = 'Décrypter les codes de résultats'
 	const textQuizContent = 'Contenu du quiz';
 	const textSave = 'Sauvegarder';
 	const textCancel = 'Annuler';
@@ -24,15 +34,24 @@
 	const messageInvalidQuestionsText = '⚠&nbsp;&nbsp;Syntaxe incorrecte';
 	const helpActiveText = "Afficher l'aide";
 	const helpNotActiveText = "Masquer l'aide";
+	const textCodeToDecrypt = 'Copier ici (un par ligne) les codes des résultats de vos élèves'
+	const textDecrypt='Décrypter';
+	const textDecryptAgain="Décrypter d'autres codes";
 
 	let modalEditActive = '';
 	let helpActive = false;
 	let modalShareActive = false;
+	let modalDecryptActive = false;
 	let targetMenu = 0;
 	let textAreaquestionsCode = '';
-
-
+	let textAreaCodesToDecrypt='';
 	let messageInvalidQuestions = '';
+
+	let keyUser='';
+
+	let codesDecrypted=[];
+	let codes=[];
+	let hasDuplicates = false;
 
 	$: if (textAreaquestionsCode && checkQuestions(textAreaquestionsCode)) {
 		messageInvalidQuestions = '';
@@ -89,13 +108,25 @@
 
 
 	let urlQuiz;
+	let urlQuizOpen;
+	let urlQuizCrypted;
+	let urlQuizEvaluation;
+	let mode='open';
 
 	function modalShareActivate() {
 		if ($url) {
-			$questionsCode && checkQuestions ? urlQuiz = $url.protocol + '//' + $url.host + '#' + encodeURI($questionsCode) : urlQuiz = $url.protocol + '//' + $url.host;
+			$questionsCode && checkQuestions ? urlQuizOpen = $url.protocol + '//' + $url.host + '#' + encodeURI($questionsCode) : urlQuizOpen = $url.protocol + '//' + $url.host;
+			urlQuiz = urlQuizOpen;
 		}
 		modalShareActive = !modalShareActive;
 		$modal = !$modal;
+		targetMenu = -1;
+	}
+
+	function modalShareDesactivate() {
+		modalShareActive = !modalShareActive;
+		$modal = !$modal;
+		targetMenu = 0;
 	}
 
 	function handleKeydown(event) {
@@ -104,11 +135,71 @@
 				modalEditOffCancel()
 			}
 			if (modalShareActive) {
-				modalShareActive = !modalShareActive;
-				$modal = !$modal;
+				modalShareDesactivate();
+			}
+			if (modalDecryptActive) {
+				modalDecryptDesactivate()
 			}
 		}
 	}
+	const chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	const passwordLength = 6;
+	let keyEvaluation = "";
+	for (let i = 0; i <= passwordLength; i++) {
+		let randomNumber = Math.floor(Math.random() * chars.length);
+		keyEvaluation += chars.substring(randomNumber, randomNumber + 1);
+	}
+
+
+	function modeOpen() {
+		urlQuiz=urlQuizOpen;
+	}
+
+	function modeCrypted() {
+		if ($url) {
+			$questionsCode && checkQuestions ? urlQuiz = $url.protocol + '//' + $url.host + '?m=1#' + encrypt(encodeURI($questionsCode),cryptedModeKey) : urlQuiz = $url.protocol + '//' + $url.host;
+		}
+	}
+
+
+	function modeEvaluation() {
+		if ($url) {
+			if (keyEvaluation=='') {urlQuiz='ATTENTION, le mode évaluation nécessite un mot de passe'} else {
+			$questionsCode && checkQuestions ? urlQuiz = $url.protocol + '//' + $url.host + '?m=2#' + encrypt(keyEvaluation+'|||'+encodeURI($questionsCode),cryptedModeKey) : urlQuiz = $url.protocol + '//' + $url.host;
+			}
+		}
+	}
+
+	function modalDecryptActivate() {
+		modalDecryptActive = !modalDecryptActive;
+		$modal = !$modal;
+		targetMenu = -1;
+	}
+
+	function arrayHasDuplicates(array) {
+    return (new Set(array)).size !== array.length;
+}
+
+	function decryptCodes() {
+		codes = textAreaCodesToDecrypt.split('\n');
+		for (let i=0;i<codes.length;i++) {
+			codesDecrypted= [...codesDecrypted, decrypt(codes[i],keyUser) ? decrypt(codes[i],keyUser) : "Erreur"]
+		}
+		if (arrayHasDuplicates(codesDecrypted)){hasDuplicates=true}
+	}
+
+	function modalDecryptDesactivate() {
+		modalDecryptActive = !modalDecryptActive;
+		$modal = !$modal;
+		targetMenu = 0;
+	}
+
+	function decryptCodesAgain () {
+		codes=[];
+		codesDecrypted=[];
+		hasDuplicates=false;
+	}
+
 </script>
 
 <svelte:window on:keydown={handleKeydown}/>
@@ -116,8 +207,9 @@
 <nav class="level is-mobile pt-2">
 	<div class="level-left">
 		<a href="#home" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={goHome} tabindex="{targetMenu}" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipHome}"><span class="material-icons is-size-3">home</span></a>
-		<a href="#edit" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalEditOn} tabindex="{targetMenu}" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipEdit}"><span class="material-icons is-size-3">edit </span></a>
+		<a href="#edit" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalEditOn} tabindex="{targetMenu}" data-target="modal" aria-haspopup="true" data-tooltip="{$home ? tooltipEditHome : tooltipEdit}"><span class="material-icons is-size-3">edit </span></a>
 		<a href="#share" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalShareActivate} tabindex="{targetMenu}" data-target="modal2" aria-haspopup="true" data-tooltip="{tooltipShare}"><span class="material-icons is-size-3">share</span></a>
+		<a href="#decrypt" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalDecryptActivate} tabindex="{targetMenu}" data-target="modal3" aria-haspopup="true" data-tooltip="{tooltipDecrypt}"><span class="material-icons is size-3">no_encryption</span></a>
 	</div>
 </nav>
 
@@ -125,7 +217,7 @@
 	<div class="modal-background"  on:click={modalEditOffCancel}></div>
 	<div class="modal-card">
 		<header class="modal-card-head">
-			<p class="modal-card-title">{tooltipEdit}</p>
+			<p class="modal-card-title">{tooltipEditModalTitle}</p>
 			
 		</header>
 		<section class="modal-card-body">
@@ -149,12 +241,86 @@
 			<button class="delete" aria-label="close" on:click={()=>(modalShareActive=!modalShareActive)}></button>
 		</header>
 		<section class="modal-card-body">
-			<div class="is-size-5">
+
+
+			<div class="is-size-6 mt-1">
 				<span>{urlQuizText}</span>
 				<input class="input is-small mx-5" type="text" value="{urlQuiz}" readonly />
-				<span class="material-icons is-clickable"  on:click={()=>navigator.clipboard.writeText(urlQuiz)}>content_copy</span>
+				<span class="material-icons is-clickable"
+					on:click={()=>navigator.clipboard.writeText(urlQuiz)}>content_copy</span>
 			</div>
+
+			<div class="control mt-5">
+				Mode de partage :
+				<label class="radio">
+					<input type="radio" bind:group={mode} value="open" checked on:click={modeOpen} >
+					Mode ordinaire
+				</label>
+				<label class="radio">
+					<input type="radio" bind:group={mode} value="crypted" on:click={modeCrypted} >
+					Mode crypté
+				</label>
+				<label class="radio">
+					<input type="radio" bind:group={mode} value="evaluation" on:click={modeEvaluation} >
+					Mode évaluation {#if mode=='evaluation'}/ mot de passe :<input type="text" bind:value={keyEvaluation} on:input={modeEvaluation}>{/if}
+				</label>
+				  
+			</div>
+			<p class="is-size-6 mt-5">Il est recommandé de conserver pour vous-même une copie du lien en mode ordinaire. Si vous n'avez accès qu'au lien en mode crypté ou évaluation, vous ne pourrez plus éditer votre quiz.</p>
+			<article class="message is-dark  mt-5">
+				<div class="message-body">
+			<div class="is-size-6">
+				<ul>
+					<li class="mt-3">
+						<i>Mode ordinaire</i> : plutôt destiné au partage avec ses collègues, car le lien permet l'édition du quiz.
+					</li>
+					<li class="mt-3">
+						<i>Mode crypté</i> : plutôt pour les élèves, pour de l'autoévaluation : les réponses ne s'affichent pas dans le lien du quiz et le quiz n'est pas éditable.
+					</li>
+					<li class="mt-3">
+						<i>Mode évaluation</i> : comme dans le mode crypté, le lien est crypté et le quiz n'est pas éditable, mais la différence est que le résultat du quiz ne s'affiche pas. À la place, un code est généré que l'élève doit transmettre à l'enseignant·e. Ce code contient de manière cryptée le résultat de l'élève et permet l'évaluation du quiz.
+					</li>
+				</ul>
+			</div>
+				</div>
+			</article>
+
 		</section>
+	</div>
+</div>
+
+
+<div class="modal" class:is-active={modalDecryptActive}>
+	<div class="modal-background" on:click={modalDecryptDesactivate}></div>
+	<div class="modal-card">
+		<header class="modal-card-head">
+			<p class="modal-card-title">{tooltipDecrypt}</p>
+			<button class="delete" aria-label="close" on:click={modalDecryptDesactivate}></button>
+		</header>
+		<section class="modal-card-body">
+			<div class="is-size-6 mt-1">Votre mot de passe : <input type="text" bind:value={keyUser} class="ml-3"></div>
+			{#if codesDecrypted.length==0}
+				<textarea class="textarea mt-5" placeholder="{textCodeToDecrypt}" rows="20" cols="50" id="quizContent" name="quizContent" bind:value={textAreaCodesToDecrypt}  tabindex="{targetMenu+1}"></textarea>
+			{:else}
+				<table class="table is-size-6 mx-auto my-5 is-fullwidth">
+					<tr><th>Code</th><th>Résultat</th></tr>
+					{#each codesDecrypted as codeDecrypted, i}
+					<tr><td>{codes[i]}</td><td>{codeDecrypted}</td></tr>
+					{/each}
+				</table>
+				{#if hasDuplicates}
+				<div class="mt-3 is-size-6 has-text-danger">Attention, il y a des codes identiques dans cette liste, alors qu'il ne devrait y avoir que des codes uniques !</div>
+				{/if}
+			{/if}
+		</section>
+		<footer class="modal-card-foot">
+			{#if codesDecrypted.length==0}
+				<button class="button is-success" disabled={textAreaCodesToDecrypt=='' || keyUser==''} on:click={decryptCodes}>{textDecrypt}</button>
+			{:else}
+			<button class="button is-success" on:click={decryptCodesAgain}>{textDecryptAgain}</button>
+			{/if}
+			<button class="button" on:click={modalDecryptDesactivate}>{textCancel}</button>
+		</footer>	
 	</div>
 </div>
 
@@ -173,8 +339,9 @@
 		max-width: 900px;
 	}
 
-	input {
-		width: 50%;
+
+	input[type=text]{
+		max-width:50%;
 	}
 
 	button:focus {
