@@ -16,7 +16,7 @@
 	const textNotComplete = 'Réponse partiellement juste !';
 	let answer;
 	let disabled = '';
-	const reg = /\{(.*?)\}/g;
+	const reg = /\{\{(.*?)\}\}/g;
 	let res = [],
 		tmp;
 	let fragment;
@@ -57,8 +57,8 @@
 	function choices(textChoices) {
 		let textChoicesArray = [];
 		let correct = false;
-		textChoices = textChoices.replace('{', '');
-		textChoices = textChoices.replace('}', '');
+		textChoices = textChoices.replace('{{', '');
+		textChoices = textChoices.replace('}}', '');
 		textChoicesArray.push(textChoices.split('|'));
 		return textChoicesArray;
 	}

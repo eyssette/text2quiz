@@ -25,7 +25,7 @@
 	let answers = [];
 	let answersChecked = [];
 	let correctAnswers = [];
-	const reg = /\{(.*?)\}/g;
+	const reg = /\{\{(.*?)\}\}/g;
 
 	let res = [],
 		tmp;

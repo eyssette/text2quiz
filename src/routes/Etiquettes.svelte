@@ -57,7 +57,7 @@
 	});
 
 
-	const reg = /\{(.*?)\}/g;
+	const reg = /\{\{(.*?)\}\}/g;
 	let res = [],
 		tmp;
 	while (tmp = reg.exec(answersByCategoryString)) res.push(tmp);
