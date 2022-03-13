@@ -28,5 +28,5 @@
 
 <style>
 	ul li {display:inline-block}
-	ul li:before {content:"– "}
+	ul li:before {content:"• "; padding:5px;}
 </style>
