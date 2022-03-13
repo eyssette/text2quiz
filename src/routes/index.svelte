@@ -60,6 +60,7 @@
 				const response = await fetch(quizEncodageHash);
 				const data = await response.text();
 				quiz = encodeURI(data);
+				quiz = quiz.replace(/%0A$/,'');
 				history.replaceState(null, null, $baseURL+'#' + quiz);
 			} else {
 				quiz = decodeURI(quizEncodageHash);

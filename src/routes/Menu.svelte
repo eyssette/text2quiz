@@ -24,9 +24,9 @@
 	const tooltipEditHome = 'Créer un quiz';
 	const tooltipEdit = 'Modifier le quiz';
 	const tooltipEditModalTitle = 'Edition du quiz'; 
-	const tooltipShare = 'Partager ce quiz';
+	const tooltipShare = 'Lien de partage';
 	const tooltipHome = 'Accueil';
-	const tooltipDecrypt = 'Décrypter les codes de résultats'
+	const tooltipDecrypt = 'Décrypter les résultats'
 	const textQuizContent = 'Contenu du quiz';
 	const textSave = 'Sauvegarder';
 	const textCancel = 'Annuler';
@@ -234,11 +234,11 @@
 </div>
 
 <div class="modal" class:is-active={modalShareActive}>
-	<div class="modal-background" on:click={()=>(modalShareActive=!modalShareActive)}></div>
+	<div class="modal-background" on:click={modalShareDesactivate}></div>
 	<div class="modal-card">
 		<header class="modal-card-head">
 			<p class="modal-card-title">{tooltipShare}</p>
-			<button class="delete" aria-label="close" on:click={()=>(modalShareActive=!modalShareActive)}></button>
+			<button class="delete" aria-label="close" on:click={modalShareDesactivate}></button>
 		</header>
 		<section class="modal-card-body">
 

@@ -12,7 +12,7 @@
 	const titleButton = 'Valider les réponses et voir les résultats';
 	const titleResults = 'Résultats du quiz';
 	const titleRefresh = 'Refaire le quiz';
-	const textAnswer = 'réponse';
+	const textAnswer = 'exercice';
 	const textCorrect = 'juste';
 	const textFractionBar = 'sur';
 	let resultsHidden = 'is-hidden';
