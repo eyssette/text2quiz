@@ -25,7 +25,8 @@
 		keyEvaluation
 	} from './stores.js';
 	const title = 'Quiz';
-	const subtitle = 'Répondez à toutes les questions et calculez votre score';
+	const subtitle = 'Répondez aux questions et calculez votre score';
+	const textPoints = '1 point par réponse juste. Dans chaque exercice, une réponse fausse annule une réponse juste.';
 	let questions = [];
 	let questionsCodeArray = [];
 	let questionCodeArray = [];
@@ -65,6 +66,9 @@
 {#if $questionsCode && $changeQuestions && questionsCodeArray.length > 0}
 <h1 class="title has-text-centered pt-2 is-size-1 has-text-link-dark">{title}</h1>
 <h2 class="subtitle has-text-centered has-text-link-dark mt-4">{subtitle}</h2>
+
+<h3 class="subtitle has-text-centered mb-6 is-size-6">{textPoints}</h3>
+
 
 <section class="pt-6">
 {#each questions as question, i}
