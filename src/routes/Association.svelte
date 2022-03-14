@@ -203,33 +203,69 @@
 <div class="block quiz-Grille py-2" id="quiz-q{quizId}">
 	<h2 class="title has-text-centered">{title}</h2>
 	<div class="box block" class:quiz-success={validate && answersChecked.filter(element=>
-		element==true).length==categoriesArray.length && !$generateCodeResults} class:quiz-error={validate && checkAnswers.length>0 &&
+		element==true).length==categoriesArray.length && !$generateCodeResults} class:quiz-error={validate &&
+		checkAnswers.length>0 &&
 		answersChecked.filter(element=>element==false).length>0 && !$generateCodeResults}>
 		<p class="has-text-centered block has-text-weight-medium">{subtitle}</p>
 		<div class="content">{@html sanitizeHTML(question)}</div>
-		<div class="columns mt-5">
-			<div class="column is-two-fifths">
+
+		{#if categoriesArray.length>5}
+		<div class="mt-5 ">
+			<div class="columns is-multiline ">
 				{#each categoriesArray as category,i}
-					<article class="message has-background-white">
-						<div class="message-header has-background-grey-lighter  has-text-dark">{@html sanitizeHTML(category)}</div>
-						<div class="message-body mt-2 quiz-zone has-background-white" id="quiz-q{quizId}-z{i}" bind:this={zone[i]}></div>
-					</article>
+					<div class="column is-half">
+						<article class="message has-background-white m-2">
+							<div class="message-header has-background-grey-lighter  has-text-dark">{@html sanitizeHTML(category)}</div>
+							<div class="message-body mt-2 quiz-zone has-background-white" id="quiz-q{quizId}-z{i}" bind:this={zone[i]}></div>
+						</article>
+					</div>
 				{/each}
 			</div>
-  			<div class="column ">
-				<article class="message  mt-5 zoneInitial">
-					<div class="message-header has-background-white has-text-dark">{labelsListText}</div>
-					<div class="message-body">
-						<div id="quiz-q{quizId}-z0" bind:this={zoneInitial}>
-							{#each answersShuffled as answer,i}
-								<p class="has-text-justified py-1" class:r-success={validate && checkAnswers.filter(element=>(element[0]==answer && element[2]==true)).length>0 && !$generateCodeResults} class:r-error={validate  && checkAnswers.length>0 && checkAnswers.filter(element=>(element[0]==answer && element[2]==false)).length>0 && !$generateCodeResults}  id="quiz-q{quizId}-r{i}" class:draggable={!validate}>{@html answer}</p>
-							{/each}
+			<div class="columns is-mobile">
+				<div class="column is-10 is-offset-1 ">
+					<article class="message  mt-5 zoneInitial">
+						<div class="message-header has-background-white has-text-dark">{labelsListText}</div>
+						<div class="message-body">
+							<div id="quiz-q{quizId}-z0" bind:this={zoneInitial}>
+								{#each answersShuffled as answer,i}
+									<p class="has-text-justified py-1" class:r-success={validate && checkAnswers.filter(element=>(element[0]==answer && element[2]==true)).length>0 && !$generateCodeResults} class:r-error={validate  && checkAnswers.length>0 && checkAnswers.filter(element=>(element[0]==answer && element[2]==false)).length>0 && !$generateCodeResults}  id="quiz-q{quizId}-r{i}" class:draggable={!validate}>{@html answer}</p>
+								{/each}
+							</div>
 						</div>
-					</div>
-				</article>
+					</article>
+				</div>
 			</div>
 			<div class="is-size-5 is-size-6-mobile mt-3 pl-6 is-italic has-text-centered">&nbsp;{#if answersChecked.filter(element=>element==false).length>0 && checkAnswers.filter(element=>(element[2]==true)).length>0 && !$generateCodeResults}{showNotComplete}{/if}</div>
 		</div>
+
+		{:else}
+			<div class="columns mt-5">
+				<div class="column is-two-fifths">
+					{#each categoriesArray as category,i}
+						<article class="message has-background-white">
+							<div class="message-header has-background-grey-lighter  has-text-dark">{@html sanitizeHTML(category)}</div>
+							<div class="message-body mt-2 quiz-zone has-background-white" id="quiz-q{quizId}-z{i}" bind:this={zone[i]}></div>
+						</article>
+					{/each}
+				</div>
+				<div class="column">
+					<article class="message  mt-5 zoneInitial">
+						<div class="message-header has-background-white has-text-dark">{labelsListText}</div>
+						<div class="message-body">
+							<div id="quiz-q{quizId}-z0" bind:this={zoneInitial}>
+								{#each answersShuffled as answer,i}
+									<p class="has-text-justified py-1" class:r-success={validate && checkAnswers.filter(element=>(element[0]==answer && element[2]==true)).length>0 && !$generateCodeResults} class:r-error={validate  && checkAnswers.length>0 && checkAnswers.filter(element=>(element[0]==answer && element[2]==false)).length>0 && !$generateCodeResults}  id="quiz-q{quizId}-r{i}" class:draggable={!validate}>{@html answer}</p>
+								{/each}
+							</div>
+						</div>
+					</article>
+				</div>
+				<div class="is-size-5 is-size-6-mobile mt-3 pl-6 is-italic has-text-centered">&nbsp;{#if answersChecked.filter(element=>element==false).length>0 && checkAnswers.filter(element=>(element[2]==true)).length>0 && !$generateCodeResults}{showNotComplete}{/if}</div>
+			</div>
+		{/if}
+
+
+
 	</div>
 </div>
 
