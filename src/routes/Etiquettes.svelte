@@ -214,7 +214,7 @@
 	}
 
 	.message-header {
-		justify-content: center;
+		display:block;
 		background-color: hsl(200, 15%, 96%);
 		border-bottom: 1px hsl(0, 0%, 66%) solid;
 	}
