@@ -13,31 +13,46 @@
 		Sortable
 	} from 'sortablejs';
 	import {
-		onMount
-	} from "svelte";
+		onMount,
+		afterUpdate
+	} from 'svelte';
 	import sanitizeHTML from './sanitizeHTML.js';
+	import {
+		regexValid
+	} from './checkQuestions.js';
 	export let validate;
 	export let quizId;
-	export let categories;
+	export let answers;
+	export let question = '';
 	const title = 'Association';
 	const textNotComplete = "Réponse partiellement juste";
 	const subtitle = "Associez à chaque élément l'étiquette correspondante";
 	const labelsListText = 'Étiquettes à classer';
+
 	let categoriesArray = []
-	$: categoriesArray = categories.split('|');
-	export let answersByCategoryString;
-	export let question = '';
 	let answersByCategory = [];
+	let answersByCategoryArray = [];
 	let answersShuffled = [];
-	let answers = [];
 	let answersChecked = [];
 	let correctAnswers = [];
 	let partialCheck = [];
 	let checkAnswers = [];
 
+	const reg = /\{\{(.*?)\}\}/g;
+	let res = [],
+		tmp;
+	while (tmp = reg.exec(answers)) res.push(tmp);
+	for (let i = 0; i < res.length; i++) {
+		let associationString = res[i][1];
+		let associationArray = associationString.split('|')
+		categoriesArray = [...categoriesArray, associationArray[0]]
+		answersByCategoryArray = [...answersByCategoryArray, associationArray[1]]
+	}
+
 	let zoneInitial;
 	let zone = [];
-	$: onMount(async function () {
+
+	onMount(async function () {
 		Sortable.create(zoneInitial, {
 			group: {
 				name: 'etiquettes',
@@ -61,16 +76,49 @@
 		}
 	});
 
+	$: afterUpdate(async function () {
+		Sortable.create(zoneInitial, {
+			group: {
+				name: 'etiquettes',
+				pull: true,
+			},
+			draggable: ".draggable",
+			animation: 200
+		});
+		for (let i = 0; i < categoriesArray.length; i++) {
+			Sortable.create(zone[i], {
+				group: {
+					name: 'etiquettes',
+					pull: true,
+					put: function (to) {
+						return to.el.children.length < 1;
+					}
+				},
+				draggable: ".draggable",
+				animation: 200
+			});
+		}
+	});
 
-	let answersByCategoryArray = [];
-	answersByCategoryArray = answersByCategoryString.split('|');
 	answersByCategoryArray.forEach(choices);
 
 	$: if ($changeQuestions) {
-		answersByCategoryArray = answersByCategoryString.split('|');
 		answersByCategory = [];
+		answersByCategoryArray = [];
 		answersShuffled = [];
+		categoriesArray = [];
+		const reg = /\{\{(.*?)\}\}/g;
+		let res = [],
+			tmp;
+		while (tmp = reg.exec(answers)) res.push(tmp);
+		for (let i = 0; i < res.length; i++) {
+			let associationString = res[i][1];
+			let associationArray = associationString.split('|')
+			categoriesArray = [...categoriesArray, associationArray[0]]
+			answersByCategoryArray = [...answersByCategoryArray, associationArray[1]]
+		}
 		answersByCategoryArray.forEach(choices);
+
 	}
 
 	$: answersShuffled = shuffleArray(answersShuffled);
@@ -79,8 +127,6 @@
 		answersByCategory.push([element]);
 		answersShuffled = answersShuffled.concat(element)
 	}
-
-
 
 
 	function childrenTexts(item) {
@@ -98,7 +144,7 @@
 	$: disabled = (validate) ? 'disabled' : '';
 	$: showNotComplete = (validate) ? textNotComplete : '';
 	$: if (validate) {
-		countPointsMax.update(n=>n+answersShuffled.length);
+		countPointsMax.update(n => n + answersShuffled.length);
 		if (zoneInitial) {
 			answersZoneInitial = childrenTexts(zoneInitial);
 		}
@@ -140,10 +186,16 @@
 		}
 
 		let countTemp = 0;
-		for (let i=0;i<checkAnswers.length;i++) {
-			if (checkAnswers[i].includes(true)) {countTemp++} else {countTemp--}
+		for (let i = 0; i < checkAnswers.length; i++) {
+			if (checkAnswers[i].includes(true)) {
+				countTemp++
+			} else {
+				countTemp--
+			}
 		}
-		if (countTemp >= 0) {countPoints.update(n => n + countTemp);}
+		if (countTemp >= 0) {
+			countPoints.update(n => n + countTemp);
+		}
 
 	}
 </script>

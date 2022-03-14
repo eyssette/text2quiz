@@ -13,8 +13,9 @@
 		Sortable
 	} from 'sortablejs';
 	import {
-		onMount
-	} from "svelte";
+		onMount,
+		afterUpdate
+	} from 'svelte';
 	import sanitizeHTML from './sanitizeHTML.js';
 	export let validate;
 	export let quizId;
@@ -34,7 +35,29 @@
 
 	let zoneInitial;
 	let zone = [];
-	$: onMount(async function () {
+	onMount(async function () {
+		Sortable.create(zoneInitial, {
+			group: {
+				name: 'etiquettes',
+				pull: true,
+				draggable: ".draggable",
+			},
+			draggable: ".draggable",
+			animation: 200
+		});
+		for (let i = 0; i < categoriesArray.length; i++) {
+			Sortable.create(zone[i], {
+				group: {
+					name: 'etiquettes',
+					pull: true,
+				},
+				draggable: ".draggable",
+				animation: 200
+			});
+		}
+	});
+
+	$: afterUpdate(async function () {
 		Sortable.create(zoneInitial, {
 			group: {
 				name: 'etiquettes',

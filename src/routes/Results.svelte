@@ -54,7 +54,7 @@ import { katexify } from './katexify.js';
 				<div class="column"><span id="countCorrectAnswers">{$countCorrectAnswers}</span> <span id="textcountCorrectAnswers">{textAnswer}{plural} {textCorrect}{plural} {textFractionBar} <span id="countExpectedAnswers">{$countExpectedAnswers}</span></span>&nbsp;&nbsp;&nbsp;(<span id="percentCorrectAnswers">{percentCorrectAnswers}</span>%)</div>
 				<div class="column"><progress class="progress is-warning" value="{percentCorrectAnswers}" max="100" id="barPercentCorrectAnswers"></progress></div>
 			</div>
-			<div class="py-5">Points : {$countPoints}&thinsp;/&thinsp;{$countPointsMax} <span class="is-inline-block mx-6">–</span> Note : {Math.round(($countPoints/$countPointsMax)*200)/10}&thinsp;/&thinsp;20</div>
+			<div class="py-5">Points : {$countPoints}&thinsp;/&thinsp;{$countPointsMax} <span class="is-inline-block mx-3">–</span> Note : {Math.round(($countPoints/$countPointsMax)*200)/10}&thinsp;/&thinsp;20</div>
 		</article>
 		<div class="has-text-centered mt-6">
 			<button class="button is-rounded is-size-4 is-size-7-mobile " type="button" id="refreshQuiz" on:click={resultsHide}><span class="material-icons mr-2">refresh </span>{titleRefresh}</button>

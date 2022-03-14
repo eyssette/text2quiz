@@ -101,7 +101,8 @@
 		<Etiquettes quizId={i} categories={format2(question[1])} answersByCategoryString={format2(question[2])} validate={$validation} />
 	{/if}
 	{#if question[0]=='Association'}
-		<Association quizId={i} categories={format2(question[1])} answersByCategoryString={format2(question[2])} validate={$validation} question={question[3] ? format1(question[3]) : question[3]} />
+		<Association quizId={i} answers={format2(question[1])}  validate={$validation} question={question[2] ? format1(question[2]) : question[2]} />
+		<!-- <Association quizId={i} categories={format2(question[1])} answersByCategoryString={format2(question[2])} validate={$validation} question={question[3] ? format1(question[3]) : question[3]} /> -->
 	{/if}
 {/each}
 
