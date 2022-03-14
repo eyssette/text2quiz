@@ -83,6 +83,7 @@ export default function sanitizeHTML(string) {
 			span: ['class', 'style'],
 			div: ['class', 'style'],
 			p: ['class', 'style'],
+			blockquote: ['class', 'style']
 		}
 	})
 }
