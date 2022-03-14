@@ -82,7 +82,7 @@
 	<div class="box block" class:quiz-success={validate && selected && correctAnswers &&
 		arrayEquals(selected,correctAnswers) && !$generateCodeResults} class:quiz-error={validate && selected && correctAnswers &&
 		!arrayEquals(selected,correctAnswers) && selected.filter(value=> value=='default').length !=selected.length && !$generateCodeResults}>
-		<div class="content">
+		<div class="content has-text-justified has-text-left-mobile">
 			{#each textFragments as textFragment,i}
 				{#if i==0}
 					{@html sanitizeHTML(textFragments[0])}
