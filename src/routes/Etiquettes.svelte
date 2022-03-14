@@ -20,6 +20,7 @@
 	export let validate;
 	export let quizId;
 	export let categories;
+	export let question='';
 	const title = 'Étiquettes';
 	const subtitle = "Placez les étiquettes ci-dessous au bon endroit";
 	const textNotComplete = "Réponse partiellement juste";
@@ -177,6 +178,7 @@
 		element==true).length==categoriesArray.length && !$generateCodeResults} class:quiz-error={validate && checkAnswers.length>0 &&
 		answersChecked.filter(element=>element==false).length>0 && !$generateCodeResults}>
 		<p class="has-text-centered block has-text-weight-medium">{subtitle}</p>
+		<div class="content">{@html sanitizeHTML(question)}</div>
 		<div class="columns mt-5">
 			{#each categoriesArray as category,i}
 				<div class="column">

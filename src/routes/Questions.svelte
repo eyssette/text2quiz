@@ -98,7 +98,7 @@
 		<Ordre quizId={i} textAnswers={format2(question[1])} subtitle={question[2] ? format1(question[2]) : question[2]} validate={$validation} />
 	{/if}
 	{#if question[0]=='Etiquettes'}
-		<Etiquettes quizId={i} categories={format2(question[1])} answersByCategoryString={format2(question[2])} validate={$validation} />
+		<Etiquettes quizId={i} categories={format2(question[1])} answersByCategoryString={format2(question[2])} validate={$validation} question={question[3] ? format1(question[3]) : question[3]} />
 	{/if}
 	{#if question[0]=='Association'}
 		<Association quizId={i} answers={format2(question[1])}  validate={$validation} question={question[2] ? format1(question[2]) : question[2]} />
