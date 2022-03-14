@@ -18,9 +18,9 @@
 <div class:is-hidden={!helpActive}>
 
 	<div class="is-size-6 mt-5">
-		<p>On écrit une question par ligne de texte. Il faut bien respecter la syntaxe, notamment l'espace avant et après les doubles barres verticales.</p>
+		<p>On écrit une question par ligne de texte (on peut laisser des lignes vides pour séparer les questions). Il faut bien respecter la syntaxe, notamment l'espace avant et après les doubles barres verticales.</p>
 		<p class="mt-1">
-			On peut utiliser du Markdown pour mettre en gras (**gras**), en italiques (*italiques*) ou pour insérer une image : ![](URL de l'image), des formules en Latex : $$formule Latex$$, et des balises HTML.
+			On peut utiliser : <i>du Markdown</i>, notamment pour mettre en gras (**gras**), en italiques (*italiques*) ou pour insérer une image : ![](URL), <i>des formules en Latex</i> : $$formule$$, et <i>des balises HTML</i> notamment pour insérer des vidéos ou faire une mise en page plus précise.
 	</div>
 
 	<table class="table mt-5 mb-4 is-size-6 has-text-centered is-fullwidth">
