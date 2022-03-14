@@ -20,6 +20,8 @@ types[8] = /^Etiquettes\s\|\|\s.+\s\|\|\s\{\{.+\}\}$/; // Etiquettes
 numberItems[8] = [3];
 types[9] = /^Association\s\|\|\s.+\|.+\s\|\|\s.+\|.+/; // Association
 numberItems[9] = [3, 4];
+types[10] = /^$/; // Lignes vides
+numberItems[10] = [1];
 
 export function regexValid(questionCode) {
 	let i = 0;

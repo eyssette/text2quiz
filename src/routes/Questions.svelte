@@ -34,6 +34,7 @@
 	let latex = true;
 	$: if ($questionsCode && $changeQuestions && !$modal) {
 		validation.update(n => false);
+		$questionsCode = $questionsCode.replace(/(\r|\n)(\r|\n)*/,'\n');
 		questionsCodeArray = $questionsCode.split(/\r?\n/);
 	}
 	$: if ($questionsCode && $changeQuestions && questionsCodeArray.length > 0) {
