@@ -3,11 +3,13 @@
 		countCorrectAnswers,
 		generateCodeResults,
 		countPoints,
-		countPointsMax
+		countPointsMax,
+		changeQuestions
 	} from './stores.js';
 	import sanitizeHTML from './sanitizeHTML.js';
 	import {
-		arrayEquals
+		arrayEquals,
+		shuffleArray
 	} from './functions.js';
 	export let validate;
 	export let quizId;
@@ -20,14 +22,41 @@
 	let res = [],
 		tmp;
 	let fragment;
-	let next = text;
+	let next= text;
 	let textSplit = [];
 	let textFragments = [];
 	let selected = [];
 	let correctAnswers = [];
 	let choicesAnswers = [];
+	
 	while (tmp = reg.exec(text)) res.push(tmp);
 	res.forEach(fragments);
+	for (let i = 0; i < choicesAnswers.length; i++) {
+		for (let j = 0; j < choicesAnswers[i].length; j++) {
+			choicesAnswers[i][j] = choicesAnswers[i][j].replace('V:', '');
+		}
+	}
+
+	
+	$: if ($changeQuestions) {
+		next = text
+		res = [],
+			tmp;
+		fragment = []
+		textSplit = [];
+		textFragments = [];
+		correctAnswers = [];
+		choicesAnswers = [];
+		while (tmp = reg.exec(text)) res.push(tmp);
+		res.forEach(fragments);
+		for (let i = 0; i < choicesAnswers.length; i++) {
+			for (let j = 0; j < choicesAnswers[i].length; j++) {
+				choicesAnswers[i][j] = choicesAnswers[i][j].replace('V:', '');
+			}
+			choicesAnswers[i] = shuffleArray(choicesAnswers[i]);
+		}
+	}
+	
 
 	function fragments(item, index) {
 		textSplit.push(next.split(item[0]));
@@ -42,11 +71,8 @@
 		choicesAnswers.push(choiceText);
 		choiceText.forEach(choiceAnswer);
 	}
-	for (let i = 0; i < choicesAnswers.length; i++) {
-		for (let j = 0; j < choicesAnswers[i].length; j++) {
-			choicesAnswers[i][j] = choicesAnswers[i][j].replace('V:', '');
-		}
-	}
+	
+	
 
 	function choiceAnswer(element) {
 		if (element.substr(0, 2) == 'V:') {
