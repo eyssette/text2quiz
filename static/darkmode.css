@@ -57,9 +57,14 @@ body .quiz-Etiquettes .message-header, body .quiz-Etiquettes .message-header.has
 	background-color:#2c3030!important;
 	border-color:#2c3030!important;
 }
-body .quiz-Etiquettes .message-body, body .quiz-Association .message-body, body .quiz-Etiquettes .has-background-white, body .Association .has-background-white, body .quiz-Association .message, body .quiz-Etiquettes .message {
+body .quiz-Etiquettes .message-body, body .quiz-Association .message-body, body .quiz-Etiquettes .has-background-white, body .Association .has-background-white, body .quiz-Association .message:not(.zoneInitial), body .quiz-Etiquettes .message:not(.zoneInitial) {
 	background-color:#353b3b!important;
 	border-color:#2c3030!important;
+}
+
+body .quiz-Association article.message.zoneInitial, body .quiz-Etiquettes article.message.zoneInitial {
+	border:2px solid #485050!important;
+	background-color: #485050;
 }
 
 
@@ -144,4 +149,3 @@ body .modal textarea {
 body .modal-card-head, body .modal-card-foot {
 	background-color: #282f2f!important;	
 }
-
