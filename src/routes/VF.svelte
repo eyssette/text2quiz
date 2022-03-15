@@ -50,7 +50,7 @@
 	}
 </script>
 
-<div class="block quiz-QR py-2" id="quiz-q{quizId}">
+<div class="block quiz-VF py-2" id="quiz-q{quizId}">
 	<h2 class="title has-text-centered">{title}</h2>
 	<div class="box block" class:quiz-success={validate && correctAnswer==answer && !$generateCodeResults} class:quiz-error={validate && answer>0
 		&& correctAnswer!=answer && !$generateCodeResults}>

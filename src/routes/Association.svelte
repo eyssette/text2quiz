@@ -200,7 +200,7 @@
 	}
 </script>
 
-<div class="block quiz-Grille py-2" id="quiz-q{quizId}">
+<div class="block quiz-Association py-2" id="quiz-q{quizId}">
 	<h2 class="title has-text-centered">{title}</h2>
 	<div class="box block" class:quiz-success={validate && answersChecked.filter(element=>
 		element==true).length==categoriesArray.length && !$generateCodeResults} class:quiz-error={validate &&
@@ -235,7 +235,7 @@
 					</article>
 				</div>
 			</div>
-			<div class="is-size-5 is-size-6-mobile mt-3 pl-6 is-italic has-text-centered">&nbsp;{#if answersChecked.filter(element=>element==false).length>0 && checkAnswers.filter(element=>(element[2]==true)).length>0 && !$generateCodeResults}{showNotComplete}{/if}</div>
+			<div class="is-size-5 is-size-6-mobile mt-3 is-italic has-text-centered has-text-danger">&nbsp;{#if answersChecked.filter(element=>element==false).length>0 && checkAnswers.filter(element=>(element[2]==true)).length>0 && !$generateCodeResults}{showNotComplete}{/if}</div>
 		</div>
 
 		{:else}
@@ -260,8 +260,8 @@
 						</div>
 					</article>
 				</div>
-				<div class="is-size-5 is-size-6-mobile mt-3 pl-6 is-italic has-text-centered">&nbsp;{#if answersChecked.filter(element=>element==false).length>0 && checkAnswers.filter(element=>(element[2]==true)).length>0 && !$generateCodeResults}{showNotComplete}{/if}</div>
 			</div>
+			<div class="is-size-5 is-size-6-mobile mt-3 is-italic has-text-centered has-text-danger">&nbsp;{#if answersChecked.filter(element=>element==false).length>0 && checkAnswers.filter(element=>(element[2]==true)).length>0 && !$generateCodeResults}{showNotComplete}{/if}</div>
 		{/if}
 
 

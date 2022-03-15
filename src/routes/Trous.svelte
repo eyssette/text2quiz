@@ -118,7 +118,7 @@
 					{textFragments[res.length]}
 				{/if}
 			{/each}
-			<div class="is-size-5 is-size-6-mobile mt-3 pl-6 is-italic" class:is-invisible={!selected || arrayEquals(selected,correctAnswers) || selected.filter(value => value=='default').length ==selected.length || correctAnswers.filter(value => selected.includes(value)).length ==0}>&nbsp;{#if validate && !$generateCodeResults}{showNotComplete}{/if}</div>
+			<div class="is-size-5 is-size-6-mobile mt-5 is-italic has-text-danger has-text-centered" class:is-invisible={!selected || arrayEquals(selected,correctAnswers) || selected.filter(value => value=='default').length ==selected.length || correctAnswers.filter(value => selected.includes(value)).length ==0}>&nbsp;{#if validate && !$generateCodeResults}{showNotComplete}{/if}</div>
 		</div>	
 	</div>
 </div>

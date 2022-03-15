@@ -47,7 +47,7 @@
 				<label class="checkbox" class:r-success={validate && correctAnswers.includes(i+1) && answers.includes(i+1) && !$generateCodeResults} class:r-error={validate && !correctAnswers.includes(i+1) && answers.includes(i+1) && !$generateCodeResults} for="quiz-q{quizId}-r{i+1}"><input type="checkbox" name="quiz-q{quizId}-r{i+1}" id="quiz-q{quizId}-r{i+1}" value={i+1} {disabled}  bind:group={answers}>&nbsp;{@html sanitizeHTML(textAnswer)}</label>
 			{/each}
 		</div>
-		<div class="is-size-5 is-size-6-mobile mt-3 pl-6 is-italic" class:is-invisible={answers.length==0 || arrayEquals(answers,correctAnswers) || correctAnswers.filter(value => answers.includes(value)).length ==0}>&nbsp;{#if validate && !$generateCodeResults}{showNotComplete}{/if}</div>
+		<div class="is-size-5 is-size-6-mobile mt-3 is-italic has-text-centered has-text-danger" class:is-invisible={answers.length==0 || arrayEquals(answers,correctAnswers) || correctAnswers.filter(value => answers.includes(value)).length ==0}>&nbsp;{#if validate && !$generateCodeResults}{showNotComplete}{/if}</div>
 	</div>
 </div>
 

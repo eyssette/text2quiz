@@ -136,7 +136,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="is-size-5 is-size-6-mobile mt-3 pl-6 is-italic">&nbsp;{#if validate && answersChecked.length>0 && answersChecked.filter(element=>element==true).length!=answersShuffledUnique.length && !$generateCodeResults}{showNotComplete}{/if}</div>
+		<div class="is-size-5 is-size-6-mobile mt-3 is-italic has-text-centered has-text-danger">&nbsp;{#if validate && answersChecked.length>0 && answersChecked.filter(element=>element==true).length!=answersShuffledUnique.length && !$generateCodeResults}{showNotComplete}{/if}</div>
 	</div>
 </div>
 

@@ -1,5 +1,6 @@
 <script>
-	import { baseURL } from "./stores.js";
+	import { baseURL
+	} from "./stores.js";
 	import url from "./url.js";
 
 	function gotoURL(urlString){

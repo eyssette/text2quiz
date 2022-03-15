@@ -13,7 +13,8 @@
 		validation,
 		home,
 		baseURL,
-		keyEvaluation
+		keyEvaluation,
+		darkmode
 	} from './stores.js';
 	import Questions from './Questions.svelte';
 	import url from './url.js';
@@ -38,6 +39,7 @@
 	let hashEvaluation=[];
 	//	$: if ($changeQuestions) {home.update(n=>false)}
 
+	
 
 	onMount(async () => {
 		if ($url) {
@@ -111,7 +113,7 @@
 
 <Head/>
 
-<div class="container is-max-desktop has-background-white-ter px-4 pb-6 is-size-4 is-size-6-mobile {validate}">
+<div class="container is-max-desktop has-background-white-ter px-4 pb-6 is-size-4 is-size-6-mobile {validate}" class:home={$home}>
 	{#if mode=='open'}
 	<Menu />
 	{/if}

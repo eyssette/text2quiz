@@ -9,7 +9,8 @@
 		countPointsMax,
 		home,
 		modal,
-		baseURL
+		baseURL,
+		darkmode
 	} from './stores.js';
 	import {
 		checkQuestions
@@ -39,6 +40,11 @@
 	const textCodeToDecrypt = 'Copier ici (un par ligne) les codes des résultats de vos élèves'
 	const textDecrypt='Décrypter';
 	const textDecryptAgain="Décrypter d'autres codes";
+	const tooltipLightMode = 'Mode clair';
+	const tooltipDarkMode = 'Mode sombre';
+
+	let tooltipDarkOrLightMode;
+	$: $darkmode ? tooltipDarkOrLightMode = tooltipLightMode : tooltipDarkOrLightMode = tooltipDarkMode;
 
 	let modalEditActive = '';
 	let helpActive = false;
@@ -107,7 +113,7 @@
 	function goHome() {
 		questionsCode.update(n => '');
 		previousQuestionsCode.update(n => '');
-		window.location.assign($baseURL);
+		window.location.assign('#');
 	}
 
 
@@ -204,6 +210,11 @@
 		hasDuplicates=false;
 	}
 
+	function lightOrDarkMode() {
+		$darkmode = !$darkmode;
+		window.document.body.classList.toggle('dark-mode')
+	}
+
 </script>
 
 <svelte:window on:keydown={handleKeydown}/>
@@ -214,6 +225,9 @@
 		<a href="#edit" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalEditOn} tabindex="{targetMenu}" data-target="modal" aria-haspopup="true" data-tooltip="{$home ? tooltipEditHome : tooltipEdit}"><span class="material-icons is-size-3">edit </span></a>
 		<a href="#share" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalShareActivate} tabindex="{targetMenu}" data-target="modal2" aria-haspopup="true" data-tooltip="{tooltipShare}"><span class="material-icons is-size-3">share</span></a>
 		<a href="#decrypt" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalDecryptActivate} tabindex="{targetMenu}" data-target="modal3" aria-haspopup="true" data-tooltip="{tooltipDecrypt}"><span class="material-icons is size-3">no_encryption</span></a>
+	</div>
+	<div class="level-right">
+		<a href="#lightOrDarkMode" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item mr-3" on:click|preventDefault={lightOrDarkMode} tabindex="{targetMenu}" data-target="modal3" aria-haspopup="true" data-tooltip="{tooltipDarkOrLightMode}"><span class="material-icons is size-3">{#if $darkmode}light_mode{:else}dark_mode{/if}</span></a>
 	</div>
 </nav>
 

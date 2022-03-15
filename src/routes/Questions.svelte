@@ -71,7 +71,7 @@
 <h3 class="subtitle has-text-centered mb-6 is-size-6">{textPoints}</h3>
 
 
-<section class="pt-6">
+<section class="pt-6" id="section-quiz">
 {#each questions as question, i}
 	{#if question[0]=='VF'}
 		<VF question={format1(question[1])} quizId={i} correctAnswer={question[2]} validate={$validation}/>
