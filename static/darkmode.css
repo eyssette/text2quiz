@@ -11,7 +11,7 @@ body .container {
 
 }
 
-body section *:not(:where(.r-error,.r-success)), body .footer * {
+body section *:not(:where(.r-error,.r-success)), body .footer *, body #section-quiz .quiz-Etiquettes .has-text-dark, body #section-quiz .quiz-Association .has-text-dark {
 	color:rgba(255, 255, 255, 0.85)!important;
 }
 
@@ -119,7 +119,6 @@ body #section-quiz .quiz-Etiquettes p.r-error, body #section-quiz .quiz-Associat
 	border:2px solid #d32f2f!important;
 	color:rgba(255, 255, 255, 0.85)!important;
 }
-
 
 body .has-text-danger {
 	color:	#d32f2f !important
