@@ -345,7 +345,7 @@
 
 
 <style>
-	.level-left span {
+	.level-left span, .level-right span {
 		border: none;
 	}
 

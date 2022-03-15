@@ -71,7 +71,7 @@ body h2.has-text-link-dark {
 }
 
 body h3 {
-	color:grey;
+	color:grey!important;
 }
 
 body .home .message, body .modal .message {
