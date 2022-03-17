@@ -78,7 +78,7 @@
 		<VF question={format1(question[1])} quizId={i} correctAnswer={question[2]} validate={$validation}/>
 	{/if}
 	{#if question[0]=='QCM'}
-		<QCM question={format1(question[1])} quizId={i} textAnswers={format2(question[2])} validate={$validation} correctAnswersString={question[3]} />
+		<QCM question={format1(question[1])} quizId={i} textAnswers={format2(question[2])} validate={$validation} />
 	{/if}
 	{#if question[0]=='QR'}
 		<QR question={format1(question[1])} quizId={i} textAnswers={format2(question[2])} correctAnswerString={question[3]} validate={$validation} />
