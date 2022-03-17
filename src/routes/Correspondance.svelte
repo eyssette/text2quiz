@@ -23,7 +23,7 @@ arrayEquals,
 	export let categoryText;
 	export let question='';
 	const textNotComplete = "Réponse partiellement juste";
-	const labelsListText = 'Étiquettes à classer';
+	const labelsListText = 'Étiquettes à sélectionner';
 	export let answers;
 	let answersByCategoryString = '';
 	let answersByCategory = [];
