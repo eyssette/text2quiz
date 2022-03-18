@@ -114,9 +114,7 @@
 <Head/>
 
 <div class="container is-max-desktop has-background-white-ter px-4 pb-6 is-size-4 is-size-6-mobile {validate}" class:home={$home}>
-	{#if mode=='open'}
-	<Menu />
-	{/if}
+	<Menu modeView={mode} />
 		<Questions />
 	{#if $home}
 		<section class="pt-6">

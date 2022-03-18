@@ -22,7 +22,7 @@
 	} from './crypt.js';
 	import url from './url.js';
 	import Help from './Help.svelte';
-	
+	export let modeView;
 
 	const tooltipEditHome = 'Créer un quiz';
 	const tooltipEdit = 'Modifier le quiz';
@@ -113,7 +113,11 @@
 	function goHome() {
 		questionsCode.update(n => '');
 		previousQuestionsCode.update(n => '');
+		if (modeView=='open') {
 		window.location.assign('#');
+		} else {
+		window.location.assign($baseURL);
+		}
 	}
 
 
@@ -220,16 +224,20 @@
 <svelte:window on:keydown={handleKeydown}/>
 
 <nav class="level is-mobile pt-2">
+	
 	<div class="level-left">
 		<a href="#home" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={goHome} tabindex="{targetMenu}" data-target="modal" aria-haspopup="true" data-tooltip="{tooltipHome}"><span class="material-icons is-size-3">home</span></a>
+		{#if modeView=='open'}
 		<a href="#edit" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalEditOn} tabindex="{targetMenu}" data-target="modal" aria-haspopup="true" data-tooltip="{$home ? tooltipEditHome : tooltipEdit}"><span class="material-icons is-size-3">edit </span></a>
 		<a href="#share" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalShareActivate} tabindex="{targetMenu}" data-target="modal2" aria-haspopup="true" data-tooltip="{tooltipShare}"><span class="material-icons is-size-3">share</span></a>
 		<a href="#decrypt" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item" on:click|preventDefault={modalDecryptActivate} tabindex="{targetMenu}" data-target="modal3" aria-haspopup="true" data-tooltip="{tooltipDecrypt}"><span class="material-icons is size-3">no_encryption</span></a>
+		{/if}
 	</div>
 	<div class="level-right">
 		<a href="#lightOrDarkMode" class="has-tooltip-bottom has-tooltip-hidden-mobile modal-button level-item mr-3" on:click|preventDefault={lightOrDarkMode} tabindex="{targetMenu}" data-target="modal3" aria-haspopup="true" data-tooltip="{tooltipDarkOrLightMode}"><span class="material-icons is size-3">{#if $darkmode}light_mode{:else}dark_mode{/if}</span></a>
 	</div>
 </nav>
+{#if modeView=='open'}
 
 <div class="modal {modalEditActive}">
 	<div class="modal-background"  on:click={modalEditOffCancel}></div>
@@ -342,6 +350,8 @@
 		</footer>	
 	</div>
 </div>
+
+{/if}
 
 
 <style>
