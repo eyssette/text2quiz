@@ -81,7 +81,7 @@
 		<QCM question={format1(question[1])} quizId={i} textAnswers={format2(question[2])} validate={$validation} />
 	{/if}
 	{#if question[0]=='QR'}
-		<QR question={format1(question[1])} quizId={i} textAnswers={format2(question[2])} correctAnswerString={question[3]} validate={$validation} />
+		<QR question={format1(question[1])} quizId={i} textAnswers={format2(question[2])} validate={$validation} />
 	{/if}
 	{#if question[0]=='Flashcard'}
 		<Flashcard quizId={i} recto={format1(question[1])} verso={format1(question[2])} validate={$validation}/>

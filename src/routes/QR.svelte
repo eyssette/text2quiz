@@ -3,27 +3,52 @@
 		countCorrectAnswers,
 		generateCodeResults,
 		countPoints,
-		countPointsMax
+		countPointsMax,
+		changeQuestions
 	} from './stores.js';
 	import sanitizeHTML from './sanitizeHTML.js';
+	import {shuffleArray} from './functions';
 	export let validate;
 	export let quizId;
 	export let question;
 	export let textAnswers;
-	let textAnswersArray = textAnswers.split('|');
-	$: textAnswersArray = textAnswers.split('|');
-	export let correctAnswerString;
-	let correctAnswer = Number(correctAnswerString);
-	$: correctAnswer = Number(correctAnswerString);
+	let textAnswersArray;
+	let correctAnswer;
 	const title = 'Question / Réponse';
 	const textAnswerDefault = 'Je ne sais pas';
 	let answer;
 	let disabled = '';
 	let answerDefault;
+
+	textAnswersArray = textAnswers.split('|');
+	for (let i=0;i<textAnswersArray.length;i++) {
+		let answer = textAnswersArray[i];
+		if (answer.substr(0, 2) == 'V:') {
+			textAnswersArray[i] = answer.replace('V:', '');
+			correctAnswer = textAnswersArray[i];
+		}
+	}
+	textAnswersArray=shuffleArray(textAnswersArray);
+
+	$: if ($changeQuestions) {
+		textAnswersArray = [];
+		textAnswersArray = textAnswers.split('|');
+		correctAnswer = '';
+		for (let i=0;i<textAnswersArray.length;i++) {
+			let answer = textAnswersArray[i];
+			if (answer.substr(0, 2) == 'V:') {
+				textAnswersArray[i] = answer.replace('V:', '');
+				correctAnswer = textAnswersArray[i];
+			}
+		}
+		textAnswersArray=shuffleArray(textAnswersArray);
+	}
+
+
 	$: disabled = (validate) ? 'disabled' : '';
 	$: if (validate) {
 		countPointsMax.update(n => n + 1);
-		if (answer > 0 && correctAnswer == answer) {
+		if (correctAnswer == textAnswersArray[answer]) {
 			countCorrectAnswers.update(n => n + 1)
 			countPoints.update(n => n + 1);
 		}
@@ -33,11 +58,11 @@
 
 <div class="block quiz-QR py-2" id="quiz-q{quizId}">
 	<h2 class="title has-text-centered">{title}</h2>
-	<div class="box block" class:quiz-success={validate && correctAnswer==answer && !$generateCodeResults} class:quiz-error={validate && answer>0 && correctAnswer!=answer && !$generateCodeResults}>
+	<div class="box block" class:quiz-success={validate && correctAnswer == textAnswersArray[answer] && !$generateCodeResults} class:quiz-error={validate && answer >=0 && correctAnswer != textAnswersArray[answer] && !$generateCodeResults}>
 		<div class="content">{@html sanitizeHTML(question)}</div>
 		<div class="control is-size-5 is-size-6-mobile">
 			{#each textAnswersArray as textAnswer, i}
-				<label class="radio" class:r-success={validate && correctAnswer==i+1 && answer==i+1 && !$generateCodeResults} class:r-error={validate && correctAnswer!=i+1 && answer==i+1 && !$generateCodeResults} for="quiz-q{quizId}-r{i+1}"><input type="radio" name="quiz-q{quizId}" id="quiz-q{quizId}-r{i+1}" {disabled} bind:group={answer}  value={i+1}>{@html sanitizeHTML(textAnswer)} </label>
+				<label class="radio" class:r-success={validate && correctAnswer==textAnswersArray[i] && answer==i && !$generateCodeResults} class:r-error={validate && correctAnswer!=textAnswersArray[i] && answer==i && !$generateCodeResults} for="quiz-q{quizId}-r{i}"><input type="radio" name="quiz-q{quizId}" id="quiz-q{quizId}-r{i}" {disabled} bind:group={answer}  value={i}>{@html sanitizeHTML(textAnswer)} </label>
 			{/each}
 			<label class="radio" for="quiz-q{quizId}-r-default"><input type="radio" name="quiz-q{quizId}" id="quiz-q{quizId}-r-default" {disabled} bind:this={answerDefault} bind:group={answer} value="default" checked>{textAnswerDefault}</label>
 		</div>
