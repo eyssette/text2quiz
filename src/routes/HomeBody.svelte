@@ -69,6 +69,7 @@
 					<li>Étiquettes</li>
 					<li>Association</li>
 					<li>Correspondance</li>
+					<li>Correspondance stricte</li>
 				</ol>
 			</div>
 		</article>
