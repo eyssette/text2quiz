@@ -8,7 +8,8 @@
 	} from './stores.js';
 	import {
 		arrayEquals,
-		shuffleArray
+		shuffleArray,
+		removeSpacesBeforeAndAfter
 	} from './functions.js';
 	import sanitizeHTML from './sanitizeHTML.js';
 	export let validate;
@@ -16,13 +17,16 @@
 	export let question;
 	export let textAnswers;
 	let answers = [];
+	let textAnswer;
 	let textAnswersArray;
 	textAnswersArray = textAnswers.split('|');
 	let correctAnswers = [];
 	for (let i=0;i<textAnswersArray.length;i++) {
-		let answer = textAnswersArray[i];
-		if (answer.substr(0, 2) == 'V:') {
-			textAnswersArray[i] = answer.replace('V:', '');
+		textAnswer = textAnswersArray[i];
+		textAnswer = removeSpacesBeforeAndAfter(textAnswer);
+		textAnswersArray[i]=textAnswer;
+		if (textAnswer.substr(0, 2) == 'V:') {
+			textAnswersArray[i] = removeSpacesBeforeAndAfter(textAnswer.replace('V:', ''));
 			correctAnswers = [...correctAnswers, textAnswersArray[i]];
 		}
 	}
@@ -34,9 +38,11 @@
 		textAnswersArray = textAnswers.split('|');
 		correctAnswers = [];
 		for (let i=0;i<textAnswersArray.length;i++) {
-			let answer = textAnswersArray[i];
-			if (answer.substr(0, 2) == 'V:') {
-				textAnswersArray[i] = answer.replace('V:', '');
+			textAnswer = textAnswersArray[i];
+			textAnswer = removeSpacesBeforeAndAfter(textAnswer);
+			textAnswersArray[i]=textAnswer;
+			if (textAnswer.substr(0, 2) == 'V:') {
+				textAnswersArray[i] = removeSpacesBeforeAndAfter(textAnswer.replace('V:', ''));
 				correctAnswers = [...correctAnswers, textAnswersArray[i]];
 			}
 		}
@@ -70,7 +76,7 @@
 		<div class="content">{@html sanitizeHTML(question)}</div>
 		<div class="control is-size-5 is-size-6-mobile">
 			{#each textAnswersArray as textAnswer, i}
-					<label class="checkbox" class:r-success={validate && correctAnswers.includes(textAnswer) && answers.includes(i) && !$generateCodeResults} class:r-error={validate && !correctAnswers.includes(textAnswer) && answers.includes(i) && !$generateCodeResults} for="quiz-q{quizId}-r{i+1}"><input type="checkbox" name="quiz-q{quizId}-r{i}" id="quiz-q{quizId}-r{i}" value={i} {disabled}  bind:group={answers}>&nbsp;{@html sanitizeHTML(textAnswer)}</label>
+					<label class="checkbox" class:r-success={validate && correctAnswers.includes(textAnswer) && answers.includes(i) && !$generateCodeResults} class:r-error={validate && !correctAnswers.includes(textAnswer) && answers.includes(i) && !$generateCodeResults} for="quiz-q{quizId}-r{i}"><input type="checkbox" name="quiz-q{quizId}-r{i}" id="quiz-q{quizId}-r{i}" value={i} {disabled}  bind:group={answers}>&nbsp;{@html sanitizeHTML(textAnswer)}</label>
 			{/each}
 		</div>
 		<div class="is-size-5 is-size-6-mobile mt-3 is-italic has-text-centered has-text-danger" class:is-invisible={answers.length==0 || arrayEquals(answers,correctAnswers) || correctAnswers.filter(value => answers.includes(value)).length ==0}>&nbsp;{#if validate && !$generateCodeResults}{showNotComplete}{/if}</div>

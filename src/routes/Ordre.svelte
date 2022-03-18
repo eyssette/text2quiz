@@ -6,7 +6,8 @@
 		countPointsMax
 	} from './stores.js';
 	import {
-		shuffleArray
+		shuffleArray,
+		removeSpacesBeforeAndAfter
 	} from './functions.js';
 	import {
 		Sortable
@@ -24,6 +25,9 @@
 	$: if (!subtitle || subtitle=='') {subtitle=subtitleDefault}
 	let textAnswersArray = textAnswers.split('|');
 	$: textAnswersArray = textAnswers.split('|');
+	$: for (let i=0;i<textAnswersArray.length;i++) {
+		textAnswersArray[i]= removeSpacesBeforeAndAfter(textAnswersArray[i]);
+	}
 	let textAnswersArrayShuffled = shuffleArray(textAnswersArray);
 	$: textAnswersArrayShuffled = shuffleArray(textAnswersArray);
 	let disabled = '';

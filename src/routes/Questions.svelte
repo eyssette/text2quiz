@@ -105,7 +105,7 @@
 		<Association quizId={i} answers={format2(question[1])}  validate={$validation} question={question[2] ? format1(question[2]) : question[2]} />
 	{/if}
 	{#if question[0]=='Correspondance'}
-		<Correspondance quizId={i} categoryText={format1(question[1])} answers={format2(question[2])} validate={$validation} question={question[3] ? format1(question[3]) : question[3]} />
+		<Correspondance quizId={i} category={format1(question[1])} answers={format2(question[2])} validate={$validation} question={question[3] ? format1(question[3]) : question[3]} />
 	{/if}
 {/each}
 

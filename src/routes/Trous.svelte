@@ -9,7 +9,8 @@
 	import sanitizeHTML from './sanitizeHTML.js';
 	import {
 		arrayEquals,
-		shuffleArray
+		shuffleArray,
+		removeSpacesBeforeAndAfter
 	} from './functions.js';
 	export let validate;
 	export let quizId;
@@ -28,12 +29,14 @@
 	let selected = [];
 	let correctAnswers = [];
 	let choicesAnswers = [];
+	let textAnswer;
 	
 	while (tmp = reg.exec(text)) res.push(tmp);
 	res.forEach(fragments);
 	for (let i = 0; i < choicesAnswers.length; i++) {
 		for (let j = 0; j < choicesAnswers[i].length; j++) {
-			choicesAnswers[i][j] = choicesAnswers[i][j].replace('V:', '');
+			textAnswer = removeSpacesBeforeAndAfter(choicesAnswers[i][j]);
+			choicesAnswers[i][j] = removeSpacesBeforeAndAfter(textAnswer.replace('V:', ''));
 		}
 	}
 
@@ -51,7 +54,8 @@
 		res.forEach(fragments);
 		for (let i = 0; i < choicesAnswers.length; i++) {
 			for (let j = 0; j < choicesAnswers[i].length; j++) {
-				choicesAnswers[i][j] = choicesAnswers[i][j].replace('V:', '');
+				textAnswer = removeSpacesBeforeAndAfter(choicesAnswers[i][j]);
+				choicesAnswers[i][j] = removeSpacesBeforeAndAfter(textAnswer.replace('V:', ''));
 			}
 			choicesAnswers[i] = shuffleArray(choicesAnswers[i]);
 		}
@@ -75,8 +79,10 @@
 	
 
 	function choiceAnswer(element) {
+		element = removeSpacesBeforeAndAfter(element);
 		if (element.substr(0, 2) == 'V:') {
-			correctAnswers.push(element.replace('V:', ''))
+			element = removeSpacesBeforeAndAfter(element.replace('V:', ''));
+			correctAnswers.push(element);
 		}
 	}
 
@@ -141,7 +147,7 @@
 						</span>
 					{/if}
 				{:else if i==textFragments.length-1}
-					{textFragments[res.length]}
+					{@html sanitizeHTML(textFragments[res.length])}
 				{/if}
 			{/each}
 			<div class="is-size-5 is-size-6-mobile mt-5 is-italic has-text-danger has-text-centered" class:is-invisible={!selected || arrayEquals(selected,correctAnswers) || selected.filter(value => value=='default').length ==selected.length || correctAnswers.filter(value => selected.includes(value)).length ==0}>&nbsp;{#if validate && !$generateCodeResults}{showNotComplete}{/if}</div>

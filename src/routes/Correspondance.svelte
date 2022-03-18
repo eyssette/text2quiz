@@ -8,7 +8,8 @@
 	} from './stores.js';
 	import {
 arrayEquals,
-		shuffleArray
+		shuffleArray,
+		removeSpacesBeforeAndAfter
 	} from './functions.js';
 	import {
 		Sortable
@@ -20,11 +21,12 @@ arrayEquals,
 	import sanitizeHTML from './sanitizeHTML.js';
 	export let validate;
 	export let quizId;
-	export let categoryText;
+	export let category;
 	export let question='';
 	const textNotComplete = "Réponse partiellement juste";
 	const labelsListText = 'Étiquettes à sélectionner';
 	export let answers;
+	$: categoryText = removeSpacesBeforeAndAfter(category);
 	let answersByCategoryString = '';
 	let answersByCategory = [];
 	let answersShuffled = [];
@@ -83,8 +85,8 @@ arrayEquals,
 			});
 	});
 
-	if (answers.includes('ORDRE|')) {
-		answersByCategoryString=answers.replace('ORDRE|','');
+	if (answers.match(/ORDRE\s*\|/)) {
+		answersByCategoryString=answers.replace(/ORDRE\s*\|/,'');
 		orderStrict=true;
 	} else {
 		answersByCategoryString=answers;
@@ -101,8 +103,8 @@ arrayEquals,
 
 
 	$: if ($changeQuestions) {
-		if (answers.includes('ORDRE|')) {
-		answersByCategoryString=answers.replace('ORDRE|','');
+		if (answers.match(/ORDRE\s*\|/)) {
+		answersByCategoryString=answers.replace(/ORDRE\s*\|/,'');
 		orderStrict=true;
 	} else {
 		answersByCategoryString=answers;
@@ -118,6 +120,9 @@ arrayEquals,
 
 	function choices(element) {
 		let choicesArray = element[1].split('|');
+		for (let i=0;i<choicesArray.length;i++) {
+			choicesArray[i] = removeSpacesBeforeAndAfter(choicesArray[i]);
+		}
 		answersByCategory = [...answersByCategory, choicesArray];
 		answersShuffled = shuffleArray(answersShuffled.concat(choicesArray))
 	}

@@ -7,7 +7,8 @@
 		countPointsMax
 	} from './stores.js';
 	import {
-		shuffleArray
+		shuffleArray,
+		removeSpacesBeforeAndAfter
 	} from './functions.js';
 	import {
 		Sortable
@@ -47,6 +48,13 @@
 		let associationArray = associationString.split('|')
 		categoriesArray = [...categoriesArray, associationArray[0]]
 		answersByCategoryArray = [...answersByCategoryArray, associationArray[1]]
+	}
+
+	for (let i=0;i<categoriesArray.length; i++) {
+		categoriesArray[i] = removeSpacesBeforeAndAfter(categoriesArray[i]);
+	}
+	for (let i=0;i<answersByCategoryArray.length; i++) {
+		answersByCategoryArray[i] = removeSpacesBeforeAndAfter(answersByCategoryArray[i]);
 	}
 
 	let zoneInitial;
@@ -117,6 +125,13 @@
 			categoriesArray = [...categoriesArray, associationArray[0]]
 			answersByCategoryArray = [...answersByCategoryArray, associationArray[1]]
 		}
+		for (let i=0;i<categoriesArray.length; i++) {
+		categoriesArray[i] = removeSpacesBeforeAndAfter(categoriesArray[i]);
+		}
+		for (let i=0;i<answersByCategoryArray.length; i++) {
+		answersByCategoryArray[i] = removeSpacesBeforeAndAfter(answersByCategoryArray[i]);
+		}
+
 		answersByCategoryArray.forEach(choices);
 
 	}

@@ -7,7 +7,8 @@
 		countPointsMax
 	} from './stores.js';
 	import {
-		shuffleArray
+		shuffleArray,
+		removeSpacesBeforeAndAfter
 	} from './functions.js';
 	import {
 		Sortable
@@ -87,6 +88,10 @@
 	while (tmp = reg.exec(answersByCategoryString)) res.push(tmp);
 	res.forEach(choices);
 
+	for (let i=0;i<categoriesArray.length; i++) {
+		categoriesArray[i] = removeSpacesBeforeAndAfter(categoriesArray[i]);
+	}
+
 	$: if ($changeQuestions) {
 		res = [],
 			tmp;
@@ -94,10 +99,16 @@
 		answersShuffled = [];
 		while (tmp = reg.exec(answersByCategoryString)) res.push(tmp);
 		res.forEach(choices);
+		for (let i=0;i<categoriesArray.length; i++) {
+		categoriesArray[i] = removeSpacesBeforeAndAfter(categoriesArray[i]);
+	}
 	}
 
 	function choices(element) {
 		let choicesArray = element[1].split('|');
+		for (let i=0;i<choicesArray.length;i++) {
+			choicesArray[i] = removeSpacesBeforeAndAfter(choicesArray[i]);
+		}
 		answersByCategory.push(choicesArray);
 		answersShuffled = shuffleArray(answersShuffled.concat(choicesArray))
 	}

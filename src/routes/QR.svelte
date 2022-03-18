@@ -7,7 +7,10 @@
 		changeQuestions
 	} from './stores.js';
 	import sanitizeHTML from './sanitizeHTML.js';
-	import {shuffleArray} from './functions';
+	import {
+		shuffleArray,
+		removeSpacesBeforeAndAfter
+	} from './functions';
 	export let validate;
 	export let quizId;
 	export let question;
@@ -17,14 +20,17 @@
 	const title = 'Question / Réponse';
 	const textAnswerDefault = 'Je ne sais pas';
 	let answer;
+	let textAnswer;
 	let disabled = '';
 	let answerDefault;
 
 	textAnswersArray = textAnswers.split('|');
 	for (let i=0;i<textAnswersArray.length;i++) {
-		let answer = textAnswersArray[i];
-		if (answer.substr(0, 2) == 'V:') {
-			textAnswersArray[i] = answer.replace('V:', '');
+		textAnswer = textAnswersArray[i];
+		textAnswer = removeSpacesBeforeAndAfter(textAnswer);
+		textAnswersArray[i]=textAnswer;
+		if (textAnswer.substr(0, 2) == 'V:') {
+			textAnswersArray[i] = removeSpacesBeforeAndAfter(textAnswer.replace('V:', ''));
 			correctAnswer = textAnswersArray[i];
 		}
 	}
@@ -35,9 +41,11 @@
 		textAnswersArray = textAnswers.split('|');
 		correctAnswer = '';
 		for (let i=0;i<textAnswersArray.length;i++) {
-			let answer = textAnswersArray[i];
-			if (answer.substr(0, 2) == 'V:') {
-				textAnswersArray[i] = answer.replace('V:', '');
+			textAnswer = textAnswersArray[i];
+			textAnswer = removeSpacesBeforeAndAfter(textAnswer);
+			textAnswersArray[i]=textAnswer;
+			if (textAnswer.substr(0, 2) == 'V:') {
+				textAnswersArray[i] = removeSpacesBeforeAndAfter(textAnswer.replace('V:', ''));
 				correctAnswer = textAnswersArray[i];
 			}
 		}

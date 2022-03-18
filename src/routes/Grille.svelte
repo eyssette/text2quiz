@@ -7,7 +7,8 @@
 		countPointsMax
 	} from './stores.js';
 	import {
-		shuffleArray
+		shuffleArray,
+		removeSpacesBeforeAndAfter
 	} from './functions.js';
 	import sanitizeHTML from './sanitizeHTML.js';
 	export let validate;
@@ -17,7 +18,7 @@
 	const title = 'Grille';
 	const textNotComplete = "La grille est incomplète";
 	let categoriesArray = categories.split('|');
-	$: categoriesArray = categories.split('|');
+	categoriesArray = categories.split('|');
 	export let answersByCategoryString;
 	let answersByCategory = [];
 	let answersShuffled = [];
@@ -25,6 +26,7 @@
 	let answers = [];
 	let answersChecked = [];
 	let correctAnswers = [];
+	let text;
 	const reg = /\{\{(.*?)\}\}/g;
 
 	let res = [],
@@ -32,14 +34,31 @@
 	while (tmp = reg.exec(answersByCategoryString)) res.push(tmp);
 	res.forEach(choices);
 
+	for (let i=0;i<categoriesArray.length; i++) {
+		text=categoriesArray[i];
+		text = removeSpacesBeforeAndAfter(text);
+		categoriesArray[i] = text;
+	}
+
 	function choices(element) {
 		let choicesArray = element[1].split('|');
+		for (let i=0;i<choicesArray.length;i++) {
+			text = choicesArray[i];
+			text = removeSpacesBeforeAndAfter(text);
+			choicesArray[i] = text;
+		}
 		answersByCategory.push(choicesArray);
 		answersShuffled = shuffleArray(answersShuffled.concat(choicesArray))
 		answersShuffledUnique = [...new Set(answersShuffled)]
 	}
 
 	$: if ($changeQuestions) {
+		categoriesArray = categories.split('|');
+		for (let i=0;i<categoriesArray.length; i++) {
+			text=categoriesArray[i];
+			text = removeSpacesBeforeAndAfter(text);
+			categoriesArray[i] = text;
+		}
 		res = [],
 			tmp;
 		answersByCategory = [];
@@ -48,6 +67,7 @@
 		correctAnswers = [];
 		while (tmp = reg.exec(answersByCategoryString)) res.push(tmp);
 		res.forEach(choices);
+		
 	}
 
 
