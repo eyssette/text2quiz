@@ -149,3 +149,7 @@ body .modal textarea {
 body .modal-card-head, body .modal-card-foot {
 	background-color: #282f2f!important;	
 }
+
+#darkmode .modal-card-foot button:focus {
+	border:3px solid orange !important;
+}

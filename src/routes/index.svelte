@@ -113,7 +113,7 @@
 
 <Head/>
 
-<div class="container is-max-desktop has-background-white-ter px-4 pb-6 is-size-4 is-size-6-mobile {validate}" class:home={$home}>
+<div class="container is-max-desktop has-background-white-ter px-4 pb-6 is-size-4 is-size-6-mobile {validate}" class:home={$home} id={$darkmode ? 'darkmode' : 'lightmode'}>
 	<Menu modeView={mode} />
 		<Questions />
 	{#if $home}
