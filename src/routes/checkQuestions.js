@@ -22,8 +22,10 @@ types[9] = /^Association\s\|\|\s\{\{.+\}\}.*/; // Association
 numberItems[9] = [2, 3];
 types[10] = /^$/; // Lignes vides
 numberItems[10] = [1];
-types[11] = /^Correspondance\s\|\|\s.+\s\|\|\s\{\{.+\}\}.*/; // Etiquettes
+types[11] = /^Correspondance\s\|\|\s.+\s\|\|\s\{\{.+\}\}.*/; // Correspondance (stricte ou non)
 numberItems[11] = [3,4];
+types[12] = /^TrousRC\s\|\|\s.*\{\{.+\}\}.*/; // TrousRC
+numberItems[12] = [2];
 
 export function regexValid(questionCode) {
 	let i = 0;

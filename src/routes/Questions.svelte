@@ -16,6 +16,7 @@
 	import Etiquettes from './Etiquettes.svelte';
 	import Association from './Association.svelte';
 	import Correspondance from './Correspondance.svelte';
+	import TrousRC from './TrousRC.svelte';
 	import {
 		validation,
 		questionsCode,
@@ -106,6 +107,9 @@
 	{/if}
 	{#if question[0]=='Correspondance'}
 		<Correspondance quizId={i} category={format1(question[1])} answers={format2(question[2])} validate={$validation} question={question[3] ? format1(question[3]) : question[3]} />
+	{/if}
+	{#if question[0]=='TrousRC'}
+		<TrousRC text={format2(question[1])} quizId={i} validate={$validation} />
 	{/if}
 {/each}
 
