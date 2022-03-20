@@ -24,15 +24,17 @@
 	export let subtitle
 	$: if (!subtitle || subtitle=='') {subtitle=subtitleDefault}
 	let textAnswersArray = textAnswers.split('|');
+	let correctAnswerArray=[];
+	let correctAnswerString;
 	$: textAnswersArray = textAnswers.split('|');
 	$: for (let i=0;i<textAnswersArray.length;i++) {
 		textAnswersArray[i]= removeSpacesBeforeAndAfter(textAnswersArray[i]);
+		correctAnswerArray[i] = textAnswersArray[i];
 	}
 	let textAnswersArrayShuffled = shuffleArray(textAnswersArray);
 	$: textAnswersArrayShuffled = shuffleArray(textAnswersArray);
 	let disabled = '';
 	let sortableElement;
-	let correctAnswer;
 	let answer;
 
 	$: onMount(async function () {
@@ -48,21 +50,22 @@
 	});
 	$: disabled = (validate) ? 'disabled' : '';
 	$: if (validate) {
-		countPointsMax.update(n => n + 1);
-		if (sortableElement) {
+		countPointsMax.update(n => n + textAnswersArray.length);
+		if (sortableElement) {	
 			answer = sortableElement.textContent;
 		}
-		correctAnswer = textAnswers.replaceAll('|', '');
-		if (answer == correctAnswer) {
+		correctAnswerString = correctAnswerArray.join('');
+		//correctAnswer = textAnswers.replaceAll('|', '');
+		if (answer == correctAnswerString) {
 			countCorrectAnswers.update(n => n + 1)
-			countPoints.update(n => n + 1);
+			countPoints.update(n => n + textAnswersArray.length);
 		}
 	}
 </script>
 
 <div class="block quiz-Ordre py-2" id="quiz-q{quizId}">
 	<h2 class="title has-text-centered">{title}</h2>
-	<div class="box block has-text-centered quiz-sortable" class:quiz-success={validate && answer==correctAnswer  && !$generateCodeResults} class:quiz-error={validate && answer!=correctAnswer  && !$generateCodeResults}>
+	<div class="box block has-text-centered quiz-sortable" class:quiz-success={validate && answer==correctAnswerString  && !$generateCodeResults} class:quiz-error={validate && answer!=correctAnswerString  && !$generateCodeResults}>
 		<p class="has-text-centered block has-text-weight-medium">{@html sanitizeHTML(subtitle)}</p>
 		<ul bind:this={sortableElement}>
 			{#each textAnswersArrayShuffled as answer}
