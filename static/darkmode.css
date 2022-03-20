@@ -150,6 +150,6 @@ body .modal-card-head, body .modal-card-foot {
 	background-color: #282f2f!important;	
 }
 
-#darkmode .modal-card-foot button:focus {
+#darkmode .modal-card-foot button:focus, #darkmode #validation button:focus, #darkmode #results button:focus {
 	border:3px solid orange !important;
 }
