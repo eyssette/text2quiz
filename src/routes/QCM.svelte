@@ -72,14 +72,14 @@
 
 <div class="block quiz-QCM py-2" id="quiz-q{quizId}">
 	<h2 class="title has-text-centered">{title}</h2>
-	<div class="box block" class:quiz-success={validate && answers.length == correctAnswers.length && answers.filter(element => correctAnswers.includes(textAnswersArray[element])).length == correctAnswers.length && !$generateCodeResults} class:quiz-error={validate &(answers.length != correctAnswers.length || answers.filter(element => correctAnswers.includes(textAnswersArray[element])).length != correctAnswers.length) && !$generateCodeResults}>
+	<div class="box block" class:quiz-success={validate && answers.length == correctAnswers.length && answers.filter(element => correctAnswers.includes(textAnswersArray[element])).length == correctAnswers.length && !$generateCodeResults} class:quiz-error={validate && answers.length>0 && (answers.length != correctAnswers.length || answers.filter(element => correctAnswers.includes(textAnswersArray[element])).length != correctAnswers.length) && !$generateCodeResults}>
 		<div class="content">{@html sanitizeHTML(question)}</div>
 		<div class="control is-size-5 is-size-6-mobile">
 			{#each textAnswersArray as textAnswer, i}
 					<label class="checkbox" class:r-success={validate && correctAnswers.includes(textAnswer) && answers.includes(i) && !$generateCodeResults} class:r-error={validate && !correctAnswers.includes(textAnswer) && answers.includes(i) && !$generateCodeResults} for="quiz-q{quizId}-r{i}"><input type="checkbox" name="quiz-q{quizId}-r{i}" id="quiz-q{quizId}-r{i}" value={i} {disabled}  bind:group={answers}>&nbsp;{@html sanitizeHTML(textAnswer)}</label>
 			{/each}
 		</div>
-		<div class="is-size-5 is-size-6-mobile mt-3 is-italic has-text-centered has-text-danger" class:is-invisible={answers.length==0 || arrayEquals(answers,correctAnswers) || correctAnswers.filter(value => answers.includes(value)).length ==0}>&nbsp;{#if validate && !$generateCodeResults}{showNotComplete}{/if}</div>
+		<div class="is-size-5 is-size-6-mobile mt-3 is-italic has-text-centered has-text-danger" class:is-invisible={answers.length==0 || answers.filter(element => correctAnswers.includes(textAnswersArray[element])).length == correctAnswers.length || answers.filter(element => correctAnswers.includes(textAnswersArray[element])).length ==0}>&nbsp;{#if validate && !$generateCodeResults}{showNotComplete}{/if}</div>
 	</div>
 </div>
 
