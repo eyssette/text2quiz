@@ -73,6 +73,10 @@
 	}
 
 	function modalEditOn() {
+		$validation=false;
+		$countCorrectAnswers = 0;
+		$countPoints = 0;
+		$countPointsMax = 0;
 		modalEditActive = 'is-active';
 		targetMenu = -1;
 		$modal = true;
