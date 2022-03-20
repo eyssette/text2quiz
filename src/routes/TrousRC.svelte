@@ -111,7 +111,6 @@ import { element } from 'svelte/internal';
 			if (testAnswer(answer[i],i)) {countTemp++} else {if(answer[i] &&answer[i]!='') {countTemp--}}
 		}
 		if (countTemp >= 0) {countPoints.update(n => n + countTemp);}
-		console.log(answer);
 	}
 	$: if (validate && answer.filter(testAnswer).length == choicesAnswers.length) {
 		countCorrectAnswers.update(n => n + 1)
