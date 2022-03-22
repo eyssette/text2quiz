@@ -110,7 +110,7 @@
 			<div>
 				On peut utiliser la syntaxe Markdown dans les questions, par
 				exemple pour insérer du texte en gras (**gras**), en italiques
-				(*italiques*), ou pour insérer une image : ![](URL de l'image).
+				(*italiques*), ou pour insérer une image : ![](URL_Image). On peut contrôler la hauteur de l'image (h-100 à h-500) et le placement (center) ainsi : ![h-500 center](URL_Image)
 			</div>
 			<h5 class="is-5 mt-5">Latex</h5>
 			<div>

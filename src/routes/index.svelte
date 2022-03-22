@@ -155,4 +155,29 @@
 		max-width:100%; 
 	}
 	
+	:global(img[alt~="h-100"]) {
+   		height:100px!important;
+	}
+
+	:global(img[alt~="h-200"]) {
+   		height:200px!important;
+	}
+
+	:global(img[alt~="h-300"]) {
+   		height:300px!important;
+	}
+
+	:global(img[alt~="h-400"]) {
+   		height:400px!important;
+	}
+
+	:global(img[alt~="h-500"]) {
+   		height:500px!important;
+	}
+
+	:global(img[alt~="center"]) {
+   		display:block;
+		margin:auto;
+	}
+
 	</style>
