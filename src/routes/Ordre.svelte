@@ -17,12 +17,11 @@
 	} from "svelte";
 	import sanitizeHTML from './sanitizeHTML.js';
 	const title = 'Ordre';
-	const subtitleDefault = 'Classez les éléments de cette liste dans le bon ordre :';
+	const subtitle = 'Classez les éléments dans le bon ordre';
 	export let validate;
 	export let quizId;
 	export let textAnswers;
-	export let subtitle
-	$: if (!subtitle || subtitle=='') {subtitle=subtitleDefault}
+	export let question;
 	let textAnswersArray = textAnswers.split('|');
 	let correctAnswerArray=[];
 	let correctAnswerString;
@@ -65,12 +64,17 @@
 
 <div class="block quiz-Ordre py-2" id="quiz-q{quizId}">
 	<h2 class="title has-text-centered">{title}</h2>
-	<div class="box block has-text-centered quiz-sortable" class:quiz-success={validate && answer==correctAnswerString  && !$generateCodeResults} class:quiz-error={validate && answer!=correctAnswerString  && !$generateCodeResults}>
-		<p class="has-text-centered block has-text-weight-medium">{@html sanitizeHTML(subtitle)}</p>
-		<ul bind:this={sortableElement}>
+	<div class="box block quiz-sortable" class:quiz-success={validate && answer==correctAnswerString  && !$generateCodeResults} class:quiz-error={validate && answer!=correctAnswerString  && !$generateCodeResults}>
+		<p class="has-text-centered block has-text-weight-medium">{subtitle}</p>
+		<div class="content">{@html sanitizeHTML(question)}</div>
+		<ul class="is-flex is-flex-direction-column" bind:this={sortableElement}>
 			{#each textAnswersArrayShuffled as answer}
-				<li class="my-3 has-background-light" class:draggable={!validate} id="quiz-q{quizId}-r1">{@html sanitizeHTML(answer)}</li>
+				<li class="my-3 py-3 px-6  has-background-light" class:draggable={!validate} id="quiz-q{quizId}-r1">{@html sanitizeHTML(answer)}</li>
 			{/each}
 		</ul>
 	</div>
 </div>
+
+<style>
+	li {width:fit-content; display:block; margin:auto;}
+</style>

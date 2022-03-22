@@ -97,7 +97,7 @@
 		<Grille categories={format2(question[1])} answersByCategoryString={format2(question[2])} question={question[3] ? format1(question[3]): question[3]} quizId={i} validate={$validation} />
 	{/if}
 	{#if question[0]=='Ordre'}
-		<Ordre quizId={i} textAnswers={format2(question[1])} subtitle={question[2] ? format1(question[2]) : question[2]} validate={$validation} />
+		<Ordre quizId={i} textAnswers={format2(question[1])} question={question[2] ? format1(question[2]) : question[2]} validate={$validation} />
 	{/if}
 	{#if question[0]=='Etiquettes'}
 		<Etiquettes quizId={i} categories={format2(question[1])} answersByCategoryString={format2(question[2])} validate={$validation} question={question[3] ? format1(question[3]) : question[3]} />

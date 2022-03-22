@@ -121,7 +121,7 @@
 					{#if validate && selected[0]!='default'}
 						<span class:r-success={validate && correctAnswers[0]==selected[0] && !$generateCodeResults} class:r-error={validate && correctAnswers[0]!=selected[0] && !$generateCodeResults}>{@html sanitizeHTML(selected[0])}</span>
 					{:else}
-						<span class="select is-size-6 is-size-7-mobile" id="quiz-q{quizId}-r0">
+						<span class="select mx-1 is-size-6 is-size-7-mobile" id="quiz-q{quizId}-r0">
 							<select name="quiz-q{quizId}-r0" bind:value={selected[0]} {disabled}>
 								<option value="default">…</option>
 								{#each choicesAnswers[0] as choice,j}
@@ -136,7 +136,7 @@
 					{#if validate && selected[i]!='default'}
 						<span class:r-success={validate && correctAnswers[i]==selected[i] && !$generateCodeResults} class:r-error={validate && correctAnswers[i]!=selected[i] && !$generateCodeResults}>{selected[i]}</span>
 					{:else}
-						<span class="select is-size-6 is-size-7-mobile" id="quiz-q{quizId}-r{i+1}">
+						<span class="select mx-1 is-size-6 is-size-7-mobile" id="quiz-q{quizId}-r{i+1}">
 							<select name="quiz-q{quizId}-r{i+1}" bind:value={selected[i]} {disabled}>
 								<option value="default">…</option>
 								{#each choicesAnswers[i] as choice,j}
