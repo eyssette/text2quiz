@@ -180,4 +180,8 @@
 		margin:auto;
 	}
 
+	:global(img[alt~="rounded"]) {
+		border-radius: 50%;
+	}
+
 	</style>
