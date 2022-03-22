@@ -184,4 +184,16 @@
 		border-radius: 50%;
 	}
 
+	:global(img[alt~="float-left"]) {
+		float:left;
+		margin-right:1em;
+		margin-bottom:1em;
+	}
+
+	:global(img[alt~="float-right"]) {
+		float:right;
+		margin-left:1em;
+		margin-bottom:1em;
+	}
+
 	</style>
