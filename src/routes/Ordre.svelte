@@ -76,5 +76,5 @@
 </div>
 
 <style>
-	li {width:fit-content; display:block; margin:auto;}
+	li {width:fit-content; display:block; margin:auto; border-radius:13px;}
 </style>

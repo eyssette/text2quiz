@@ -320,7 +320,7 @@
 </div>
 
 
-<div class="modal" class:is-active={modalDecryptActive}>
+<div class="modal" class:is-active={modalDecryptActive} id="decrypt">
 	<div class="modal-background" on:click={modalDecryptDesactivate}></div>
 	<div class="modal-card">
 		<header class="modal-card-head">
@@ -338,7 +338,7 @@
 					<tr><td>{codes[i]}</td><td>{codeDecrypted}</td></tr>
 					{/each}
 				</table>
-				<div class="mt-3 is-size-6">Le résultat est toujours de la forme suivante :<br>Nombre d'exercices réussis / Nombre d'exercices au total / Nombre de points / Nombre de points possibles au total </div>
+				<div class="mt-3 is-size-6"><b>Le résultat est toujours de la forme suivante :</b><br>Hash de l'adresse IP / Nombre d'exercices réussis / Nombre d'exercices au total / Nombre de points / Nombre de points possibles au total<br><br>Le hash de l'adresse IP permet d'identifier l'ordinateur utilisé pour faire le quiz, mais sous une forme cryptée pour ne pas enregistrer de donnée personnelle</div>
 				{#if hasDuplicates}
 				<div class="mt-3 is-size-6 has-text-danger">Attention, il y a des codes identiques dans cette liste, alors qu'il ne devrait y avoir que des codes uniques !</div>
 				{/if}
@@ -379,5 +379,9 @@
 
 	button:focus {
 		border:2px solid blue !important;
+	}
+
+	#decrypt table td {
+		word-break: break-all;
 	}
 </style>

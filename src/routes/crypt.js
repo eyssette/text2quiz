@@ -14,3 +14,7 @@ export function decrypt(string, key) {
 	const hex = CryptoES.Rabbit.decrypt(string, key);
 	return Buffer.from(hex.toString(), 'hex').toString()
 }
+
+export function hash(string) {
+	return CryptoES.MD5(string);
+}

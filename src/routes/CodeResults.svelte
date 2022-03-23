@@ -5,18 +5,21 @@ countCorrectAnswers,
 generateCodeResults,
 countPoints,
 countPointsMax,
-validation}
-from './stores.js';
+validation,
+ip
+} from './stores.js';
 import {
 		encrypt,
-		decrypt
-	} from './crypt.js';
+		decrypt,
+		hash
+} from './crypt.js';
+import GetIPAdress from './GetIPAdress.svelte';
 
 let code;
 let results;
 const titleRefresh = 'Refaire le quiz';
 let codeResultsShow = false;
-$ : messageResults=$countCorrectAnswers.toString() + ' ' + $countExpectedAnswers.toString() + ' ' + $countPoints.toString() + ' ' + $countPointsMax.toString();
+$ : messageResults = hash($ip) + ' ' + $countCorrectAnswers.toString() + ' ' + $countExpectedAnswers.toString() + ' ' + $countPoints.toString() + ' ' + $countPointsMax.toString();
 $: code = encrypt(messageResults, $keyEvaluation);
 
 function generateCode() {
@@ -35,6 +38,8 @@ function refreshQuiz() {
 
 </script>
 
+<GetIPAdress />
+
 {#if !codeResultsShow}
 <section class="section" id="validation">
 	<div class="has-text-centered">
@@ -47,8 +52,8 @@ function refreshQuiz() {
 	<article class="panel is-danger is-size-4 is-size-6-mobile has-text-centered">
 		<p class="panel-heading">Code à transmettre</p>
 		<!-- <div class="panel-block py-6"> -->
-			<div class="has-text-centered my-5">{code}</div>
-			<div class="has-text-centered my-5 is-size-4">Attention ce code est unique, vous ne pouvez pas copier le code de quelqu'un d'autre, ou donner ce code à quelqu'un d'autre</div>
+		<div class="has-text-centered p-5">{code}</div>
+		<div class="has-text-centered p-5 is-size-4">Attention ce code est unique, vous ne pouvez pas copier le code de quelqu'un d'autre, ou donner ce code à quelqu'un d'autre</div>
 		<!-- </div> -->
 	</article>
 </section>
@@ -58,3 +63,10 @@ function refreshQuiz() {
 </div>
 
 {/if}
+
+
+<style>
+	.panel {
+		word-break: break-all;
+	}
+</style>
