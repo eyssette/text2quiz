@@ -338,7 +338,7 @@
 					<tr><td>{codes[i]}</td><td>{codeDecrypted}</td></tr>
 					{/each}
 				</table>
-				<div class="mt-3 is-size-6"><b>Le résultat est toujours de la forme suivante :</b><br>Hash de l'adresse IP / Nombre d'exercices réussis / Nombre d'exercices au total / Nombre de points / Nombre de points possibles au total<br><br>Le hash de l'adresse IP permet d'identifier l'ordinateur utilisé pour faire le quiz, mais sous une forme cryptée pour ne pas enregistrer de donnée personnelle</div>
+				<div class="mt-3 is-size-6"><b>Le résultat est toujours de la forme suivante :</b><br>Hash de l'adresse IP / Hash du navigateur / Nombre d'exercices réussis / Nombre d'exercices au total / Nombre de points / Nombre de points possibles au total<br><br>Le hash de l'adresse IP et le hash du navigateur permettent d'identifier (de manière approximative) l'ordinateur et le navigateur utilisés pour faire le quiz, mais sous une forme cryptée pour ne pas enregistrer de donnée personnelle</div>
 				{#if hasDuplicates}
 				<div class="mt-3 is-size-6 has-text-danger">Attention, il y a des codes identiques dans cette liste, alors qu'il ne devrait y avoir que des codes uniques !</div>
 				{/if}

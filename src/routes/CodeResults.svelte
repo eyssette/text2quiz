@@ -6,7 +6,8 @@ generateCodeResults,
 countPoints,
 countPointsMax,
 validation,
-ip
+ip,
+userAgent
 } from './stores.js';
 import {
 		encrypt,
@@ -14,12 +15,13 @@ import {
 		hash
 } from './crypt.js';
 import GetIPAdress from './GetIPAdress.svelte';
+import GetUserAgent from './GetUserAgent.svelte';
 
 let code;
 let results;
 const titleRefresh = 'Refaire le quiz';
 let codeResultsShow = false;
-$ : messageResults = hash($ip) + ' ' + $countCorrectAnswers.toString() + ' ' + $countExpectedAnswers.toString() + ' ' + $countPoints.toString() + ' ' + $countPointsMax.toString();
+$ : messageResults = hash($ip) + ' ' + hash($userAgent) + ' ' + $countCorrectAnswers.toString() + ' ' + $countExpectedAnswers.toString() + ' ' + $countPoints.toString() + ' ' + $countPointsMax.toString();
 $: code = encrypt(messageResults, $keyEvaluation);
 
 function generateCode() {
@@ -39,6 +41,7 @@ function refreshQuiz() {
 </script>
 
 <GetIPAdress />
+<GetUserAgent />
 
 {#if !codeResultsShow}
 <section class="section" id="validation">

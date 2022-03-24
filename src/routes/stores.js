@@ -17,3 +17,4 @@ export const countPointsMax = writable(0);
 export const countPoints = writable(0);
 export const darkmode = writable(false);
 export const ip = writable('');
+export const userAgent = writable('');
