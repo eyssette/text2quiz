@@ -1,6 +1,6 @@
 <script>
 	export let helpActive;
-	const copyText = 'Copier le code dans le presse-papier';
+	const copyText = 'Cliquer pour copier le\n code dans le presse-papier';
 	const helpText = [];
 	helpText[0] = ["Vrai ou faux", "VF || Énoncé || V", "On indique si l'énoncé est vrai ou faux avec le dernier élément, qui doit être V ou F"];
 	helpText[1] = ["QCM", "QCM || Question || V:Réponse A | Réponse B | V:Réponse C | Réponse D", "On peut mettre autant de réponses que l'on souhaite, en les séparant avec une barre verticale : |. On indique chaque réponse juste en mettant “V:” avant"];
@@ -37,7 +37,7 @@
 			<tr>
 				<td>{i+1}</td>
 				<td>{help[0]}</td>
-				<td><button class="has-tooltip-bottom has-tooltip-hidden-mobile" aria-haspopup="true" data-tooltip={copyText} on:click={()=>navigator.clipboard.writeText(help[1])}>{help[1]}</button></td>
+				<td><span class="has-tooltip-bottom has-tooltip-hidden-mobile" aria-haspopup="true" data-tooltip={copyText} on:click={()=>navigator.clipboard.writeText(help[1])}>{help[1]}</span></td>
 				<td>{help[2]}</td>
 			</tr>
 		{/each}
@@ -47,11 +47,16 @@
 <style>
 	.table td {
 		font-size: 0.9em;
+		vertical-align: middle;
 	}
 	
 	.table td:nth-of-type(4) {
 		font-size: 0.9em;
 		text-align: justify;
+	}
+
+	span[data-tooltip] {
+		border-bottom:none;
 	}
 		
 </style>
