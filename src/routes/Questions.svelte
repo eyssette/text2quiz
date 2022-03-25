@@ -47,7 +47,7 @@
 		})
 		questions = questionsCodeArrayChanged;
 	} else {}
-	$: countExpectedAnswers.update(n => questions.length);
+	$: countExpectedAnswers.update(n => questions.filter(element => element !='').length);
 	$: countCorrectAnswers.update(n => 0);
 	$: if ($validation) {
 		validate = 'validate';
