@@ -45,12 +45,12 @@
 		if ($url) {
 			quizEncodageHash = $url.hash.slice(1);
 			keyEvaluation.update(n=>'');
-			if($url.search=='?m=1') {
+			if($url.search.includes('m=1')) {
 				quizEncodageHash=decrypt(quizEncodageHash,cryptedModeKey);
 				mode='crypted';
 				keyEvaluation.update(n=>'');
 			}
-			if($url.search=='?m=2') {
+			if($url.search.includes('m=2')) {
 				quizEncodageHash=decrypt(quizEncodageHash,cryptedModeKey);
 				hashEvaluation=quizEncodageHash.split('|||');
 				keyEvaluation.update(n => hashEvaluation[0]);
@@ -63,7 +63,7 @@
 				const data = await response.text();
 				quiz = encodeURI(data);
 				quiz = quiz.replace(/%0A$/,'');
-				history.replaceState(null, null, $baseURL+'#' + quiz);
+				history.replaceState(null, null, $baseURL+$url.search+'#' + quiz);
 			} else {
 				quiz = decodeURI(quizEncodageHash);
 			}
@@ -81,12 +81,12 @@
 	$: if ($url) {
 		quizEncodageHash = $url.hash.slice(1);
 		keyEvaluation.update(n=>'');
-			if($url.search=='?m=1') {
+			if($url.search.includes('m=1')) {
 				quizEncodageHash=decrypt(quizEncodageHash,cryptedModeKey);
 				mode='crypted';
 				keyEvaluation.update(n=>'');
 			}
-			if($url.search=='?m=2') {
+			if($url.search.includes('m=2')) {
 				quizEncodageHash=decrypt(quizEncodageHash,cryptedModeKey);
 				hashEvaluation=quizEncodageHash.split('|||');
 				keyEvaluation.update(n => hashEvaluation[0]);

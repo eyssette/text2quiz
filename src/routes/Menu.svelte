@@ -90,7 +90,7 @@
 	function modalEditOffSave() {
 		if (checkQuestions(textAreaquestionsCode)) {
 			$previousQuestionsCode = $questionsCode;
-			window.location.assign($baseURL+'#' + encodeURI(textAreaquestionsCode))
+			window.location.assign($baseURL+'?v=1.0#' + encodeURI(textAreaquestionsCode))
 			modalEditActive = '';
 			messageInvalidQuestions = '';
 			$changeQuestions = true;
@@ -133,7 +133,7 @@
 
 	function modalShareActivate() {
 		if ($url) {
-			$questionsCode && checkQuestions ? urlQuizOpen = $url.protocol + '//' + $url.host + '#' + encodeURI($questionsCode) : urlQuizOpen = $url.protocol + '//' + $url.host;
+			$questionsCode && checkQuestions ? urlQuizOpen = $url.protocol + '//' + $url.host + '?v=1.0#' + encodeURI($questionsCode) : urlQuizOpen = $url.protocol + '//' + $url.host;
 			urlQuiz = urlQuizOpen;
 		}
 		modalShareActive = !modalShareActive;
@@ -175,7 +175,7 @@
 
 	function modeCrypted() {
 		if ($url) {
-			$questionsCode && checkQuestions ? urlQuiz = $url.protocol + '//' + $url.host + '?m=1#' + encrypt(encodeURI($questionsCode),cryptedModeKey) : urlQuiz = $url.protocol + '//' + $url.host;
+			$questionsCode && checkQuestions ? urlQuiz = $url.protocol + '//' + $url.host + '?m=1&v=1.0#' + encrypt(encodeURI($questionsCode),cryptedModeKey) : urlQuiz = $url.protocol + '//' + $url.host;
 		}
 	}
 
@@ -183,7 +183,7 @@
 	function modeEvaluation() {
 		if ($url) {
 			if (keyEvaluation=='') {urlQuiz='ATTENTION, le mode évaluation nécessite un mot de passe'} else {
-			$questionsCode && checkQuestions ? urlQuiz = $url.protocol + '//' + $url.host + '?m=2#' + encrypt(keyEvaluation+'|||'+encodeURI($questionsCode),cryptedModeKey) : urlQuiz = $url.protocol + '//' + $url.host;
+			$questionsCode && checkQuestions ? urlQuiz = $url.protocol + '//' + $url.host + '?m=2&v=1.0#' + encrypt(keyEvaluation+'|||'+encodeURI($questionsCode),cryptedModeKey) : urlQuiz = $url.protocol + '//' + $url.host;
 			}
 		}
 	}
