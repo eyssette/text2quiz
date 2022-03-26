@@ -90,10 +90,10 @@
 				<i>Mode ordinaire</i> : plutôt destiné au partage avec ses collègues. Le lien permet l'édition du quiz.
 			</li>
 			<li>
-				<i>Mode crypté</i> : plutôt pour les élèves, pour de l'autoévaluation. Les réponses ne s'affichent pas dans le lien du quiz et le quiz n'est pas éditable.
+				<i>Mode crypté</i> : plutôt pour les élèves, pour de l'autoévaluation. Les réponses ne s'affichent pas dans le lien du quiz, le quiz n'est pas éditable et l'ordre des exercices est aléatoire.
 			</li>
 			<li>
-				<i>Mode évaluation</i> : pour pouvoir noter les élèves. Le résultat du quiz ne s'affiche pas. À la place, un code est généré que l'élève
+				<i>Mode évaluation</i> : pour pouvoir noter les élèves. Même principe que pour le mode crypté, mais le résultat du quiz ne s'affiche pas. À la place, un code est généré que l'élève
 				doit transmettre à l'enseignant·e.
 			</li>
 		</ul>
