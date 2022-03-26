@@ -26,6 +26,8 @@
 		modal,
 		keyEvaluation
 	} from './stores.js';
+	import { shuffleArray } from './functions.js';
+	export let modeView;
 	const title = 'Quiz';
 	const subtitle = 'Répondez aux questions et calculez votre score';
 	const textPoints = '1 point par réponse juste. Dans chaque exercice, une réponse fausse annule une réponse juste.';
@@ -45,7 +47,9 @@
 			questionCodeArray = question.split(/\s\|\|\s/);
 			questionsCodeArrayChanged.push(questionCodeArray);
 		})
-		questions = questionsCodeArrayChanged;
+		if (modeView=='crypted' || modeView=='evaluation') {
+			questions = shuffleArray(questionsCodeArrayChanged);
+		} else {questions = questionsCodeArrayChanged;}
 	} else {}
 	$: countExpectedAnswers.update(n => questions.filter(element => element !='').length);
 	$: countCorrectAnswers.update(n => 0);
