@@ -17,7 +17,7 @@
     "buffer": "^6.0.3",
     "crypto-es": "^1.2.7",
     "katex": "^0.15.2",
-    "markdown-it": "^12.3.2",
+    "marked": "^4.0.12",
     "sanitize-markdown": "^2.6.7",
     "sortablejs": "^1.14.0"
   }
