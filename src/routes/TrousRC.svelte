@@ -99,7 +99,7 @@ import { element } from 'svelte/internal';
 	}
 
 	function testAnswer(element,index) {
-		return choicesAnswers[index].includes(element ? removeSpacesBeforeAndAfter(element) : element);
+		return choicesAnswers[index].includes(element ? removeSpacesBeforeAndAfter(element.replaceAll("'","&#39;").replaceAll('"',"&quot;")) : element.replaceAll("'","&#39;").replaceAll('"',"&quot;"));
 	}
 
 	$: disabled = (validate) ? 'disabled' : '';
@@ -125,12 +125,12 @@ import { element } from 'svelte/internal';
 				{#if i==0}
 					{@html sanitizeHTML(textFragments[0])}
 						{#if !validate || !answer[0] || removeSpacesBeforeAndAfter(answer[0])==''}
-							<input class="input mx-1" type="text" placeholder="" id="quiz-q{quizId}-r0" size="{maxCharChoicesArray[0]}" name="quiz-q{quizId}"  bind:value={answer[0]} {disabled} >{:else}<span class:r-success={validate && answer[0] && choicesAnswers[0].includes(removeSpacesBeforeAndAfter(answer[0])) && !$generateCodeResults} class:r-error={validate && answer[0] && !choicesAnswers[0].includes(removeSpacesBeforeAndAfter(answer[0])) && !$generateCodeResults}>{answer[0]}</span>
+							<input class="input mx-1" type="text" placeholder="" id="quiz-q{quizId}-r0" size="{maxCharChoicesArray[0]}" name="quiz-q{quizId}"  bind:value={answer[0]} {disabled} >{:else}<span class:r-success={validate && answer[0] && choicesAnswers[0].includes(removeSpacesBeforeAndAfter(answer[0].replaceAll("'","&#39;").replaceAll('"',"&quot;"))) && !$generateCodeResults} class:r-error={validate && answer[0] && !choicesAnswers[0].includes(removeSpacesBeforeAndAfter(answer[0].replaceAll("'","&#39;").replaceAll('"',"&quot;"))) && !$generateCodeResults}>{answer[0]}</span>
 						{/if}
 				{:else if i<textFragments.length-1}
 					{@html sanitizeHTML(textFragment)}
 						{#if !validate || !answer[i] || removeSpacesBeforeAndAfter(answer[i])==''}
-							<input class="input mx-1" type="text" placeholder="" id="quiz-q{quizId}-r{i}" size="{maxCharChoicesArray[i]}" name="quiz-q{quizId}" bind:value={answer[i]} {disabled} >{:else}<span class:r-success={validate && answer[i] && choicesAnswers[i].includes(removeSpacesBeforeAndAfter(answer[i])) && !$generateCodeResults} class:r-error={validate && answer[i] && !choicesAnswers[i].includes(removeSpacesBeforeAndAfter(answer[i])) && !$generateCodeResults}>{answer[i]}</span>
+							<input class="input mx-1" type="text" placeholder="" id="quiz-q{quizId}-r{i}" size="{maxCharChoicesArray[i]}" name="quiz-q{quizId}" bind:value={answer[i]} {disabled} >{:else}<span class:r-success={validate && answer[i] && choicesAnswers[i].includes(removeSpacesBeforeAndAfter(answer[i].replaceAll("'","&#39;").replaceAll('"',"&quot;"))) && !$generateCodeResults} class:r-error={validate && answer[i] && !choicesAnswers[i].includes(removeSpacesBeforeAndAfter(answer[i].replaceAll("'","&#39;").replaceAll('"',"&quot;"))) && !$generateCodeResults}>{answer[i]}</span>
 						{/if}
 				{:else if i==textFragments.length-1}
 					{@html sanitizeHTML(textFragments[res.length])}

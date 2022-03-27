@@ -155,7 +155,7 @@ arrayEquals,
 
 		for (let i = 0;i<answersZone1.length;i++){
 			partialCheck = [];
-			if (answersByCategory[0].includes(answersZone1[i])) {
+			if (answersByCategory[0].includes(answersZone1[i].replaceAll("'","&#39;").replaceAll('"',"&quot;"))) {
 					partialCheck[i] = true
 				} else {
 					partialCheck[i] = false
@@ -213,7 +213,7 @@ arrayEquals,
 					<div class="message-body">
 						<div id="quiz-q{quizId}-z0" bind:this={zoneInitial}>
 							{#each answersShuffled as answer,i}
-									<p class="has-text-justified py-1" class:r-success={validate && orderStrict && checkAnswers.filter(element=>(element[0]==answer && element[1]==true && element[2]==true)).length>0 && !$generateCodeResults} class:r-error={validate && orderStrict && checkAnswers.filter(element=>(element[0]==answer && element[1]==false)).length>0 && !$generateCodeResults} class:r-partial-success={validate && orderStrict && checkAnswers.filter(element=>(element[0]==answer && element[1]==true && element[2]==false)).length>0 && !$generateCodeResults}  id="quiz-q{quizId}-r{i}" class:draggable={!validate}>{@html sanitizeHTML(answer)}</p>
+									<p class="has-text-justified py-1" class:r-success={validate && orderStrict && checkAnswers.filter(element=>(element[0].replaceAll("'","&#39;").replaceAll('"',"&quot;")==answer && element[1]==true && element[2]==true)).length>0 && !$generateCodeResults} class:r-error={validate && orderStrict && checkAnswers.filter(element=>(element[0].replaceAll("'","&#39;").replaceAll('"',"&quot;")==answer && element[1]==false)).length>0 && !$generateCodeResults} class:r-partial-success={validate && orderStrict && checkAnswers.filter(element=>(element[0].replaceAll("'","&#39;").replaceAll('"',"&quot;")==answer && element[1]==true && element[2]==false)).length>0 && !$generateCodeResults}  id="quiz-q{quizId}-r{i}" class:draggable={!validate}>{@html sanitizeHTML(answer)}</p>
 							{/each}
 						</div>
 					</div>
@@ -243,7 +243,7 @@ arrayEquals,
 					<div class="message-body">
 						<div id="quiz-q{quizId}-z0" bind:this={zoneInitial}>
 							{#each answersShuffled as answer,i}
-									<p class="has-text-justified py-1" class:r-success={validate && !orderStrict && checkAnswers.filter(element=>(element[0]==answer && element[1]==true)).length>0 && !$generateCodeResults} class:r-error={validate && !orderStrict && checkAnswers.filter(element=>(element[0]==answer && element[1]==false)).length>0 && !$generateCodeResults}  id="quiz-q{quizId}-r{i}" class:draggable={!validate}>{@html sanitizeHTML(answer)}</p>
+									<p class="has-text-justified py-1" class:r-success={validate && !orderStrict && checkAnswers.filter(element=>(element[0].replaceAll("'","&#39;").replaceAll('"',"&quot;")==answer && element[1]==true)).length>0 && !$generateCodeResults} class:r-error={validate && !orderStrict && checkAnswers.filter(element=>(element[0].replaceAll("'","&#39;").replaceAll('"',"&quot;")==answer && element[1]==false)).length>0 && !$generateCodeResults}  id="quiz-q{quizId}-r{i}" class:draggable={!validate}>{@html sanitizeHTML(answer)}</p>
 							{/each}
 						</div>
 					</div>

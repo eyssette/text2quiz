@@ -55,7 +55,7 @@
 		}
 		correctAnswerString = correctAnswerArray.join('');
 		//correctAnswer = textAnswers.replaceAll('|', '');
-		if (answer == correctAnswerString) {
+		if (answer.replaceAll("'","&#39;").replaceAll('"',"&quot;") == correctAnswerString) {
 			countCorrectAnswers.update(n => n + 1)
 			countPoints.update(n => n + textAnswersArray.length);
 		}
@@ -64,7 +64,7 @@
 
 <div class="block quiz-Ordre py-2" id="quiz-q{quizId}">
 	<h2 class="title has-text-centered">{title}</h2>
-	<div class="box block quiz-sortable" class:quiz-success={validate && answer==correctAnswerString  && !$generateCodeResults} class:quiz-error={validate && answer!=correctAnswerString  && !$generateCodeResults}>
+	<div class="box block quiz-sortable" class:quiz-success={validate && answer.replaceAll("'","&#39;").replaceAll('"',"&quot;")==correctAnswerString  && !$generateCodeResults} class:quiz-error={validate && answer.replaceAll("'","&#39;").replaceAll('"',"&quot;")!=correctAnswerString  && !$generateCodeResults}>
 		<p class="has-text-centered block has-text-weight-medium">{subtitle}</p>
 		<div class="content">{@html sanitizeHTML(question)}</div>
 		<ul class="is-flex is-flex-direction-column" bind:this={sortableElement}>

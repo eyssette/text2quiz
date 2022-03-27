@@ -178,7 +178,7 @@
 			zone.forEach(answer => {
 				partialCheck = [];
 				let i = 0;
-				if (answersByCategory[category].includes(answer)) {
+				if (answersByCategory[category].includes(answer.replaceAll("'","&#39;").replaceAll('"',"&quot;"))) {
 					partialCheck[i] = true
 				} else {
 					partialCheck[i] = false
@@ -243,7 +243,7 @@
 						<div class="message-body">
 							<div id="quiz-q{quizId}-z0" bind:this={zoneInitial}>
 								{#each answersShuffled as answer,i}
-									<p class="has-text-justified py-1" class:r-success={validate && checkAnswers.filter(element=>(element[0]==answer && element[2]==true)).length>0 && !$generateCodeResults} class:r-error={validate  && checkAnswers.length>0 && checkAnswers.filter(element=>(element[0]==answer && element[2]==false)).length>0 && !$generateCodeResults}  id="quiz-q{quizId}-r{i}" class:draggable={!validate}>{@html answer}</p>
+									<p class="has-text-justified py-1" class:r-success={validate && checkAnswers.filter(element=>(element[0].replaceAll("'","&#39;").replaceAll('"',"&quot;")==answer && element[2]==true)).length>0 && !$generateCodeResults} class:r-error={validate  && checkAnswers.length>0 && checkAnswers.filter(element=>(element[0].replaceAll("'","&#39;").replaceAll('"',"&quot;")==answer && element[2]==false)).length>0 && !$generateCodeResults}  id="quiz-q{quizId}-r{i}" class:draggable={!validate}>{@html answer}</p>
 								{/each}
 							</div>
 						</div>
@@ -269,7 +269,7 @@
 						<div class="message-body">
 							<div id="quiz-q{quizId}-z0" bind:this={zoneInitial}>
 								{#each answersShuffled as answer,i}
-									<p class="has-text-justified py-1" class:r-success={validate && checkAnswers.filter(element=>(element[0]==answer && element[2]==true)).length>0 && !$generateCodeResults} class:r-error={validate  && checkAnswers.length>0 && checkAnswers.filter(element=>(element[0]==answer && element[2]==false)).length>0 && !$generateCodeResults}  id="quiz-q{quizId}-r{i}" class:draggable={!validate}>{@html answer}</p>
+									<p class="has-text-justified py-1" class:r-success={validate && checkAnswers.filter(element=>(element[0].replaceAll("'","&#39;").replaceAll('"',"&quot;")==answer && element[2]==true)).length>0 && !$generateCodeResults} class:r-error={validate  && checkAnswers.length>0 && checkAnswers.filter(element=>(element[0].replaceAll("'","&#39;").replaceAll('"',"&quot;")==answer && element[2]==false)).length>0 && !$generateCodeResults}  id="quiz-q{quizId}-r{i}" class:draggable={!validate}>{@html answer}</p>
 								{/each}
 							</div>
 						</div>
