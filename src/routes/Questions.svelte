@@ -59,6 +59,8 @@
 		validate = '';
 	}
 
+	marked.setOptions({pedantic: true});
+
 	function format1(string) {
 		string = latex ? katexifyString(marked.parse(string)) : marked.parse(string);
 		return string;
