@@ -1,5 +1,6 @@
 <script>
-	import snarkdown from 'snarkdown'
+	import MarkdownIt from 'markdown-it';
+	const md = new MarkdownIt();
 	import {
 		katexifyString
 	} from './katexify';
@@ -60,11 +61,11 @@
 	}
 
 	function format1(string) {
-		string = latex ? katexifyString(snarkdown(string)) : snarkdown(string);
+		string = latex ? katexifyString(md.render(string)) : md.render(string);
 		return string;
 	}
 	function format2(string) {
-		string = latex ? katexifyString(snarkdown(string)).replace('<p>','').replace('</p>','') : snarkdown(string).replace('<p>','').replace('</p>','');
+		string = latex ? katexifyString(md.render(string)).replace('<p>','').replace('</p>','') : md.render(string).replace('<p>','').replace('</p>','');
 		return string;
 	}
 

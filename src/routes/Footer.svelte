@@ -17,7 +17,7 @@
 			<li><a href="https://bulma.io/" tabindex={tabIndexFooter}>Bulma</a> (framework CSS)</li>
 			<li><a href="https://github.com/SortableJS/Sortable" tabindex={tabIndexFooter}>Sortable</a> (pour les étiquettes à glisser-déposer)</li>
 			<li><a href="https://katex.org/" tabindex={tabIndexFooter}>Katex</a> (pour les formules en Latex)</li>
-			<li><a href="https://github.com/developit/snarkdown">Snarkdown</a> et <a href="https://github.com/Codecademy/sanitize-markdown">Sanitize markdown</a> (pour le Markdown)</li>
+			<li><a href="https://github.com/markdown-it/markdown-it">Mardown-It</a> et <a href="https://github.com/Codecademy/sanitize-markdown">Sanitize markdown</a> (pour le Markdown)</li>
 			<li><a href="https://github.com/entronad/crypto-es">Crypto-ES</a> et <a href="https://github.com/feross/buffer">Buffer</a> (pour les liens cryptés)</li>
 		</ul>
 		<p>Le code est publié sur <a href="https://github.com/eyssette/text2quiz" tabindex={tabIndexFooter}>Github</a>, sous licence
