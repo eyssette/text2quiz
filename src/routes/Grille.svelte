@@ -82,7 +82,7 @@
 				partialCheck[j] = false
 			}
 		}
-		correctAnswers.push([answersShuffledUnique[i], partialCheck]);
+		correctAnswers = [...correctAnswers, [answersShuffledUnique[i], partialCheck]]
 	}
 
 	function checkAnswers(answer, i) {
@@ -108,6 +108,7 @@
 	$: showNotComplete = (validate) ? textNotComplete : '';
 	$: if (validate) {
 		countPointsMax.update(n=>n+correctAnswers.length);
+		answersChecked=[];
 		answersShuffledUnique.forEach(checkAnswers);
 		let countTemp=0;
 		for (let i=0;i<answers.length;i++) {
@@ -119,7 +120,7 @@
 		}
 		if (countTemp >= 0) {countPoints.update(n => n + countTemp);}
 
-		if (answers.length > 0 && answersChecked.filter(element => element == true).length == answersShuffledUnique.length && answersChecked.every(element => element == true)) {
+		if (answers.length > 0 && answersChecked.filter(element => element == true).length == answersShuffledUnique.length && answersChecked.every(element => element == true && answersChecked.filter(element => element == false).length == 0)) {
 			countCorrectAnswers.update(n => n + 1)
 		}
 	}
