@@ -99,7 +99,7 @@ import { element } from 'svelte/internal';
 	}
 
 	function testAnswer(element,index) {
-		return choicesAnswers[index].includes(element ? removeSpacesBeforeAndAfter(element.replaceAll("'","&#39;").replaceAll('"',"&quot;")) : element.replaceAll("'","&#39;").replaceAll('"',"&quot;"));
+		return choicesAnswers[index].includes(element ? removeSpacesBeforeAndAfter(element.replaceAll("'","&#39;").replaceAll('"',"&quot;")) : element);
 	}
 
 	$: disabled = (validate) ? 'disabled' : '';

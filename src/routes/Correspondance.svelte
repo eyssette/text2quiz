@@ -220,7 +220,7 @@ arrayEquals,
 				</article>
 			</div>
 		</div>
-		<div class="is-size-5 is-size-6-mobile mt-3 is-italic has-text-centered has-text-danger">&nbsp;{#if answersChecked.filter(element=>element==false).length>0 && checkAnswers.filter(element=>(element[2]==true)).length>0 && !$generateCodeResults}{showNotComplete}{/if}</div>
+		<div class="is-size-5 is-size-6-mobile mt-3 is-italic has-text-centered has-text-danger">&nbsp;{#if checkAnswers.filter(element=>element[1]==true).length != answersByCategory[0].length && checkAnswers.filter(element=>(element[1]==true)).length>0 && !$generateCodeResults}{showNotComplete}{/if}</div>
 	</div>
 </div>
 {:else}
@@ -250,7 +250,7 @@ arrayEquals,
 				</article>
 			</div>
 		</div>
-		<div class="is-size-5 is-size-6-mobile mt-3 is-italic has-text-centered has-text-danger">&nbsp;{#if answersChecked.filter(element=>element==false).length>0 && checkAnswers.filter(element=>(element[2]==true)).length>0 && !$generateCodeResults}{showNotComplete}{/if}</div>
+		<div class="is-size-5 is-size-6-mobile mt-3 is-italic has-text-centered has-text-danger">&nbsp;{#if checkAnswers.filter(element=>element[1]==true).length != answersByCategory[0].length && checkAnswers.filter(element=>(element[1]==true)).length>0 && !$generateCodeResults}{showNotComplete}{/if}</div>
 	</div>
 </div>
 {/if}
