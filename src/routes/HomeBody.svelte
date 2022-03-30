@@ -15,8 +15,7 @@
 <div class="box block px-6 py-5 mt-6">
 	<div class="content has-text-justified">
 		<div>
-			Text2quiz est une application de quiz qui permet de transformer du
-			texte en un quiz. Le principe est simple :
+			Text2quiz est un outil en ligne, libre et gratuit, qui permet de créer automatiquement un quiz à partir d'un simple fichier texte. Le principe est simple :
 		</div>
 		<ol>
 			<li>
@@ -47,7 +46,7 @@
 
 		<h4 class="is-4 has-text-left mt-6 mb-5">Comment ça marche ?</h4>
 		<ul>
-			<li>Pour écrire son quiz, on doit coder chaque question</li>
+			<li>Pour écrire son quiz, on doit coder chaque question en respectant une syntaxe simple</li>
 			<li>
 				On peut afficher l'aide dans la fenêtre d'édition du quiz, et
 				commencer d'abord par les types de question les plus simples
