@@ -11,7 +11,6 @@
 		arrayEquals,
 		removeSpacesBeforeAndAfter
 	} from './functions.js';
-import { element } from 'svelte/internal';
 	export let validate;
 	export let quizId;
 	export let text;
@@ -35,7 +34,9 @@ import { element } from 'svelte/internal';
 	let maxCharChoicesArray= [];
 	
 	while (tmp = reg.exec(text)) res.push(tmp);
-	res.forEach(fragments);
+	for(let i=0 ; i < res.length ; i++ ){
+		fragments(res[i],i);
+	}
 	for (let i = 0; i < choicesAnswers.length; i++) {
 		maxCharChoices = 0;
 		for (let j = 0; j < choicesAnswers[i].length; j++) {
@@ -56,37 +57,45 @@ import { element } from 'svelte/internal';
 		correctAnswers = [];
 		choicesAnswers = [];
 		choiceText = [];
+		maxCharChoices=0;
+		maxCharChoicesArray= [];
 		while (tmp = reg.exec(text)) res.push(tmp);
-		res.forEach(fragments);
-		for (let i = 0; i < choicesAnswers.length; i++) {
-		maxCharChoices = 0;
-		for (let j = 0; j < choicesAnswers[i].length; j++) {
-			choicesAnswers[i][j] = removeSpacesBeforeAndAfter(choicesAnswers[i][j]);
-			maxCharChoices < choicesAnswers[i][j].length ? maxCharChoices = choicesAnswers[i][j].length : maxCharChoices = maxCharChoices;
+		for(let i=0 ; i < res.length ;i++ ){
+			fragments(res[i],i);
 		}
-		maxCharChoicesArray[i] = maxCharChoices;
-	}
+		for (let i = 0; i < choicesAnswers.length; i++) {
+			maxCharChoices = 0;
+			for (let j = 0; j < choicesAnswers[i].length; j++) {
+				choicesAnswers[i][j] = removeSpacesBeforeAndAfter(choicesAnswers[i][j]);
+				maxCharChoices < choicesAnswers[i][j].length ? maxCharChoices = choicesAnswers[i][j].length : maxCharChoices = maxCharChoices;
+			}
+			maxCharChoicesArray[i] = maxCharChoices;
+		}
 	}
 	
 
 	function fragments(item, index) {
-		textSplit = [...textSplit, next.split(item[0])]
-		fragment = textSplit[index][0];
-		next = textSplit[index][1];
-		textFragments = [...textFragments, fragment];
+		let toSplit = next.split(item[0]);
+		let first = toSplit[0]
+		let rest = toSplit.slice(1).join(item[0]);
+		textSplit.push(first)
+		fragment = first;
+		next = rest;
+		textFragments.push(fragment)
 		if (index == res.length - 1) {
-			textFragments = [...textFragments, next];
+			textFragments.push(next)
 		}
 		choiceText = choices(res[index][0])[0];
 		let choiceCorrect = choices(res[index][0])[1];
-		choicesAnswers = [...choicesAnswers, choiceText]
+		choicesAnswers.push(choiceText)
 	}
 	
 	
 
 	function choiceAnswer(element) {
 		element = removeSpacesBeforeAndAfter(element);
-		correctAnswers = [...correctAnswers, element]
+		// correctAnswers = [...correctAnswers, element]
+		correctAnswers.push(element)
 	}
 
 	function choices(textChoices) {
@@ -94,7 +103,8 @@ import { element } from 'svelte/internal';
 		let correct = false;
 		textChoices = textChoices.replace('{{', '');
 		textChoices = textChoices.replace('}}', '');
-		textChoicesArray = [...textChoicesArray, textChoices.split('|')]
+		// textChoicesArray = [...textChoicesArray, textChoices.split('|')]
+		textChoicesArray.push(textChoices.split('|'))
 		return textChoicesArray;
 	}
 
