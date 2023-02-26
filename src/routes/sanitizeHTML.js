@@ -80,10 +80,15 @@ export default function sanitizeHTML(string) {
 	return sanitizeMarkdown(string, {
 		allowedTags: allowedTagsArray,
 		allowedAttributes: {
-			span: ['class', 'style'],
+			span: ['class', 'style', 'aria-hidden'],
 			div: ['class', 'style'],
 			p: ['class', 'style'],
-			blockquote: ['class', 'style']
-		}
+			blockquote: ['class', 'style'],
+			path: ['d'],
+			svg: ['width','height','style','viewbox','preserveaspectratio']
+		}/* ,
+		parser: {
+			lowerCaseAttributeNames: false,
+		  } */
 	})
 }
