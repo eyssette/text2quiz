@@ -62,11 +62,13 @@
 	marked.setOptions({pedantic: true});
 
 	function format1(string) {
-		string = latex ? katexifyString(marked.parse(string)) : marked.parse(string);
+		/* string = latex ? katexifyString(marked.parse(string)) : marked.parse(string); */
+		string = latex ? marked.parse(katexifyString(string)) : marked.parse(string);
 		return string;
 	}
 	function format2(string) {
-		string = latex ? katexifyString(marked.parse(string)).replace('<p>','').replace('</p>','') : marked.parse(string).replace('<p>','').replace('</p>','');
+		/* string = latex ? katexifyString(marked.parse(string)).replace('<p>','').replace('</p>','') : marked.parse(string).replace('<p>','').replace('</p>',''); */
+		string = latex ? marked.parse(katexifyString(string)).replace('<p>','').replace('</p>','') : marked.parse(string).replace('<p>','').replace('</p>','');
 		return string;
 	}
 
