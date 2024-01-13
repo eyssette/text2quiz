@@ -70,7 +70,8 @@ const allowedTagsLatex = [
 	"mglyph",
 	"svg",
 	"line",
-	"path"
+	"path",
+	"iframe",
 ];
 
 const allowedTagsArray = allowewTagsDefault.concat(allowedTagsLatex);
@@ -85,7 +86,8 @@ export default function sanitizeHTML(string) {
 			p: ['class', 'style'],
 			blockquote: ['class', 'style'],
 			path: ['d'],
-			svg: ['width','height','style','viewbox','preserveaspectratio']
+			svg: ['width','height','style','viewbox','preserveaspectratio'],
+			iframe : ['src', 'width', 'height', 'style', 'scrolling', 'frameBorder', 'allow', 'title', 'allowfullscreen', 'type'],
 		}/* ,
 		parser: {
 			lowerCaseAttributeNames: false,
