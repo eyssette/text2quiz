@@ -22,6 +22,7 @@
 	export let quizId;
 	export let textAnswers;
 	export let question;
+	export let displayQuestionTitle;
 	let textAnswersArray = textAnswers.split('|');
 	let correctAnswerArray=[];
 	let correctAnswerString;
@@ -63,7 +64,9 @@
 </script>
 
 <div class="block quiz-Ordre py-2" id="quiz-q{quizId}">
-	<h2 class="title has-text-centered">{title}</h2>
+	{#if displayQuestionTitle}
+		<h2 class="title has-text-centered">{title}</h2>
+	{/if}
 	<div class="box block quiz-sortable" class:quiz-success={validate && answer.replaceAll("'","&#39;").replaceAll('"',"&quot;")==correctAnswerString  && !$generateCodeResults} class:quiz-error={validate && answer.replaceAll("'","&#39;").replaceAll('"',"&quot;")!=correctAnswerString  && !$generateCodeResults}>
 		<p class="has-text-centered block has-text-weight-medium">{subtitle}</p>
 		<div class="content">{@html sanitizeHTML(question)}</div>

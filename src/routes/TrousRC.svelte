@@ -14,6 +14,7 @@
 	export let validate;
 	export let quizId;
 	export let text;
+	export let displayQuestionTitle;
 	const title = 'Texte à trous avec réponses courtes';
 	const textNotComplete = 'Réponse partiellement juste !';
 	let answer = [];
@@ -128,7 +129,9 @@
 </script>
 
 <div class="block quiz-Trous py-2" id="quiz-q{quizId}">
-	<h2 class="title has-text-centered">{title}</h2>
+	{#if displayQuestionTitle}
+		<h2 class="title has-text-centered">{title}</h2>
+	{/if}
 	<div class="box block" class:quiz-success={validate && answer.filter(testAnswer).length == choicesAnswers.length && !$generateCodeResults} class:quiz-error={validate & answer.filter(testAnswer).length != choicesAnswers.length && answer.length>0 && answer.filter(element => removeSpacesBeforeAndAfter(element)!='').length>0 && !$generateCodeResults}>
 		<div class="content has-text-justified has-text-left-mobile">
 			{#each textFragments as textFragment,i}

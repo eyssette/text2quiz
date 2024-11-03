@@ -15,6 +15,7 @@
 	export let quizId;
 	export let categories;
 	export let question = '';
+	export let displayQuestionTitle;
 	const title = 'Grille';
 	const textNotComplete = "La grille est incomplète";
 	let categoriesArray = categories.split('|');
@@ -128,7 +129,9 @@
 
 
 <div class="block quiz-Grille py-2" id="quiz-q{quizId}">
-	<h2 class="title has-text-centered">{title}</h2>
+	{#if displayQuestionTitle}
+		<h2 class="title has-text-centered">{title}</h2>
+	{/if}
 	<div class="box block" class:quiz-success={validate && answers.length>0 &&
 		answersChecked.filter(element=>element==true).length==answersShuffledUnique.length &&
 		answersChecked.every(element=>element==true) && !$generateCodeResults} class:quiz-error={(validate && answers.length>0 &&

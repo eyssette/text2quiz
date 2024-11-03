@@ -16,6 +16,7 @@
 	export let quizId;
 	export let question;
 	export let textAnswers;
+	export let displayQuestionTitle;
 	let answers = [];
 	let textAnswer;
 	let textAnswersArray;
@@ -71,7 +72,9 @@
 
 
 <div class="block quiz-QCM py-2" id="quiz-q{quizId}">
-	<h2 class="title has-text-centered">{title}</h2>
+	{#if displayQuestionTitle}
+		<h2 class="title has-text-centered">{title}</h2>
+	{/if}
 	<div class="box block" class:quiz-success={validate && answers.length == correctAnswers.length && answers.filter(element => correctAnswers.includes(textAnswersArray[element])).length == correctAnswers.length && !$generateCodeResults} class:quiz-error={validate && answers.length>0 && (answers.length != correctAnswers.length || answers.filter(element => correctAnswers.includes(textAnswersArray[element])).length != correctAnswers.length) && !$generateCodeResults}>
 		<div class="content">{@html sanitizeHTML(question)}</div>
 		<div class="control is-size-5 is-size-6-mobile">

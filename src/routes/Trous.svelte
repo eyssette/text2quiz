@@ -15,6 +15,7 @@
 	export let validate;
 	export let quizId;
 	export let text;
+	export let displayQuestionTitle;
 	const title = 'Texte à trous';
 	const textNotComplete = 'Réponse partiellement juste !';
 	let answer;
@@ -110,7 +111,9 @@
 </script>
 
 <div class="block quiz-Trous py-2" id="quiz-q{quizId}">
-	<h2 class="title has-text-centered">{title}</h2>
+	{#if displayQuestionTitle}
+		<h2 class="title has-text-centered">{title}</h2>
+	{/if}
 	<div class="box block" class:quiz-success={validate && selected && correctAnswers &&
 		arrayEquals(selected,correctAnswers) && !$generateCodeResults} class:quiz-error={validate && selected && correctAnswers &&
 		!arrayEquals(selected,correctAnswers) && selected.filter(value=> value=='default').length !=selected.length && !$generateCodeResults}>

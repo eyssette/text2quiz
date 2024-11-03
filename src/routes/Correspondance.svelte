@@ -23,6 +23,7 @@ arrayEquals,
 	export let quizId;
 	export let category;
 	export let question='';
+	export let displayQuestionTitle;
 	const textNotComplete = "Réponse partiellement juste";
 	const labelsListText = 'Étiquettes à sélectionner';
 	export let answers;
@@ -195,7 +196,9 @@ arrayEquals,
 
 {#if orderStrict}
 <div class="block quiz-Etiquettes py-2" id="quiz-q{quizId}">
-	<h2 class="title has-text-centered">{title}</h2>
+	{#if displayQuestionTitle}
+		<h2 class="title has-text-centered">{title}</h2>
+	{/if}
 		<div class="box block" class:quiz-success={validate && orderStrict && checkAnswers.filter(element=>element[1]==true && element[2]==true).length == answersByCategory[0].length && checkAnswers.filter(element=>element[1]==false || element[2]==false).length==0 && !$generateCodeResults} class:quiz-error={validate && orderStrict && checkAnswers.length>0 &&
 		(checkAnswers.filter(element=>element[1]==false || element[2]==false).length>0 || checkAnswers.filter(element=>element[1]==true).length != answersByCategory[0].length) && !$generateCodeResults}>
 		<p class="has-text-centered block has-text-weight-medium">{subtitle}</p>
@@ -225,7 +228,9 @@ arrayEquals,
 </div>
 {:else}
 <div class="block quiz-Etiquettes py-2" id="quiz-q{quizId}">
-	<h2 class="title has-text-centered">{title}</h2>
+	{#if displayQuestionTitle}
+		<h2 class="title has-text-centered">{title}</h2>
+	{/if}
 		<div class="box block" class:quiz-success={validate && !orderStrict && checkAnswers.filter(element=>element[1]==true).length == answersByCategory[0].length && checkAnswers.filter(element=>element[1]==false).length==0 && !$generateCodeResults} class:quiz-error={validate && !orderStrict && checkAnswers.length>0 &&
 		(checkAnswers.filter(element=>element[1]==false).length>0 || checkAnswers.filter(element=>element[1]==true).length != answersByCategory[0].length) && !$generateCodeResults}>
 		<p class="has-text-centered block has-text-weight-medium">{subtitle}</p>

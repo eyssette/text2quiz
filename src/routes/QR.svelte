@@ -15,6 +15,7 @@
 	export let quizId;
 	export let question;
 	export let textAnswers;
+	export let displayQuestionTitle;
 	let textAnswersArray;
 	let correctAnswer;
 	const title = 'Question / Réponse';
@@ -65,7 +66,9 @@
 
 
 <div class="block quiz-QR py-2" id="quiz-q{quizId}">
-	<h2 class="title has-text-centered">{title}</h2>
+	{#if displayQuestionTitle}
+		<h2 class="title has-text-centered">{title}</h2>
+	{/if}
 	<div class="box block" class:quiz-success={validate && correctAnswer == textAnswersArray[answer] && !$generateCodeResults} class:quiz-error={validate && answer >=0 && correctAnswer != textAnswersArray[answer] && !$generateCodeResults}>
 		<div class="content">{@html sanitizeHTML(question)}</div>
 		<div class="control is-size-5 is-size-6-mobile">

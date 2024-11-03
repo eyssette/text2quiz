@@ -29,6 +29,7 @@
 	import { shuffleArray } from './functions.js';
 	export let modeView;
 	export let displayHeader;
+	export let displayQuestionTitle;
 	const title = 'Quiz';
 	const subtitle = 'Répondez aux questions et calculez votre score';
 	const textPoints = '1 point par réponse juste. Dans chaque exercice, une réponse fausse annule une réponse juste.';
@@ -87,40 +88,40 @@
 <section class="pt-6" id="section-quiz">
 {#each questions as question, i}
 	{#if question[0]=='VF'}
-		<VF question={format1(question[1])} quizId={i} correctAnswer={question[2]} validate={$validation}/>
+		<VF question={format1(question[1])} quizId={i} correctAnswer={question[2]} validate={$validation} displayQuestionTitle={displayQuestionTitle} />
 	{/if}
 	{#if question[0]=='QCM'}
-		<QCM question={format1(question[1])} quizId={i} textAnswers={format2(question[2])} validate={$validation} />
+		<QCM question={format1(question[1])} quizId={i} textAnswers={format2(question[2])} validate={$validation} displayQuestionTitle={displayQuestionTitle} />
 	{/if}
 	{#if question[0]=='QR'}
-		<QR question={format1(question[1])} quizId={i} textAnswers={format2(question[2])} validate={$validation} />
+		<QR question={format1(question[1])} quizId={i} textAnswers={format2(question[2])} validate={$validation} displayQuestionTitle={displayQuestionTitle} />
 	{/if}
 	{#if question[0]=='Flashcard'}
-		<Flashcard quizId={i} recto={format1(question[1])} verso={format1(question[2])} validate={$validation}/>
+		<Flashcard quizId={i} recto={format1(question[1])} verso={format1(question[2])} validate={$validation} displayQuestionTitle={displayQuestionTitle} />
 	{/if}
 	{#if question[0]=='QRC'}
-		<QRC question={format1(question[1])} quizId={i} textAnswers={question[2]} validate={$validation} />
+		<QRC question={format1(question[1])} quizId={i} textAnswers={question[2]} validate={$validation} displayQuestionTitle={displayQuestionTitle} />
 	{/if}
 	{#if question[0]=='Trous'}
-		<Trous text={format2(question[1])} quizId={i} validate={$validation} />
+		<Trous text={format2(question[1])} quizId={i} validate={$validation} displayQuestionTitle={displayQuestionTitle} />
 	{/if}
 	{#if question[0]=='Grille'}
-		<Grille categories={format2(question[1])} answersByCategoryString={format2(question[2])} question={question[3] ? format1(question[3]): question[3]} quizId={i} validate={$validation} />
+		<Grille categories={format2(question[1])} answersByCategoryString={format2(question[2])} question={question[3] ? format1(question[3]): question[3]} quizId={i} validate={$validation} displayQuestionTitle={displayQuestionTitle} />
 	{/if}
 	{#if question[0]=='Ordre'}
-		<Ordre quizId={i} textAnswers={format2(question[1])} question={question[2] ? format1(question[2]) : question[2]} validate={$validation} />
+		<Ordre quizId={i} textAnswers={format2(question[1])} question={question[2] ? format1(question[2]) : question[2]} validate={$validation} displayQuestionTitle={displayQuestionTitle} />
 	{/if}
 	{#if question[0]=='Etiquettes'}
-		<Etiquettes quizId={i} categories={format2(question[1])} answersByCategoryString={format2(question[2])} validate={$validation} question={question[3] ? format1(question[3]) : question[3]} />
+		<Etiquettes quizId={i} categories={format2(question[1])} answersByCategoryString={format2(question[2])} validate={$validation} question={question[3] ? format1(question[3]) : question[3]} displayQuestionTitle={displayQuestionTitle} />
 	{/if}
 	{#if question[0]=='Association'}
-		<Association quizId={i} answers={format2(question[1])}  validate={$validation} question={question[2] ? format1(question[2]) : question[2]} />
+		<Association quizId={i} answers={format2(question[1])}  validate={$validation} question={question[2] ? format1(question[2]) : question[2]} displayQuestionTitle={displayQuestionTitle} />
 	{/if}
 	{#if question[0]=='Correspondance'}
-		<Correspondance quizId={i} category={format1(question[1])} answers={format2(question[2])} validate={$validation} question={question[3] ? format1(question[3]) : question[3]} />
+		<Correspondance quizId={i} category={format1(question[1])} answers={format2(question[2])} validate={$validation} question={question[3] ? format1(question[3]) : question[3]} displayQuestionTitle={displayQuestionTitle} />
 	{/if}
 	{#if question[0]=='TrousRC'}
-		<TrousRC text={format2(question[1])} quizId={i} validate={$validation} />
+		<TrousRC text={format2(question[1])} quizId={i} validate={$validation} displayQuestionTitle={displayQuestionTitle} />
 	{/if}
 {/each}
 

@@ -25,6 +25,7 @@
 	export let quizId;
 	export let answers;
 	export let question = '';
+	export let displayQuestionTitle;
 	const title = 'Association';
 	const textNotComplete = "Réponse partiellement juste";
 	const subtitle = "Associez à chaque élément l'étiquette correspondante";
@@ -216,7 +217,9 @@
 </script>
 
 <div class="block quiz-Association py-2" id="quiz-q{quizId}">
-	<h2 class="title has-text-centered">{title}</h2>
+	{#if displayQuestionTitle}
+		<h2 class="title has-text-centered">{title}</h2>
+	{/if}
 	<div class="box block" class:quiz-success={validate && answersChecked.filter(element=>
 		element==true).length==categoriesArray.length && !$generateCodeResults} class:quiz-error={validate &&
 		checkAnswers.length>0 &&

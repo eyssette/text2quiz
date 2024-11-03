@@ -11,6 +11,7 @@
 		export let quizId;
 		export let recto;
 		export let verso;
+		export let displayQuestionTitle;
 		const textAnswers = ['Réponse juste', 'Réponse partiellement juste', 'Réponse fausse']
 		const correctAnswer = 1;
 		const title = 'Flashcard';
@@ -35,7 +36,9 @@
 
 
 <div class="block quiz-Flashcard py-2" id="quiz-q{quizId}">
-	<h2 class="title has-text-centered">{title}</h2>
+	{#if displayQuestionTitle}
+		<h2 class="title has-text-centered">{title}</h2>
+	{/if}
 	<div class="box block" class:quiz-success={validate && correctAnswer==answer && !$generateCodeResults} class:quiz-error={validate && answer>0
 		&& correctAnswer!=answer && !$generateCodeResults}>
 		<div class="card flip has-background-lighter px-5 my-4 has-text-justified" on:click={toggleFlashcard} bind:this={flashcard}>

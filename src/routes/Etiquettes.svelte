@@ -22,6 +22,7 @@
 	export let quizId;
 	export let categories;
 	export let question='';
+	export let displayQuestionTitle;
 	const title = 'Étiquettes';
 	const subtitle = "Placez les étiquettes ci-dessous au bon endroit";
 	const textNotComplete = "Réponse partiellement juste";
@@ -184,7 +185,9 @@
 
 
 <div class="block quiz-Etiquettes py-2" id="quiz-q{quizId}">
-	<h2 class="title has-text-centered">{title}</h2>
+	{#if displayQuestionTitle}
+		<h2 class="title has-text-centered">{title}</h2>
+	{/if}
 	<div class="box block" class:quiz-success={validate && answersChecked.filter(element=>
 		element==true).length==categoriesArray.length && !$generateCodeResults} class:quiz-error={validate && checkAnswers.length>0 &&
 		answersChecked.filter(element=>element==false).length>0 && !$generateCodeResults}>

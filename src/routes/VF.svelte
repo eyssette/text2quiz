@@ -12,6 +12,7 @@
 	export let validate;
 	export let quizId;
 	export let question;
+	export let displayQuestionTitle;
 	let textAnswersArray = [];
 	let titleArray = [];
 	let textAnswerDefaultArray = [];
@@ -51,7 +52,9 @@
 </script>
 
 <div class="block quiz-VF py-2" id="quiz-q{quizId}">
-	<h2 class="title has-text-centered">{title}</h2>
+	{#if displayQuestionTitle}
+		<h2 class="title has-text-centered">{title}</h2>
+	{/if}
 	<div class="box block" class:quiz-success={validate && correctAnswer==answer && !$generateCodeResults} class:quiz-error={validate && answer>0
 		&& correctAnswer!=answer && !$generateCodeResults}>
 		<div class="content">{@html sanitizeHTML(question)}</div>
