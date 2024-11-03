@@ -1,9 +1,10 @@
 <script>
 	import {darkmode} from './stores'
+	import url from './url.js';
 	const title = 'Quiz';
 	import {onMount} from 'svelte'
 	onMount(async () => {
-	if(window.matchMedia('(prefers-color-scheme: dark)').matches) {$darkmode=true}
+		if((window.matchMedia('(prefers-color-scheme: dark)').matches && !$url.search.includes('t=lm')) || $url.search.includes('t=dm')) {$darkmode=true}
 	})
 </script>
 

@@ -89,6 +89,12 @@
 			if($url.search.includes('dh=0')) {
 				displayHeader = false;
 			}
+			if($url.search.includes('t=dm')) {
+				$darkmode = true;
+			}
+			if($url.search.includes('t=lm')) {
+				$darkmode = false;
+			}
 			if($url.search.includes('m=1')) {
 				quizEncodageHash=decrypt(quizEncodageHash,cryptedModeKey);
 				mode='crypted';
