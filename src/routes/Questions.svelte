@@ -28,6 +28,7 @@
 	} from './stores.js';
 	import { shuffleArray } from './functions.js';
 	export let modeView;
+	export let displayHeader;
 	const title = 'Quiz';
 	const subtitle = 'Répondez aux questions et calculez votre score';
 	const textPoints = '1 point par réponse juste. Dans chaque exercice, une réponse fausse annule une réponse juste.';
@@ -75,11 +76,13 @@
 </script>
 
 {#if $questionsCode && $changeQuestions && questionsCodeArray.length > 0}
+
+{#if displayHeader}
 <h1 class="title has-text-centered pt-2 is-size-1 has-text-link-dark">{title}</h1>
 <h2 class="subtitle has-text-centered has-text-link-dark mt-4">{subtitle}</h2>
 
 <h3 class="subtitle has-text-centered mb-6 is-size-6">{textPoints}</h3>
-
+{/if}
 
 <section class="pt-6" id="section-quiz">
 {#each questions as question, i}

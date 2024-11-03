@@ -37,6 +37,8 @@
 	let quiz;
 	let mode='open';
 	let hashEvaluation=[];
+	let displayHeader = true;
+	let displayMenu = true;
 	//	$: if ($changeQuestions) {home.update(n=>false)}
 
 	
@@ -81,6 +83,12 @@
 	$: if ($url) {
 		quizEncodageHash = $url.hash.slice(1);
 		keyEvaluation.update(n=>'');
+			if($url.search.includes('dm=0')) {
+				displayMenu = false;
+			}
+			if($url.search.includes('dh=0')) {
+				displayHeader = false;
+			}
 			if($url.search.includes('m=1')) {
 				quizEncodageHash=decrypt(quizEncodageHash,cryptedModeKey);
 				mode='crypted';
@@ -114,8 +122,10 @@
 <Head/>
 
 <div class="container is-max-desktop has-background-white-ter px-4 pb-6 is-size-4 is-size-6-mobile {validate}" class:home={$home} id={$darkmode ? 'darkmode' : 'lightmode'}>
-	<Menu modeView={mode} />
-		<Questions modeView={mode} />
+	{#if displayMenu}
+		<Menu modeView={mode} />
+	{/if}
+		<Questions modeView={mode} displayHeader={displayHeader} />
 	{#if $home}
 		<section class="pt-6">
 			<HomeBody />
