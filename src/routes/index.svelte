@@ -111,6 +111,9 @@
 			if($url.search.includes('t=lm')) {
 				$darkmode = false;
 			}
+			if($url.search.includes('dqt=0')) {
+				displayQuestionTitle = false;
+			}
 			if($url.search.includes('m=1')) {
 				quizEncodageHash=decrypt(quizEncodageHash,cryptedModeKey);
 				mode='crypted';
