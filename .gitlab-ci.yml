@@ -1,0 +1,12 @@
+pages:
+  stage: deploy
+  image: node:latest
+  script:
+    - npm install
+    - npm run build
+    - find public -type f -exec gzip -k {} \; -exec mv {}.gz {} \;
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
