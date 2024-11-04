@@ -13,7 +13,7 @@ import { katexify } from './katexify.js';
 	$: if ($countCorrectAnswers > 1) {
 		plural = 's';
 	}
-	const titleButton = 'Valider les réponses et voir les résultats';
+	const titleButton = 'Voir les résultats';
 	const titleResults = 'Résultats du quiz';
 	const titleRefresh = 'Refaire le quiz';
 	const textAnswer = 'exercice';
