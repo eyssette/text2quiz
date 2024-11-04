@@ -40,6 +40,7 @@
 	let displayHeader = true;
 	let displayMenu = true;
 	let displayQuestionTitle = true;
+	let styleTransparentBackground;
 	//	$: if ($changeQuestions) {home.update(n=>false)}
 
 	
@@ -62,6 +63,9 @@
 			}
 			if($url.search.includes('dqt=0')) {
 				displayQuestionTitle = false;
+			}
+			if($url.search.includes('dbg=0')) {
+				styleTransparentBackground = `background-color:transparent!important`;
 			}
 			if($url.search.includes('m=1')) {
 				quizEncodageHash=decrypt(quizEncodageHash,cryptedModeKey);
@@ -114,6 +118,9 @@
 			if($url.search.includes('dqt=0')) {
 				displayQuestionTitle = false;
 			}
+			if($url.search.includes('dbg=0')) {
+				styleTransparentBackground = `background-color:transparent!important`;
+			}
 			if($url.search.includes('m=1')) {
 				quizEncodageHash=decrypt(quizEncodageHash,cryptedModeKey);
 				mode='crypted';
@@ -146,7 +153,7 @@
 
 <Head/>
 
-<div class="container is-max-desktop has-background-white-ter px-4 pb-6 is-size-4 is-size-6-mobile {validate}" class:home={$home} id={$darkmode ? 'darkmode' : 'lightmode'}>
+<div class="container is-max-desktop has-background-white-ter px-4 pb-6 is-size-4 is-size-6-mobile {validate}" class:home={$home} id={$darkmode ? 'darkmode' : 'lightmode'} style="{styleTransparentBackground}" >
 	{#if displayMenu}
 		<Menu modeView={mode} />
 	{/if}
@@ -161,6 +168,10 @@
 
 
 <style>
+	:global(html) {
+		overflow-y: auto;
+		background-color: transparent!important;
+	}
 	:global(.quiz-error) {
 		border-left: 4px solid hsl(348, 86%, 43%);
 	}

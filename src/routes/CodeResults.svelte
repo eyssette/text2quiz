@@ -71,5 +71,6 @@ function refreshQuiz() {
 <style>
 	.panel {
 		word-break: break-all;
+		background-color: #fefefe57;
 	}
 </style>
