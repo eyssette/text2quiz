@@ -1,5 +1,6 @@
 pages:
   stage: deploy
+  environment: production
   image: node:latest
   script:
     - npm install
