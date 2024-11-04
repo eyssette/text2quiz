@@ -131,13 +131,13 @@ body .has-text-danger {
 
 
 .progress::-webkit-progress-bar {
-    background-color: #212424;
+    background-color: #212424!important;
 }
 .progress::-moz-progress-bar {
-    background-color: #212424;
+    background-color: #212424!important;
 }
 .progress::-ms-fill {
-    background-color: #212424;
+    background-color: #212424!important;
     border: 0;
 }
 

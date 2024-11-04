@@ -61,3 +61,9 @@ import { katexify } from './katexify.js';
 		</div>
 	</section>
 {/if}
+
+<style>
+progress[value], progress[value]::-webkit-progress-bar {
+	background:#CCC;
+}
+</style>
