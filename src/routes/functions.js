@@ -13,10 +13,7 @@ export function shuffleArray(array) {
     return array;
 }
 
-
-const regexSpaceBefore = /^\s+/g;
-const regexSpaceAfter = /\s+$/g;
-
 export function removeSpacesBeforeAndAfter(string) {
-    return string.replace(regexSpaceBefore,'').replace(regexSpaceAfter,'');
+  const regexSpacesBeforeOrAfter = /^\s+|\s+$/g;
+  return string.replace(regexSpacesBeforeOrAfter, '');
 }
